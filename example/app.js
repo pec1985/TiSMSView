@@ -24,7 +24,7 @@ var btn = Ti.UI.createButton({
 
 var tf = textfield.createTextField({
 	value:'hello world',
-    autocorrect:'false'
+    color:'black'
 });
 
 window.add(tf);
@@ -32,5 +32,4 @@ window.add(btn);
 
 btn.addEventListener('click', function(){
     tf.blur();
-    alert(tf.value);
 });
