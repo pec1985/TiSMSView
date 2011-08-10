@@ -14,6 +14,7 @@
 
 @implementation PecTfTextField
 @synthesize mainFrame;
+
 -(void)dealloc
 {
 	RELEASE_TO_NIL(containerView);
@@ -84,6 +85,7 @@
 }
 
 
+
 -(UIView *)containerView
 {
 	if(!containerView)
@@ -104,10 +106,6 @@
 		[[self imageView] setImage:background];
 		imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 		
-		// view hierachy
-		[containerView addSubview:imageView];
-		[containerView addSubview:[self textView]];
-		[containerView addSubview:entryImageView];
 		
 		UIImage *sendBtnBackground = [[self resourcesImage:@"textarea.bundle/MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
 		UIImage *selectedSendBtnBackground = [[self resourcesImage:@"textarea.bundle/MessageEntrySendButton.png"]stretchableImageWithLeftCapWidth:13 topCapHeight:0];
@@ -121,10 +119,16 @@
 		[self doneBtn].titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
 		
 		[[self doneBtn] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-		[[self doneBtn] addTarget:self action:@selector(resignTextView) forControlEvents:UIControlEventTouchUpInside];
+		[[self doneBtn] addTarget:self action:@selector(buttonClicked) forControlEvents:UIControlEventTouchUpInside];
 		[[self doneBtn] setBackgroundImage:sendBtnBackground forState:UIControlStateNormal];
 		[[self doneBtn] setBackgroundImage:selectedSendBtnBackground forState:UIControlStateSelected];
-		[[self containerView] addSubview:[self doneBtn]];	
+		
+		
+		// view hierachy
+		[containerView addSubview:imageView];
+		[containerView addSubview:[self textView]];
+		[containerView addSubview:entryImageView];
+		[containerView addSubview:[self doneBtn]];	
 		
 		[self addSubview:containerView];
 	}
@@ -156,25 +160,27 @@
 	[[self textView] setReturnKeyType:[TiUtils intValue:value]];
 }
 
-//===== still not working ======
-
 -(void)setEnableReturnKey_:(id)value
 {
-	[[self textView] setEnablesReturnKeyAutomatically:[TiUtils boolValue:value]];
+	[(id)[self textView] setEnablesReturnKeyAutomatically:[TiUtils boolValue:value]];
 }
 
 -(void)setKeyboardType_:(id)value
 {
-	[[self textView] setKeyboardType:[TiUtils intValue:value]];
+	[(id)[self textView] setKeyboardType:[TiUtils intValue:value]];
 }
 
 -(void)setAutocorrect_:(id)value
 {
-	[[self textView] setAutocorrectionType:[TiUtils boolValue:value] ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
+	[(id)[self textView] setAutocorrectionType:[TiUtils boolValue:value] ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
 }
 
-// =============================
-
+-(void)setButtonTitle_:(id)value
+{
+	ENSURE_SINGLE_ARG(value, NSString);
+	
+	[[self doneBtn] setTitle:[TiUtils stringValue:value] forState: UIControlStateNormal];
+}
 
 -(id)value
 {
@@ -184,34 +190,50 @@
 
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
-	if(!containerView)
-		containerView = [self containerView];
-
-	self.mainFrame = bounds;
+	if(CGRectIsEmpty(self.mainFrame)){
+		self.mainFrame = bounds;
+	}
+		
+	[[self containerView]	setFrame: CGRectMake(0, CGRectGetHeight(self.mainFrame) - 40, CGRectGetWidth(self.mainFrame), 40)];
+//	[[self containerView]	setFrame: CGRectMake(0, 0, CGRectGetWidth(self.mainFrame), 40)];
+	[[self textView]		setFrame: CGRectMake(6, 3, CGRectGetWidth(self.mainFrame) - 80, 40)];
+	[[self doneBtn ]		setFrame: CGRectMake([self containerView].frame.size.width - 69, 8, 63, 27)];
+	[[self imageView]		setFrame: CGRectMake(0, 0, [self containerView].frame.size.width, [self containerView].frame.size.height)];
+	[[self entryImageView]	setFrame: CGRectMake(5, 0, CGRectGetWidth(self.mainFrame)-72, 40)];
+	//	[self setFrame:CGRectMake(0, CGRectGetHeight(self.mainFrame) - 40, CGRectGetWidth(self.mainFrame), 40)];
 	
-
-	[TiUtils setView:containerView positionRect:
-			CGRectMake(
-						0,
-						CGRectGetHeight(self.mainFrame) - 40,
-						CGRectGetWidth(self.mainFrame),
-						40/*CGRectGetHeight([containerView frame])*/
-			)];
-	[[self textView] setFrame:CGRectMake(6, 3, CGRectGetWidth(self.mainFrame) - 80, 40)];
-	[[self doneBtn ] setFrame: CGRectMake([self containerView].frame.size.width - 69, 9, 63, 27)];
-	[[self imageView] setFrame: CGRectMake(0, 0, [self containerView].frame.size.width, containerView.frame.size.height)];
-	[[self entryImageView] setFrame: CGRectMake(5, 0, CGRectGetWidth(self.mainFrame)-72, 40)];
-
 }
 
 
 -(void)resignTextView
 {
-	[textView resignFirstResponder];
+	NSMutableDictionary *event = [NSMutableDictionary dictionary];
+	[event setObject:[[self textView] text] forKey:@"value"];
+
+	[self.proxy fireEvent:@"blur" withObject:event];
+	
+	[(id)[self textView] resignFirstResponder];
 }
 
+-(void)becomeTextView
+{
+	NSMutableDictionary *event = [NSMutableDictionary dictionary];
+	[event setObject:[[self textView] text] forKey:@"value"];
+	
+	[self.proxy fireEvent:@"focus" withObject:event];
+	
+	[(id)[self textView] becomeFirstResponder];
+}
+
+-(void)buttonClicked
+{
+	NSMutableDictionary *event = [NSMutableDictionary dictionary];
+	[event setObject:[[self textView] text] forKey:@"value"];
+	[self.proxy fireEvent:@"buttonClicked" withObject:event];
+	
+}
 //Code from Brett Schumann
--(void) keyboardWillShow:(NSNotification *)note{
+-(void)keyboardWillShow:(NSNotification *)note{
     // get keyboard size and loctaion
 	CGRect keyboardBounds;
     [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
@@ -235,7 +257,7 @@
 	[UIView commitAnimations];
 }
 
--(void) keyboardWillHide:(NSNotification *)note{
+-(void)keyboardWillHide:(NSNotification *)note{
     // get keyboard size and location
 	CGRect keyboardBounds;
     [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
@@ -257,11 +279,50 @@
 	
 	// commit animations
 	[UIView commitAnimations];
+
 }
+
+-(void)growingTextView:(HPGrowingTextView *)growingTextView didChangeHeight:(float)height
+{
+	
+
+	NSMutableDictionary *event = [NSMutableDictionary dictionary];
+	[event setObject:[[self textView] text] forKey:@"value"];
+	[event setObject:  [NSString stringWithFormat:@"%f",height] forKey:@"height"];
+	[self.proxy fireEvent:@"heightChanged" withObject:event];
+
+}
+-(void)growingTextViewDidChange:(HPGrowingTextView *)growingTextView
+{
+	NSMutableDictionary *event = [NSMutableDictionary dictionary];
+	[event setObject:[[self textView] text] forKey:@"value"];
+	[self.proxy fireEvent:@"change" withObject:event];
+}
+-(void)growingTextViewDidChangeSelection:(HPGrowingTextView *)growingTextView
+{
+	
+}
+
+-(void)growingTextViewDidBeginEditing:(HPGrowingTextView *)growingTextView
+{
+	NSMutableDictionary *event = [NSMutableDictionary dictionary];
+	[event setObject:[[self textView] text] forKey:@"value"];
+	[self.proxy fireEvent:@"keyboardUp" withObject:event];
+	
+}
+-(void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView
+{
+	NSMutableDictionary *event = [NSMutableDictionary dictionary];
+	[event setObject:[[self textView] text] forKey:@"value"];
+	[self.proxy fireEvent:@"keyboardDown" withObject:event];
+
+}
+
+
 
 - (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height
 {
-	float diff = (textView.frame.size.height - height);
+	float diff = ([self containerView].frame.size.height - height);
 	
 	CGRect r = [self containerView].frame;
     r.size.height -= diff;

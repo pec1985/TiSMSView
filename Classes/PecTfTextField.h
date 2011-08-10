@@ -10,6 +10,7 @@
 #import "HPGrowingTextView.h"
 
 @interface PecTfTextField : TiUIView<HPGrowingTextViewDelegate> {
+	
 	UIView *containerView;
     HPGrowingTextView *textView;
 	CGRect mainFrame;

@@ -27,17 +27,14 @@
 
 -(void)focus:(id)args
 {
-	
-	NSLog(@"Not yet implemented");
-	/*
+
 	HPTextViewInternal *tf = (HPTextViewInternal *)[self view];
 	if ([self viewAttached])
 	{
-		[tf becomeFirstResponder];
-		//		[tf performSelectorOnMainThread:@selector(becomeFirstResponder) withObject:nil waitUntilDone:NO];
+		[tf performSelectorOnMainThread:@selector(becomeTextView) withObject:nil waitUntilDone:NO];
 	}
 
-	 */
+	
 }
 
 -(void)viewDidAttach

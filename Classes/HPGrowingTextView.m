@@ -179,8 +179,9 @@
 - (void)textViewDidChange:(UITextView *)textView
 {	
 	//size of content, so we can set the frame of self
-	NSInteger newSizeH = internalTextView.contentSize.height;
-	if(newSizeH < minHeight || !internalTextView.hasText) newSizeH = minHeight; //not smalles than minHeight
+	NSInteger newSizeH = internalTextView.contentSize.height+5;
+	NSLog(@"%d",newSizeH);
+	if(newSizeH < minHeight || !internalTextView.hasText) newSizeH = minHeight+5; //not smalles than minHeight
 	 
 	if (internalTextView.frame.size.height != newSizeH)
 	{
