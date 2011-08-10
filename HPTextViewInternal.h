@@ -30,4 +30,5 @@
 
 @interface HPTextViewInternal : UITextView {
 }
+
 @end

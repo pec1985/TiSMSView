@@ -9,40 +9,129 @@
 #import "PecTfTextField.h"
 #import "TiBase.h"
 #import "TiUtils.h"
+#import "TiHost.h"
 
 
 @implementation PecTfTextField
-
+@synthesize mainFrame;
 -(void)dealloc
 {
-	if(textView != nil)
-		textView = nil;
+	RELEASE_TO_NIL(containerView);
 	RELEASE_TO_NIL(textView);
+	RELEASE_TO_NIL(entryImageView);
+	RELEASE_TO_NIL(imageView);
+	RELEASE_TO_NIL(doneBtn);
+
 	[super dealloc];
 }
+
+-(NSString*)getNormalizedPath:(NSString*)source
+{
+	// NOTE: File paths may contain URL prefix as of release 1.7 of the SDK
+	if ([source hasPrefix:@"file:/"]) {
+		NSURL* url = [NSURL URLWithString:source];
+		return [url path];
+	}
+	
+	// NOTE: Here is where you can perform any other processing needed to
+	// convert the source path. For example, if you need to handle
+	// tilde, then add the call to stringByExpandingTildeInPath
+	
+	return source;
+}
+
+
+-(UIImage *)resourcesImage:(NSString *)url
+{
+	UIImage *image = [[UIImage alloc] initWithContentsOfFile: [[TiHost resourcePath] stringByAppendingPathComponent:[self getNormalizedPath:url]]];
+	return image;
+}
+
 
 - (HPGrowingTextView *)textView {
 	
 	if(textView==nil)
 	{
-		
-		[self setBackgroundColor:[UIColor blueColor]];
-	
-		textView = [[HPGrowingTextView alloc] initWithFrame:CGRectMake(0, 0, 320, 35)];
+		textView = [[HPGrowingTextView alloc] init];
 		textView.minNumberOfLines = 1;
 		textView.maxNumberOfLines = 4;
 		textView.returnKeyType = UIReturnKeyGo; //just as an example
 		textView.font = [UIFont boldSystemFontOfSize:15.0f];
 		textView.delegate = self;
-		//textView.animateHeightChange = NO; //turns off animation
 		[textView sizeToFit];
-
-		
-		[self addSubview:textView];
-		
 	}
 	return textView;
 }
+
+-(UIButton *)doneBtn
+{
+	if(!doneBtn)
+		doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+	return doneBtn;
+}
+-(UIImageView *)entryImageView
+{
+	if(!entryImageView)
+		entryImageView = [[UIImageView alloc] init];
+	return entryImageView;
+}
+
+-(UIImageView *)imageView
+{
+	if(!imageView)
+		imageView = [[UIImageView alloc] init];
+	return imageView;
+}
+
+
+-(UIView *)containerView
+{
+	if(!containerView)
+	{
+		containerView = [[UIView alloc] init];
+		
+		containerView.backgroundColor = [UIColor lightGrayColor];
+		
+		UIImage *rawEntryBackground = [self resourcesImage:@"textarea.bundle/MessageEntryInputField.png"];
+
+		UIImage *entryBackground = [rawEntryBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
+		[[self entryImageView] setImage:entryBackground];
+		entryImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+		
+		UIImage *rawBackground = [self resourcesImage:@"textarea.bundle/MessageEntryBackground.png"];
+		
+		UIImage *background = [rawBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
+		[[self imageView] setImage:background];
+		imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+		
+		// view hierachy
+		[containerView addSubview:imageView];
+		[containerView addSubview:[self textView]];
+		[containerView addSubview:entryImageView];
+		
+		UIImage *sendBtnBackground = [[self resourcesImage:@"textarea.bundle/MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
+		UIImage *selectedSendBtnBackground = [[self resourcesImage:@"textarea.bundle/MessageEntrySendButton.png"]stretchableImageWithLeftCapWidth:13 topCapHeight:0];
+		
+		[self doneBtn].autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+		
+		[[self doneBtn] setTitle:@"Done" forState:UIControlStateNormal];
+		
+		[[self doneBtn] setTitleShadowColor:[UIColor colorWithWhite:0 alpha:0.4] forState:UIControlStateNormal];
+		[self doneBtn].titleLabel.shadowOffset = CGSizeMake (0.0, -1.0);
+		[self doneBtn].titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
+		
+		[[self doneBtn] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+		[[self doneBtn] addTarget:self action:@selector(resignTextView) forControlEvents:UIControlEventTouchUpInside];
+		[[self doneBtn] setBackgroundImage:sendBtnBackground forState:UIControlStateNormal];
+		[[self doneBtn] setBackgroundImage:selectedSendBtnBackground forState:UIControlStateSelected];
+		[[self containerView] addSubview:[self doneBtn]];	
+		
+		[self addSubview:containerView];
+	}
+	return containerView;
+}
+
+
 
 -(void)setValue_:(id)value
 {
@@ -95,17 +184,24 @@
 
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
-	if(textView!=nil)
-	{
-		
-		[TiUtils setView:textView positionRect:
+	if(!containerView)
+		containerView = [self containerView];
+
+	self.mainFrame = bounds;
+	
+
+	[TiUtils setView:containerView positionRect:
 			CGRectMake(
 						0,
-						CGRectGetHeight([self frame])-CGRectGetHeight([textView frame]),
-						CGRectGetWidth([self frame]),
-						CGRectGetHeight([textView frame])
+						CGRectGetHeight(self.mainFrame) - 40,
+						CGRectGetWidth(self.mainFrame),
+						40/*CGRectGetHeight([containerView frame])*/
 			)];
-	}
+	[[self textView] setFrame:CGRectMake(6, 3, CGRectGetWidth(self.mainFrame) - 80, 40)];
+	[[self doneBtn ] setFrame: CGRectMake([self containerView].frame.size.width - 69, 9, 63, 27)];
+	[[self imageView] setFrame: CGRectMake(0, 0, [self containerView].frame.size.width, containerView.frame.size.height)];
+	[[self entryImageView] setFrame: CGRectMake(5, 0, CGRectGetWidth(self.mainFrame)-72, 40)];
+
 }
 
 
@@ -114,31 +210,26 @@
 	[textView resignFirstResponder];
 }
 
-
-
-
-
-
 //Code from Brett Schumann
 -(void) keyboardWillShow:(NSNotification *)note{
     // get keyboard size and loctaion
 	CGRect keyboardBounds;
-    [[note.userInfo valueForKey:UIKeyboardBoundsUserInfoKey] getValue: &keyboardBounds];
+    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
 	
 	// get the height since this is the main value that we need.
 	NSInteger kbSizeH = keyboardBounds.size.height;
 	
 	// get a rect for the textView frame
-	CGRect textViewFrame = textView.frame;
-	textViewFrame.origin.y -= kbSizeH;
+	CGRect containerFrame = containerView.frame;
+	containerFrame.origin.y -= kbSizeH;
 	
 	// animations settings
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:0.3f];
+    [UIView setAnimationDuration:0.25f];
 	
 	// set views with new info
-	textView.frame = textViewFrame;
+	containerView.frame = containerFrame;
 	
 	// commit animations
 	[UIView commitAnimations];
@@ -147,22 +238,22 @@
 -(void) keyboardWillHide:(NSNotification *)note{
     // get keyboard size and location
 	CGRect keyboardBounds;
-    [[note.userInfo valueForKey:UIKeyboardBoundsUserInfoKey] getValue: &keyboardBounds];
+    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
 	
 	// get the height since this is the main value that we need.
 	NSInteger kbSizeH = keyboardBounds.size.height;
 	
 	// get a rect for the textView frame
-	CGRect textViewFrame = textView.frame;
-	textViewFrame.origin.y += kbSizeH;
+	CGRect containerFrame = containerView.frame;
+	containerFrame.origin.y += kbSizeH;
 	
 	// animations settings
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:0.3f];
+    [UIView setAnimationDuration:0.25f];
 	
 	// set views with new info
-	textView.frame = textViewFrame;
+	containerView.frame = containerFrame;
 	
 	// commit animations
 	[UIView commitAnimations];
@@ -172,9 +263,10 @@
 {
 	float diff = (textView.frame.size.height - height);
 	
-	CGRect r = textView.frame;
-	r.origin.y += diff;
-	textView.frame = r;
+	CGRect r = [self containerView].frame;
+    r.size.height -= diff;
+    r.origin.y += diff;
+	[self containerView ].frame = r;
 }
 
 

@@ -31,11 +31,8 @@
 
 @implementation HPGrowingTextView
 @synthesize internalTextView;
-@synthesize maxNumberOfLines;
-@synthesize minNumberOfLines;
 @synthesize delegate;
 
-@synthesize text;
 @synthesize font;
 @synthesize textColor;
 @synthesize textAlignment; 
@@ -52,7 +49,6 @@
 		CGRect r = frame;
 		r.origin.y = 0;
 		r.origin.x = 0;
-		
 		internalTextView = [[HPTextViewInternal alloc] initWithFrame:r];
 		internalTextView.delegate = self;
 		internalTextView.scrollEnabled = NO;
@@ -60,8 +56,6 @@
 		internalTextView.contentInset = UIEdgeInsetsZero;		
 		internalTextView.showsHorizontalScrollIndicator = NO;
 		internalTextView.text = @"-";
-		
-		
 		[self addSubview:internalTextView];
 		
 		UIView *internal = (UIView*)[[internalTextView subviews] objectAtIndex:0];
@@ -80,92 +74,129 @@
 -(void)sizeToFit
 {
 	CGRect r = self.frame;
-	r.size.height = minHeight;
-	self.frame = r;
+    
+    // check if the text is available in text view or not, if it is available, no need to set it to minimum lenth, it could vary as per the text length
+    // fix from Ankit Thakur
+    if ([self.text length] > 0) {
+        return;
+    } else {
+        r.size.height = minHeight;
+        self.frame = r;
+    }
 }
 
 -(void)setFrame:(CGRect)aframe
 {
 	CGRect r = aframe;
 	r.origin.y = 0;
-	r.origin.x = 0;
+	r.origin.x = contentInset.left;
+    r.size.width -= contentInset.left + contentInset.right;
+
 	internalTextView.frame = r;
 	
 	[super setFrame:aframe];
 }
 
+-(void)setContentInset:(UIEdgeInsets)inset
+{
+    contentInset = inset;
+    
+    CGRect r = self.frame;
+    r.origin.y = inset.top - inset.bottom;
+    r.origin.x = inset.left;
+    r.size.width -= inset.left + inset.right;
+    
+    internalTextView.frame = r;
+    
+    [self setMaxNumberOfLines:maxNumberOfLines];
+    [self setMaxNumberOfLines:minNumberOfLines];
+}
+
+-(UIEdgeInsets)contentInset
+{
+    return contentInset;
+}
+
 -(void)setMaxNumberOfLines:(int)n
 {
-	UITextView *test = [[HPTextViewInternal alloc] init];	
-	test.font = internalTextView.font;
-	test.hidden = YES;
-	
-	NSMutableString *newLines = [NSMutableString string];
-	
-	if(n == 1){
-		[newLines appendString:@"-"];
-	} else {
-		for(int i = 1; i<n; i++){
-			[newLines appendString:@"\n"];
-		}
-	}
-	
-	test.text = newLines;
-	
-	
-	[self addSubview:test];
+    // Use internalTextView for height calculations, thanks to Gwynne <http://blog.darkrainfall.org/>
+    NSString *saveText = internalTextView.text, *newText = @"-";
+    
+    internalTextView.delegate = nil;
+    internalTextView.hidden = YES;
+    
+    for (int i = 1; i < n; ++i)
+        newText = [newText stringByAppendingString:@"\n|W|"];
+    
+    internalTextView.text = newText;
+    
+    maxHeight = internalTextView.contentSize.height;
+    
+    internalTextView.text = saveText;
+    internalTextView.hidden = NO;
+    internalTextView.delegate = self;
+    
+    [self sizeToFit];
+    
+    maxNumberOfLines = n;
+}
 
-	maxHeight = test.contentSize.height;
-	maxNumberOfLines = n;
-	
-	[test removeFromSuperview];
-	[test release];	
+-(int)maxNumberOfLines
+{
+    return maxNumberOfLines;
 }
 
 -(void)setMinNumberOfLines:(int)m
 {
-	
-	UITextView *test = [[HPTextViewInternal alloc] init];	
-	test.font = internalTextView.font;
-	test.hidden = YES;
-	
-	NSMutableString *newLines = [NSMutableString string];
- 
-	if(m == 1){
-		[newLines appendString:@"-"];
-	} else {
-		for(int i = 1; i<m; i++){
-			[newLines appendString:@"\n"];
-		}
-	}
-	
-	test.text = newLines;
-	
-	
-	[self addSubview:test];
-	
-	minHeight = test.contentSize.height;
-			
-	[self sizeToFit];	
-	minNumberOfLines = m;
-	
-	[test removeFromSuperview];
-	[test release];
+	// Use internalTextView for height calculations, thanks to Gwynne <http://blog.darkrainfall.org/>
+    NSString *saveText = internalTextView.text, *newText = @"-";
+    
+    internalTextView.delegate = nil;
+    internalTextView.hidden = YES;
+    
+    for (int i = 1; i < m; ++i)
+        newText = [newText stringByAppendingString:@"\n|W|"];
+    
+    internalTextView.text = newText;
+    
+    minHeight = internalTextView.contentSize.height;
+    
+    internalTextView.text = saveText;
+    internalTextView.hidden = NO;
+    internalTextView.delegate = self;
+    
+    [self sizeToFit];
+    
+    minNumberOfLines = m;
+}
+
+-(int)minNumberOfLines
+{
+    return minNumberOfLines;
 }
 
 
 - (void)textViewDidChange:(UITextView *)textView
-{
+{	
 	//size of content, so we can set the frame of self
 	NSInteger newSizeH = internalTextView.contentSize.height;
 	if(newSizeH < minHeight || !internalTextView.hasText) newSizeH = minHeight; //not smalles than minHeight
 	 
 	if (internalTextView.frame.size.height != newSizeH)
 	{
+        // [fixed] Pasting too much text into the view failed to fire the height change, 
+        // thanks to Gwynne <http://blog.darkrainfall.org/>
+        
+        if (newSizeH > maxHeight && internalTextView.frame.size.height <= maxHeight)
+        {
+            newSizeH = maxHeight;
+        }
+        
 		if (newSizeH <= maxHeight)
 		{
 			if(animateHeightChange){
 				[UIView beginAnimations:@"" context:nil];
+                [UIView setAnimationDuration:0.1f];
 				[UIView setAnimationDelegate:self];
 				[UIView setAnimationDidStopSelector:@selector(growDidStop)];
 				[UIView setAnimationBeginsFromCurrentState:YES];
@@ -180,13 +211,21 @@
 			internalTextViewFrame.size.height = newSizeH; // + padding
 			self.frame = internalTextViewFrame;
 			
-			internalTextViewFrame.origin.y = 0;
-			internalTextViewFrame.origin.x = 0;
+			internalTextViewFrame.origin.y = contentInset.top - contentInset.bottom;
+			internalTextViewFrame.origin.x = contentInset.left;
+            internalTextViewFrame.size.height = newSizeH;
+            internalTextViewFrame.size.width = internalTextView.contentSize.width;
+            
 			internalTextView.frame = internalTextViewFrame;
 			
+            // [fixed] The growingTextView:didChangeHeight: delegate method was not called at all when not animating height changes.
+            // thanks to Gwynne <http://blog.darkrainfall.org/>
+            
 			if(animateHeightChange){
 				[UIView commitAnimations];
-			}			
+			} else if ([delegate respondsToSelector:@selector(growingTextView:didChangeHeight:)]) {
+                [delegate growingTextView:self didChangeHeight:newSizeH];
+            }		
 		}
 		
 				
@@ -221,6 +260,17 @@
 	
 }
 
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [internalTextView becomeFirstResponder];
+}
+
+- (BOOL)becomeFirstResponder
+{
+    [super becomeFirstResponder];
+    return [self.internalTextView becomeFirstResponder];
+}
+
 -(BOOL)resignFirstResponder
 {
 	[super resignFirstResponder];
@@ -237,14 +287,18 @@
 #pragma mark UITextView properties
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
--(void)setText:(NSString *)atext
+-(void)setText:(NSString *)newText
 {
-	internalTextView.text= atext;
+    internalTextView.text = newText;
+    
+    // include this line to analyze the height of the textview.
+    // fix from Ankit Thakur
+    [self performSelector:@selector(textViewDidChange:) withObject:internalTextView];
 }
-//
--(NSString*)text
+
+-(NSString*) text
 {
-	return internalTextView.text;
+    return internalTextView.text;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
