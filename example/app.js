@@ -9,7 +9,7 @@ var window = Ti.UI.createWindow({
 	backgroundColor:'white'
 });
 
-window.open();
+window.open({modal:true});
 
 // TODO: write your module tests here
 var textfield = require('pec.tf');

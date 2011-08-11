@@ -41,16 +41,13 @@
 	return source;
 }
 
-
 -(UIImage *)resourcesImage:(NSString *)url
 {
 	UIImage *image = [[UIImage alloc] initWithContentsOfFile: [[TiHost resourcePath] stringByAppendingPathComponent:[self getNormalizedPath:url]]];
 	return image;
 }
 
-
 - (HPGrowingTextView *)textView {
-	
 	if(textView==nil)
 	{
 		textView = [[HPGrowingTextView alloc] init];
@@ -125,9 +122,9 @@
 		
 		
 		// view hierachy
-		[containerView addSubview:imageView];
+		[containerView addSubview:[self imageView]];
 		[containerView addSubview:[self textView]];
-		[containerView addSubview:entryImageView];
+		[containerView addSubview:[self entryImageView]];
 		[containerView addSubview:[self doneBtn]];	
 		
 		[self addSubview:containerView];
@@ -191,16 +188,18 @@
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
 	if(CGRectIsEmpty(self.mainFrame)){
-		self.mainFrame = bounds;
+		self.mainFrame = bounds;//[[UIScreen mainScreen] applicationFrame];
 	}
-		
-	[[self containerView]	setFrame: CGRectMake(0, CGRectGetHeight(self.mainFrame) - 40, CGRectGetWidth(self.mainFrame), 40)];
-//	[[self containerView]	setFrame: CGRectMake(0, 0, CGRectGetWidth(self.mainFrame), 40)];
-	[[self textView]		setFrame: CGRectMake(6, 3, CGRectGetWidth(self.mainFrame) - 80, 40)];
-	[[self doneBtn ]		setFrame: CGRectMake([self containerView].frame.size.width - 69, 8, 63, 27)];
-	[[self imageView]		setFrame: CGRectMake(0, 0, [self containerView].frame.size.width, [self containerView].frame.size.height)];
-	[[self entryImageView]	setFrame: CGRectMake(5, 0, CGRectGetWidth(self.mainFrame)-72, 40)];
-	//	[self setFrame:CGRectMake(0, CGRectGetHeight(self.mainFrame) - 40, CGRectGetWidth(self.mainFrame), 40)];
+	
+	CGFloat w = CGRectGetWidth(self.mainFrame);
+	CGFloat h = CGRectGetHeight(self.mainFrame);
+	
+	[[self containerView]	setFrame: CGRectMake(0, 0, w, 40)];
+	[[self textView]		setFrame: CGRectMake(6, 3, w - 80, 40)];
+	[[self doneBtn ]		setFrame: CGRectMake(w - 69, 8, 63, 27)];
+	[[self imageView]		setFrame: CGRectMake(0, 0, w, h)];
+	[[self entryImageView]	setFrame: CGRectMake(5, 0, w-72, 40)];
+	[self					setFrame: CGRectMake(0, h - 40, w, 40)];
 	
 }
 
@@ -240,9 +239,8 @@
 	
 	// get the height since this is the main value that we need.
 	NSInteger kbSizeH = keyboardBounds.size.height;
-	
 	// get a rect for the textView frame
-	CGRect containerFrame = containerView.frame;
+	CGRect containerFrame = self.frame;
 	containerFrame.origin.y -= kbSizeH;
 	
 	// animations settings
@@ -251,9 +249,8 @@
     [UIView setAnimationDuration:0.25f];
 	
 	// set views with new info
-	containerView.frame = containerFrame;
+	[self setFrame: containerFrame];
 	
-	// commit animations
 	[UIView commitAnimations];
 }
 
@@ -266,7 +263,7 @@
 	NSInteger kbSizeH = keyboardBounds.size.height;
 	
 	// get a rect for the textView frame
-	CGRect containerFrame = containerView.frame;
+	CGRect containerFrame = self.frame;
 	containerFrame.origin.y += kbSizeH;
 	
 	// animations settings
@@ -275,8 +272,8 @@
     [UIView setAnimationDuration:0.25f];
 	
 	// set views with new info
-	containerView.frame = containerFrame;
-	
+	[self setFrame: containerFrame];
+
 	// commit animations
 	[UIView commitAnimations];
 
@@ -284,8 +281,6 @@
 
 -(void)growingTextView:(HPGrowingTextView *)growingTextView didChangeHeight:(float)height
 {
-	
-
 	NSMutableDictionary *event = [NSMutableDictionary dictionary];
 	[event setObject:[[self textView] text] forKey:@"value"];
 	[event setObject:  [NSString stringWithFormat:@"%f",height] forKey:@"height"];
