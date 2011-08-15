@@ -13,126 +13,187 @@
 
 
 @implementation PecTfTextField
-@synthesize mainFrame;
+@synthesize value;
 
 -(void)dealloc
 {
-	RELEASE_TO_NIL(containerView);
-	RELEASE_TO_NIL(textView);
-	RELEASE_TO_NIL(entryImageView);
-	RELEASE_TO_NIL(imageView);
-	RELEASE_TO_NIL(doneBtn);
+	RELEASE_TO_NIL(textArea);
+	RELEASE_TO_NIL(scrollView);
 
 	[super dealloc];
 }
 
--(NSString*)getNormalizedPath:(NSString*)source
+-(PETextArea *)textArea 
 {
-	// NOTE: File paths may contain URL prefix as of release 1.7 of the SDK
-	if ([source hasPrefix:@"file:/"]) {
-		NSURL* url = [NSURL URLWithString:source];
-		return [url path];
+	if(!textArea){
+		textArea = [[PETextArea alloc] initWithFrame:self.frame];
+		textArea.delegate = self;
+	}
+	return textArea;
+}
+
+-(PEScrollView *)scrollView
+{
+	if(!scrollView)
+	{
+		CGFloat h = CGRectGetHeight(self.frame);// - CGRectGetHeight(self.navigationController.navigationBar.frame);
+		CGRect a = self.frame;
+		a.size.height = h - 40;
+		a.origin.y = 0;
+		scrollView = [[PEScrollView alloc] initWithFrame:a];
+		scrollView.backgroundColor = [UIColor colorWithRed: 180.0/255.0 green: 238.0/255.0 blue:180.0/255.0 alpha: 1.0];
+		scrollView.delegate = self;
+	}
+	return scrollView;
+}
+
+
+//Code from Brett Schumann
+-(void) keyboardWillShow:(NSNotification *)note{
+    // get keyboard size and loctaion
+	CGRect keyboardBounds;
+    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+	
+	// get the height since this is the main value that we need.
+	NSInteger kbSizeH = keyboardBounds.size.height;
+	
+	// get a rect for the textView frame
+	CGRect containerFrame = [self textArea].frame;
+	containerFrame.origin.y -= kbSizeH;
+	CGRect scrollViewFrame = [self scrollView].frame;	
+	scrollViewFrame.size.height -=kbSizeH;
+	
+	// animations settings
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:0.3f];
+	
+	// set views with new info
+	[self scrollView].frame = scrollViewFrame;
+	[self textArea].frame = containerFrame;
+	
+	// commit animations
+	[UIView commitAnimations];
+	[[self scrollView] reloadContentSize];
+}
+
+-(void)changeHeightOfScrollView
+{
+	NSLog(@"changeHeightOfScrollView");
+}
+
+-(void) keyboardWillHide:(NSNotification *)note{
+    // get keyboard size and location
+	CGRect keyboardBounds;
+	
+    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+	
+	// get the height since this is the main value that we need.
+	NSInteger kbSizeH = keyboardBounds.size.height;
+	
+	// get a rect for the textView frame
+	CGRect containerFrame = [self textArea].frame;
+	containerFrame.origin.y += kbSizeH;
+	CGRect scrollViewFrame = [self scrollView].frame;	
+	scrollViewFrame.size.height +=kbSizeH;
+	
+	// animations settings
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:0.3f];
+	
+	// set views with new info
+	[[self scrollView]setFrame: scrollViewFrame];
+	[[self textArea] setFrame: containerFrame];
+	
+	// commit animations
+	[UIView commitAnimations];
+}
+-(void)heightOfTextViewDidChange:(float)height
+{
+	CGRect scrollViewFrame = [self scrollView].frame;	
+	scrollViewFrame.size.height +=height;
+	[[self scrollView]setFrame: scrollViewFrame];
+	[[self scrollView] reloadContentSize];
+}
+-(void)blur
+{
+	[[self textArea] resignTextView];
+}
+-(void)focus
+{
+	[[self textArea] becomeTextView];
+}
+
+-(void)sendMessage:(NSString *)msg
+{
+	if([msg isEqualToString:@""])
+		return;
+	[[self scrollView] performSelectorOnMainThread:@selector(sendMessage:) withObject:msg waitUntilDone:YES];
+	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
+}
+-(void)recieveMessage:(NSString *)msg
+{
+	if([msg isEqualToString:@""])
+		return;
+	[[self scrollView] performSelectorOnMainThread:@selector(recieveMessage:) withObject:msg waitUntilDone:YES];
+	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
+}
+
+-(void)textViewButtonPressed:(NSString *)text
+{
+	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
+	[tiEvent setObject:text forKey:@"value"];
+	[self.proxy fireEvent:@"buttonClicked" withObject:tiEvent];
+/*
+	if(!testM)
+	{
+		[[self scrollView] sendMessage:text];
+		testM = YES;
+	}	
+	else
+	{
+		[[self scrollView] recieveMessage:text];
+		testM = NO;
+	}
+*/
+	[[self textArea] emptyTextView];
+	[[self scrollView] reloadContentSize];
+}
+-(void)textViewTextChange:(NSString *)text
+{
+	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
+	[tiEvent setObject:text forKey:@"value"];
+	[self.proxy fireEvent:@"change" withObject:tiEvent];
+
+	self.value = text;
+}
+-(void)scrollViewClicked:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
+
+	[self.proxy fireEvent:@"click" withObject:tiEvent];
+
+	[self blur];
+}
+
+
+-(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
+{
+	if(!testM)
+	{
+		testM = YES;
+		self.frame = self.superview.frame;
+		[self addSubview: [self scrollView]];
+		[self addSubview: [self textArea]];
+
 	}
 	
-	// NOTE: Here is where you can perform any other processing needed to
-	// convert the source path. For example, if you need to handle
-	// tilde, then add the call to stringByExpandingTildeInPath
-	
-	return source;
 }
 
--(UIImage *)resourcesImage:(NSString *)url
-{
-	UIImage *image = [[UIImage alloc] initWithContentsOfFile: [[TiHost resourcePath] stringByAppendingPathComponent:[self getNormalizedPath:url]]];
-	return image;
-}
+/*
 
-- (HPGrowingTextView *)textView {
-	if(textView==nil)
-	{
-		textView = [[HPGrowingTextView alloc] init];
-		textView.minNumberOfLines = 1;
-		textView.maxNumberOfLines = 4;
-		textView.returnKeyType = UIReturnKeyGo; //just as an example
-		textView.font = [UIFont boldSystemFontOfSize:15.0f];
-		textView.delegate = self;
-		[textView sizeToFit];
-	}
-	return textView;
-}
-
--(UIButton *)doneBtn
-{
-	if(!doneBtn)
-		doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-	return doneBtn;
-}
--(UIImageView *)entryImageView
-{
-	if(!entryImageView)
-		entryImageView = [[UIImageView alloc] init];
-	return entryImageView;
-}
-
--(UIImageView *)imageView
-{
-	if(!imageView)
-		imageView = [[UIImageView alloc] init];
-	return imageView;
-}
-
-
-
--(UIView *)containerView
-{
-	if(!containerView)
-	{
-		containerView = [[UIView alloc] init];
-		
-		containerView.backgroundColor = [UIColor lightGrayColor];
-		
-		UIImage *rawEntryBackground = [self resourcesImage:@"textarea.bundle/MessageEntryInputField.png"];
-
-		UIImage *entryBackground = [rawEntryBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
-		[[self entryImageView] setImage:entryBackground];
-		entryImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-		
-		UIImage *rawBackground = [self resourcesImage:@"textarea.bundle/MessageEntryBackground.png"];
-		
-		UIImage *background = [rawBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
-		[[self imageView] setImage:background];
-		imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-		
-		
-		UIImage *sendBtnBackground = [[self resourcesImage:@"textarea.bundle/MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
-		UIImage *selectedSendBtnBackground = [[self resourcesImage:@"textarea.bundle/MessageEntrySendButton.png"]stretchableImageWithLeftCapWidth:13 topCapHeight:0];
-		
-		[self doneBtn].autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-		
-		[[self doneBtn] setTitle:@"Done" forState:UIControlStateNormal];
-		
-		[[self doneBtn] setTitleShadowColor:[UIColor colorWithWhite:0 alpha:0.4] forState:UIControlStateNormal];
-		[self doneBtn].titleLabel.shadowOffset = CGSizeMake (0.0, -1.0);
-		[self doneBtn].titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
-		
-		[[self doneBtn] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-		[[self doneBtn] addTarget:self action:@selector(buttonClicked) forControlEvents:UIControlEventTouchUpInside];
-		[[self doneBtn] setBackgroundImage:sendBtnBackground forState:UIControlStateNormal];
-		[[self doneBtn] setBackgroundImage:selectedSendBtnBackground forState:UIControlStateSelected];
-		
-		
-		// view hierachy
-		[containerView addSubview:[self imageView]];
-		[containerView addSubview:[self textView]];
-		[containerView addSubview:[self entryImageView]];
-		[containerView addSubview:[self doneBtn]];	
-		
-		[self addSubview:containerView];
-	}
-	return containerView;
-}
-
-
+ #pragma mark JavaScript setters and getters
 
 -(void)setValue_:(id)value
 {
@@ -183,149 +244,5 @@
 {
 	return [[self textView] text];
 }
-
-
--(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
-{
-	if(CGRectIsEmpty(self.mainFrame)){
-		self.mainFrame = bounds;//[[UIScreen mainScreen] applicationFrame];
-	}
-	
-	CGFloat w = CGRectGetWidth(self.mainFrame);
-	CGFloat h = CGRectGetHeight(self.mainFrame);
-	
-	[[self containerView]	setFrame: CGRectMake(0, 0, w, 40)];
-	[[self textView]		setFrame: CGRectMake(6, 3, w - 80, 40)];
-	[[self doneBtn ]		setFrame: CGRectMake(w - 69, 8, 63, 27)];
-	[[self imageView]		setFrame: CGRectMake(0, 0, w, h)];
-	[[self entryImageView]	setFrame: CGRectMake(5, 0, w-72, 40)];
-	[self					setFrame: CGRectMake(0, h - 40, w, 40)];
-	
-}
-
-
--(void)resignTextView
-{
-	NSMutableDictionary *event = [NSMutableDictionary dictionary];
-	[event setObject:[[self textView] text] forKey:@"value"];
-
-	[self.proxy fireEvent:@"blur" withObject:event];
-	
-	[(id)[self textView] resignFirstResponder];
-}
-
--(void)becomeTextView
-{
-	NSMutableDictionary *event = [NSMutableDictionary dictionary];
-	[event setObject:[[self textView] text] forKey:@"value"];
-	
-	[self.proxy fireEvent:@"focus" withObject:event];
-	
-	[(id)[self textView] becomeFirstResponder];
-}
-
--(void)buttonClicked
-{
-	NSMutableDictionary *event = [NSMutableDictionary dictionary];
-	[event setObject:[[self textView] text] forKey:@"value"];
-	[self.proxy fireEvent:@"buttonClicked" withObject:event];
-	
-}
-//Code from Brett Schumann
--(void)keyboardWillShow:(NSNotification *)note{
-    // get keyboard size and loctaion
-	CGRect keyboardBounds;
-    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
-	
-	// get the height since this is the main value that we need.
-	NSInteger kbSizeH = keyboardBounds.size.height;
-	// get a rect for the textView frame
-	CGRect containerFrame = self.frame;
-	containerFrame.origin.y -= kbSizeH;
-	
-	// animations settings
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:0.25f];
-	
-	// set views with new info
-	[self setFrame: containerFrame];
-	
-	[UIView commitAnimations];
-}
-
--(void)keyboardWillHide:(NSNotification *)note{
-    // get keyboard size and location
-	CGRect keyboardBounds;
-    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
-	
-	// get the height since this is the main value that we need.
-	NSInteger kbSizeH = keyboardBounds.size.height;
-	
-	// get a rect for the textView frame
-	CGRect containerFrame = self.frame;
-	containerFrame.origin.y += kbSizeH;
-	
-	// animations settings
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:0.25f];
-	
-	// set views with new info
-	[self setFrame: containerFrame];
-
-	// commit animations
-	[UIView commitAnimations];
-
-}
-
--(void)growingTextView:(HPGrowingTextView *)growingTextView didChangeHeight:(float)height
-{
-	NSMutableDictionary *event = [NSMutableDictionary dictionary];
-	[event setObject:[[self textView] text] forKey:@"value"];
-	[event setObject:  [NSString stringWithFormat:@"%f",height] forKey:@"height"];
-	[self.proxy fireEvent:@"heightChanged" withObject:event];
-
-}
--(void)growingTextViewDidChange:(HPGrowingTextView *)growingTextView
-{
-	NSMutableDictionary *event = [NSMutableDictionary dictionary];
-	[event setObject:[[self textView] text] forKey:@"value"];
-	[self.proxy fireEvent:@"change" withObject:event];
-}
--(void)growingTextViewDidChangeSelection:(HPGrowingTextView *)growingTextView
-{
-	
-}
-
--(void)growingTextViewDidBeginEditing:(HPGrowingTextView *)growingTextView
-{
-	NSMutableDictionary *event = [NSMutableDictionary dictionary];
-	[event setObject:[[self textView] text] forKey:@"value"];
-	[self.proxy fireEvent:@"keyboardUp" withObject:event];
-	
-}
--(void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView
-{
-	NSMutableDictionary *event = [NSMutableDictionary dictionary];
-	[event setObject:[[self textView] text] forKey:@"value"];
-	[self.proxy fireEvent:@"keyboardDown" withObject:event];
-
-}
-
-
-
-- (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height
-{
-	float diff = ([self containerView].frame.size.height - height);
-	
-	CGRect r = [self containerView].frame;
-    r.size.height -= diff;
-    r.origin.y += diff;
-	[self containerView ].frame = r;
-}
-
-
-
-
+*/
 @end

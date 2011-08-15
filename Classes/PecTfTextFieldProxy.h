@@ -10,7 +10,7 @@
 
 
 @interface PecTfTextFieldProxy : TiViewProxy {
-
+	PecTfTextField *ourView;
 }
 
 @end

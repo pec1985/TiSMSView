@@ -12,48 +12,57 @@
 
 @implementation PecTfTextFieldProxy
 
--(void)loadView
+-(PecTfTextField *)ourView
 {
-}
-
--(void)blur:(id)args
-{
-	PecTfTextField *tf = (PecTfTextField *)[self view];
-	if ([self viewAttached])
+	if(!ourView)
 	{
-		[tf performSelectorOnMainThread:@selector(resignTextView) withObject:nil waitUntilDone:NO];
+		ourView = (PecTfTextField *)[self view];
 	}
-}
-
--(void)focus:(id)args
-{
-
-	HPTextViewInternal *tf = (HPTextViewInternal *)[self view];
-	if ([self viewAttached])
-	{
-		[tf performSelectorOnMainThread:@selector(becomeTextView) withObject:nil waitUntilDone:NO];
-	}
-
-	
+	return ourView;
 }
 
 -(void)viewDidAttach
 {
-	PecTfTextField * ourView = (PecTfTextField *)[self view];
-	[[NSNotificationCenter defaultCenter] addObserver:ourView 
+	[[NSNotificationCenter defaultCenter] addObserver:[self ourView] 
 											 selector:@selector(keyboardWillShow:) 
 												 name:UIKeyboardWillShowNotification 
 											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:ourView 
+	[[NSNotificationCenter defaultCenter] addObserver:[self ourView] 
 											 selector:@selector(keyboardWillHide:) 
 												 name:UIKeyboardWillHideNotification 
 											   object:nil];	
 	[super viewDidAttach];
 }
 
+-(void)message:(id)args
+{
+	ENSURE_SINGLE_ARG(args,NSDictionary);
+	NSString *send = [args objectForKey:@"send"]?[args objectForKey:@"send"]:@"";
+	NSString *recieve = [args objectForKey:@"recieve"]?[args objectForKey:@"recieve"]:@"";
+	if(![send isEqualToString:@""]){
+
+		[ourView sendMessage:send];
+	}
+	if(![recieve isEqualToString:@""])
+		[ourView recieveMessage:recieve];
+}
+
+-(void)sendMessage:(id)args
+{
+	ENSURE_SINGLE_ARG(args, NSString);
+	[ourView sendMessage:args];
+	
+}
+
+-(void)recieveMessage:(id)args
+{
+	ENSURE_SINGLE_ARG(args, NSString);
+	[ourView recieveMessage:args];
+	
+}
+
 -(id)value
 {
-	PecTfTextField * ourView = (PecTfTextField *)[self view];
-	return [ourView value];
+	return [[self ourView] value];
 }
 @end
