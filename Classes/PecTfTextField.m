@@ -13,14 +13,31 @@
 
 
 @implementation PecTfTextField
-@synthesize value;
+@synthesize value, bgColor;
 
 -(void)dealloc
 {
 	RELEASE_TO_NIL(textArea);
 	RELEASE_TO_NIL(scrollView);
+	
+    
+    NSLog(@"%@",super.self);
+    
+	@try {
+        [super dealloc];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+    }
+}
 
-	[super dealloc];
+-(id)init
+{
+    if(self = [super init])
+    {
+        
+    }
+    return self;
 }
 
 -(PETextArea *)textArea 
@@ -41,7 +58,7 @@
 		a.size.height = h - 40;
 		a.origin.y = 0;
 		scrollView = [[PEScrollView alloc] initWithFrame:a];
-		scrollView.backgroundColor = [UIColor colorWithRed: 180.0/255.0 green: 238.0/255.0 blue:180.0/255.0 alpha: 1.0];
+		scrollView.backgroundColor = self.bgColor;
 		scrollView.delegate = self;
 	}
 	return scrollView;
@@ -145,18 +162,7 @@
 	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
 	[tiEvent setObject:text forKey:@"value"];
 	[self.proxy fireEvent:@"buttonClicked" withObject:tiEvent];
-/*
-	if(!testM)
-	{
-		[[self scrollView] sendMessage:text];
-		testM = YES;
-	}	
-	else
-	{
-		[[self scrollView] recieveMessage:text];
-		testM = NO;
-	}
-*/
+	
 	[[self textArea] emptyTextView];
 	[[self scrollView] reloadContentSize];
 }
@@ -165,84 +171,120 @@
 	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
 	[tiEvent setObject:text forKey:@"value"];
 	[self.proxy fireEvent:@"change" withObject:tiEvent];
-
+	
 	self.value = text;
 }
 -(void)scrollViewClicked:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
-
+	
 	[self.proxy fireEvent:@"click" withObject:tiEvent];
-
+	
 	[self blur];
 }
 
 
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
-	if(!testM)
+    NSLog(@"[DEBUG] Resized");    
+    [TiUtils setView:self positionRect:self.superview.bounds];
+    CGRect a = self.frame;
+    CGFloat h = CGRectGetHeight(self.frame);
+    a.size.height = h - 40;
+    [[self scrollView] setFrame:a];
+	
+	if(!firstTime)
 	{
-		testM = YES;
-		self.frame = self.superview.frame;
+		firstTime = YES;
 		[self addSubview: [self scrollView]];
 		[self addSubview: [self textArea]];
-
+		
 	}
+    else
+    {
+        NSLog(@"[DEBUG] Resizing innerviews");
+        [[self scrollView] reloadContentSize];
+        [[self textArea] resize];
+    }
 	
+}
+
+-(void)setSendColor_:(id)col
+{
+    [[self scrollView] performSelectorOnMainThread:@selector(sendColor:) withObject:[TiUtils stringValue:col] waitUntilDone:YES];
+}
+-(void)setRecieveColor_:(id)col
+{
+    [[self scrollView] performSelectorOnMainThread:@selector(recieveColor:) withObject:[TiUtils stringValue:col] waitUntilDone:YES];
+	
+}
+
+-(void)setBackground_:(id)col
+{
+	TiColor *color = [TiUtils colorValue:col];
+	[[self scrollView] setBackgroundColor: [color _color]];
+	[[self scrollView] reloadContentSize];
+	
+}
+
+-(void)setButtonTitle_:(id)title
+{
+	[[self textArea] buttonTitle:[TiUtils stringValue:title]];
+	[[self scrollView] reloadContentSize];
+}
+-(void)setReturnKeyType_:(id)val
+{
+	[[self textArea] setReturnKeyType:[TiUtils intValue:val]];
 }
 
 /*
-
+ 
  #pragma mark JavaScript setters and getters
-
--(void)setValue_:(id)value
-{
-	[[self textView] setText:[TiUtils stringValue:value]];
-}
-
-
--(void)setColor_:(id)color
-{
-	UIColor * newColor = [[TiUtils colorValue:color] _color];
-	[(id)[self textView] setTextColor:(newColor != nil)?newColor:[UIColor darkTextColor]];
-}
-
-
--(void)setTextAlign_:(id)alignment
-{
-	[(id)[self textView] setTextAlignment:[TiUtils textAlignmentValue:alignment]];
-}
-
--(void)setReturnKeyType_:(id)value
-{
-	[[self textView] setReturnKeyType:[TiUtils intValue:value]];
-}
-
--(void)setEnableReturnKey_:(id)value
-{
-	[(id)[self textView] setEnablesReturnKeyAutomatically:[TiUtils boolValue:value]];
-}
-
--(void)setKeyboardType_:(id)value
-{
-	[(id)[self textView] setKeyboardType:[TiUtils intValue:value]];
-}
-
--(void)setAutocorrect_:(id)value
-{
-	[(id)[self textView] setAutocorrectionType:[TiUtils boolValue:value] ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
-}
-
--(void)setButtonTitle_:(id)value
-{
-	ENSURE_SINGLE_ARG(value, NSString);
-	
-	[[self doneBtn] setTitle:[TiUtils stringValue:value] forState: UIControlStateNormal];
-}
-
--(id)value
-{
-	return [[self textView] text];
-}
-*/
+ 
+ -(void)setValue_:(id)value
+ {
+ [[self textView] setText:[TiUtils stringValue:value]];
+ }
+ 
+ 
+ -(void)setColor_:(id)color
+ {
+ UIColor * newColor = [[TiUtils colorValue:color] _color];
+ [(id)[self textView] setTextColor:(newColor != nil)?newColor:[UIColor darkTextColor]];
+ }
+ 
+ 
+ -(void)setTextAlign_:(id)alignment
+ {
+ [(id)[self textView] setTextAlignment:[TiUtils textAlignmentValue:alignment]];
+ }
+ 
+ 
+ -(void)setEnableReturnKey_:(id)value
+ {
+ [(id)[self textView] setEnablesReturnKeyAutomatically:[TiUtils boolValue:value]];
+ }
+ 
+ -(void)setKeyboardType_:(id)value
+ {
+ [(id)[self textView] setKeyboardType:[TiUtils intValue:value]];
+ }
+ 
+ -(void)setAutocorrect_:(id)value
+ {
+ [(id)[self textView] setAutocorrectionType:[TiUtils boolValue:value] ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
+ }
+ 
+ -(void)setButtonTitle_:(id)value
+ {
+ ENSURE_SINGLE_ARG(value, NSString);
+ 
+ [[self doneBtn] setTitle:[TiUtils stringValue:value] forState: UIControlStateNormal];
+ }
+ 
+ -(id)value
+ {
+ return [[self textView] text];
+ }
+ */
 @end

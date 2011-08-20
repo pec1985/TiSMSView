@@ -36,7 +36,9 @@
 
 @property(assign) NSObject<PETextAreaDelegate> *delegate;
 @property(nonatomic, retain)NSString *text;
+-(void)resize;
 -(void)resignTextView;
 -(void)emptyTextView;
 -(void)becomeTextView;
+-(void)buttonTitle:(NSString *)title;
 @end

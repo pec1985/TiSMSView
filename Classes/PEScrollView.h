@@ -26,8 +26,15 @@
 
 @property(nonatomic, assign) id<PEScrollViewDelegate>  delegate;
 @property(nonatomic) CGRect labelsPosition;
+@property(nonatomic, retain)NSString *sColor;
+@property(nonatomic, retain)NSString *rColor;
+
+
 
 -(void)sendMessage:(NSString *)text;;
 -(void)recieveMessage:(NSString *)text;;
 -(void)reloadContentSize;
+-(void)backgroundColor:(UIColor *)col;
+-(void)sendColor:(NSString *)col;
+-(void)recieveColor:(NSString *)col;
 @end

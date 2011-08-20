@@ -40,7 +40,7 @@
 	NSString *send = [args objectForKey:@"send"]?[args objectForKey:@"send"]:@"";
 	NSString *recieve = [args objectForKey:@"recieve"]?[args objectForKey:@"recieve"]:@"";
 	if(![send isEqualToString:@""]){
-
+		
 		[ourView sendMessage:send];
 	}
 	if(![recieve isEqualToString:@""])
@@ -51,7 +51,6 @@
 {
 	ENSURE_SINGLE_ARG(args, NSString);
 	[ourView sendMessage:args];
-	
 }
 
 -(void)recieveMessage:(id)args

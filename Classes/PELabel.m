@@ -13,6 +13,8 @@
 
 @implementation PELabel
 
+@synthesize rColor, sColor;
+
 -(void)dealloc
 {
 	[backgroundImage release];
@@ -32,7 +34,17 @@
 	}
 	return label;
 }
-
+/*
+ -(void)setRColor:(NSString *)color
+ {
+ self.rColor = color;
+ }
+ 
+ -(void)setSColor:(NSString *)color
+ {
+ self.sColor = color;
+ }
+ */
 -(void)setUpImageSize
 {
 	CGRect x = [self label].frame;
@@ -41,7 +53,7 @@
 		x.size.width = self.superview.frame.size.width-100;
 		[[self label] setFrame:x];
 		[[self label] sizeToFit];
-
+		
 	}
 	CGRect a = [self label].frame;
 	a.size.width +=25;
@@ -98,10 +110,10 @@
 		color = @"Green";
 	
 	NSString *imgName = [[[[@"textarea.bundle/"
-						stringByAppendingString:color ]
-						stringByAppendingString:@"Balloon"]
-						stringByAppendingString:pos]
-						stringByAppendingString:@".png" ];
+							stringByAppendingString:color ]
+						   stringByAppendingString:@"Balloon"]
+						  stringByAppendingString:pos]
+						 stringByAppendingString:@".png" ];
 	// titanium project
 	imgName = [self resourcesDir:imgName];
 	if([pos isEqualToString:@"Left"])
@@ -115,12 +127,12 @@
 		
 		backgroundImage = [[[UIImage alloc ] initWithContentsOfFile:imgName] stretchableImageWithLeftCapWidth:22  topCapHeight:14];
 		self.image = backgroundImage;
-//		[self performSelectorOnMainThread:@selector(setImage:) withObject:backgroundImage waitUntilDone:YES];
+		//		[self performSelectorOnMainThread:@selector(setImage:) withObject:backgroundImage waitUntilDone:YES];
 	}
 	else if([pos isEqualToString:@"Right"])
 	{
 		backgroundImage = [[[UIImage alloc ] initWithContentsOfFile:imgName] stretchableImageWithLeftCapWidth:20  topCapHeight:14];
-	//	[self performSelectorOnMainThread:@selector(setImage:) withObject:backgroundImage waitUntilDone:YES];
+		//	[self performSelectorOnMainThread:@selector(setImage:) withObject:backgroundImage waitUntilDone:YES];
 		self.image = backgroundImage;
 		CGRect a = self.frame;
 		

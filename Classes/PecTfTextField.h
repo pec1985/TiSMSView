@@ -13,10 +13,12 @@
 @interface PecTfTextField : TiUIView<PETextAreaDelegate, PEScrollViewDelegate> {
 	PETextArea *textArea;
 	PEScrollView *scrollView;
-	BOOL testM;
+	BOOL firstTime;
+	UIColor *bgColor;
 	NSString *value;
 }
 @property(nonatomic, retain)NSString *value;
+@property(nonatomic, retain)UIColor *bgColor;
 -(void)sendMessage:(NSString *)msg;
 -(void)recieveMessage:(NSString *)msg;
 
@@ -52,4 +54,4 @@
  -(void)becomeTextView;
  
  @end
-*/
+ */

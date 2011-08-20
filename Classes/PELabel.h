@@ -14,7 +14,13 @@
 	UILabel *label;
 }
 
+@property(nonatomic, retain)NSString *sColor;
+@property(nonatomic, retain)NSString *rColor;
+
+
 -(void)addText:(NSString *)text;
 -(void)position:(NSString *)pos:(NSString *)color;
+
+
 
 @end

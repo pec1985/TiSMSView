@@ -9,7 +9,7 @@
 #import "PEScrollView.h"
 
 @implementation PEScrollView
-@synthesize delegate, labelsPosition;
+@synthesize delegate, labelsPosition, sColor, rColor;
 
 -(void)dealloc
 {
@@ -42,12 +42,15 @@
 	CGRect a = self.labelsPosition;
 	a.origin.y = frame.origin.y+frame.size.height;
 	self.labelsPosition = a;
-
+	
 	return label;
 }
 
 -(void)reloadContentSize
 {
+    if(CGRectIsEmpty(self.labelsPosition))
+        self.labelsPosition = self.frame;
+    
 	CGFloat bottomOfContent = self.labelsPosition.origin.y;//+self.labelsPosition.size.height;
 	
 	CGSize contentSize1 = CGSizeMake(self.frame.size.width , bottomOfContent);
@@ -67,33 +70,54 @@
 	}		
 }
 
+-(void)sendColor:(NSString *)col
+{
+    self.sColor = col;
+}
+-(void)recieveColor:(NSString *)col
+{
+    self.rColor = col;
+}
+
+-(void)backgroundColor:(UIColor *)col
+{
+	self.backgroundColor = col;
+}
+
 -(void)recieveMessage:(NSString *)text;
 {
 	/*
 	 Colors:
-			Blue
-			Purple
-			Green
-			Gray
-			White
-	*/
-	[[self label:text] position:@"Right":@"Green"];
-//	[self reloadContentSize];
-
+	 Blue
+	 Purple
+	 Green
+	 Gray
+	 White
+	 */
+    
+    if(!self.rColor)
+        self.rColor = @"Green";
+    
+	[[self label:text] position:@"Left":self.rColor];
+	//	[self reloadContentSize];
+	
 }
 
 -(void)sendMessage:(NSString *)text;
 {
 	/*
 	 Colors:
-			Blue
-			Purple
-			Green
-			Gray
-			White
-	*/
-	[[self label:text] position:@"Left":@"White"];
-//	[self reloadContentSize];
+	 Blue
+	 Purple
+	 Green
+	 Gray
+	 White
+	 */
+    if(!self.sColor)
+        self.sColor = @"White";
+	
+	[[self label:text] position:@"Right":self.sColor];
+	//	[self reloadContentSize];
 }
 
 @end

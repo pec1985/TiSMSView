@@ -44,7 +44,7 @@
 	
 	// titanium project:
 	images = [[[UIImage alloc] initWithContentsOfFile: [[TiHost resourcePath] stringByAppendingPathComponent:[self getNormalizedPath:url]]]autorelease ];
-
+	
 	return images;
 }
 
@@ -70,7 +70,7 @@
 		doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 		doneBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
 		
-		[doneBtn setTitle:@"Done" forState:UIControlStateNormal];
+		[doneBtn setTitle:@"Send" forState:UIControlStateNormal];
 		
 		[doneBtn setTitleShadowColor:[UIColor colorWithWhite:0 alpha:0.4] forState:UIControlStateNormal];
 		doneBtn.titleLabel.shadowOffset = CGSizeMake (0.0, -1.0);
@@ -78,14 +78,14 @@
 		
 		[doneBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 		[doneBtn addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
-
+		
 		UIImage *sendBtnBackground = [[self resourcesImage:@"textarea.bundle/MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
 		UIImage *selectedSendBtnBackground = [[self resourcesImage:@"textarea.bundle/MessageEntrySendButton.png"]stretchableImageWithLeftCapWidth:13 topCapHeight:0];
-
+		
 		[doneBtn setBackgroundImage:sendBtnBackground forState:UIControlStateNormal];
 		[doneBtn setBackgroundImage:selectedSendBtnBackground forState:UIControlStateSelected];
 		
-}
+	}
 	return doneBtn;
 }
 -(UIImageView *)entryImageView
@@ -94,13 +94,18 @@
 	{
 		entryImageView = [[UIImageView alloc] init];
 		entryImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-
+		
 		UIImage *rawEntryBackground = [self resourcesImage:@"textarea.bundle/MessageEntryInputField.png"];
 		UIImage *entryBackground = [rawEntryBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
-	
+		
 		[entryImageView setImage:entryBackground];
 	}
 	return entryImageView;
+}
+
+-(void)buttonTitle:(NSString *)title
+{
+	[[self doneBtn] setTitle:title forState:UIControlStateNormal];
 }
 
 -(UIImageView *)imageView
@@ -125,7 +130,7 @@
 	[[self imageView]		setFrame: CGRectMake(0, 0, w, h)];
 	[[self entryImageView]	setFrame: CGRectMake(5, 0, w-72, 40)];
 	[self					setFrame: CGRectMake(0, h - 40, w, 40)];
-
+	
 }
 
 
@@ -148,7 +153,7 @@
 	if ([delegate respondsToSelector:@selector(textViewButtonPressed:)]) {
 		[delegate textViewButtonPressed:[self textView].text];
 	}	
-
+	
 }
 
 -(void)becomeTextView
