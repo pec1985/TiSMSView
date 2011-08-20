@@ -19,26 +19,27 @@
 {
 	RELEASE_TO_NIL(textArea);
 	RELEASE_TO_NIL(scrollView);
+	RELEASE_TO_NIL(bgColor);
+	RELEASE_TO_NIL(value);
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 	
-    
-    NSLog(@"%@",super.self);
-    
-	@try {
-        [super dealloc];
-    }
-    @catch (NSException *exception) {
-        NSLog(@"%@",exception);
-    }
+	[super dealloc];
 }
 
--(id)init
-{
-    if(self = [super init])
-    {
-        
-    }
-    return self;
-}
+//-(id)init
+//{
+//    if(self = [super init])
+//	{
+//		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//		[[NSNotificationCenter defaultCenter] addObserver:self  
+//												 selector:@selector(keyboardWillHide:) 
+//													 name:UIKeyboardWillHideNotification 
+//												   object:nil];	
+//
+//	}
+//	return self;
+//}
 
 -(PETextArea *)textArea 
 {
@@ -96,7 +97,7 @@
 
 -(void)changeHeightOfScrollView
 {
-	NSLog(@"changeHeightOfScrollView");
+
 }
 
 -(void) keyboardWillHide:(NSNotification *)note{
@@ -162,7 +163,6 @@
 	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
 	[tiEvent setObject:text forKey:@"value"];
 	[self.proxy fireEvent:@"buttonClicked" withObject:tiEvent];
-	
 	[[self textArea] emptyTextView];
 	[[self scrollView] reloadContentSize];
 }
@@ -186,7 +186,6 @@
 
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
-    NSLog(@"[DEBUG] Resized");    
     [TiUtils setView:self positionRect:self.superview.bounds];
     CGRect a = self.frame;
     CGFloat h = CGRectGetHeight(self.frame);
@@ -202,7 +201,6 @@
 	}
     else
     {
-        NSLog(@"[DEBUG] Resizing innerviews");
         [[self scrollView] reloadContentSize];
         [[self textArea] resize];
     }
@@ -232,12 +230,12 @@
 	[[self textArea] buttonTitle:[TiUtils stringValue:title]];
 	[[self scrollView] reloadContentSize];
 }
+/*
 -(void)setReturnKeyType_:(id)val
 {
 	[[self textArea] setReturnKeyType:[TiUtils intValue:val]];
 }
 
-/*
  
  #pragma mark JavaScript setters and getters
  

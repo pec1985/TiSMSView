@@ -13,11 +13,10 @@
 
 -(void)dealloc
 {
-	[delegate release];
-	[sentLabel release];
 	[label release];
-	[super dealloc];
+	label = nil;
 	
+	[super dealloc];
 }
 
 - (id)initWithFrame:(CGRect)aRect {
@@ -113,6 +112,8 @@
 	 Gray
 	 White
 	 */
+	
+	
     if(!self.sColor)
         self.sColor = @"White";
 	

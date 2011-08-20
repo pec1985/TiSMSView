@@ -2,7 +2,7 @@
 // You should do something interesting in this harness
 // to test out the module and to provide instructions
 // to users on how to use it by example.
-function random1() {
+/*function random1() {
     var i,
     uarticle = ["The", "A", "One", "Some", "Any"],
     noun = ["boy", "girl", "dog", "town", "car", "kid", "boss", "table", "chair"],
@@ -164,3 +164,42 @@ tf.addEventListener('focus',
 function(e) {
     alert(e);
 });
+*/
+var textfield = require('pec.tf');
+
+var MainWin = Ti.UI.createWindow();
+var win = Ti.UI.createWindow();
+
+var btn = Ti.UI.createButton({
+                             title:'Here',
+                             left:40,
+                             right:40,
+                             height:50
+                             });
+win.add(btn);
+
+var nav = Ti.UI.iPhone.createNavigationGroup({
+                                             window:win
+                                             });
+MainWin.add(nav);
+
+function nextWin(){
+    var wind = Ti.UI.createWindow();
+    var tf = textfield.createTextField({
+                                       backgroundColor:'#b7d4fa',
+                                       sendColor:'Purple',
+                                       recieveColor:'Green'
+                                       });
+    wind.add(tf);
+    tf.addEventListener('buttonClicked', function(e){
+                        tf.sendMessage(e.value);
+                        });    
+
+    return wind;
+}
+
+btn.addEventListener('click', function(){
+                     nav.open(nextWin());
+                     });
+
+MainWin.open();

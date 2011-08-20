@@ -16,14 +16,20 @@
 
 -(void)dealloc
 {
-	[delegate release];
 	[textView release];
-	[doneBtn release];
+	textView = nil;
 	[entryImageView release];
+	entryImageView = nil;
 	[imageView release];
-	[images release];
-	[imagesPath release];
+	imagesPath = nil;
+	
 	[super dealloc];
+}
+
+-(id)init
+{
+	self = [super init];
+	return self;
 }
 
 // titanium project:

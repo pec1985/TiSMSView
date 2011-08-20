@@ -14,6 +14,7 @@
 	PETextArea *textArea;
 	PEScrollView *scrollView;
 	BOOL firstTime;
+	BOOL deallocOnce;
 	UIColor *bgColor;
 	NSString *value;
 }

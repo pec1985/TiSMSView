@@ -29,7 +29,6 @@
 	UIImageView *entryImageView;
 	UIImageView *imageView;
 	UIImage *images;
-	UIView *containerView;
 	NSString *imagesPath;
 	BOOL firstTime;
 }

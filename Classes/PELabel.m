@@ -34,17 +34,7 @@
 	}
 	return label;
 }
-/*
- -(void)setRColor:(NSString *)color
- {
- self.rColor = color;
- }
- 
- -(void)setSColor:(NSString *)color
- {
- self.sColor = color;
- }
- */
+
 -(void)setUpImageSize
 {
 	CGRect x = [self label].frame;
@@ -74,7 +64,6 @@
 	
 	NSString *a = [@"" stringByAppendingString:text];
 	
-	//[[self label] setText: a];
 	[[self label] performSelectorOnMainThread : @selector(setText:) withObject:a waitUntilDone:YES];
 	[self addSubview:[self label]];
 	[[self label] sizeToFit];
