@@ -29,6 +29,8 @@
 
 -(PELabel *)label:(NSString *)text
 {
+	[self performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
+	
 	label = [[PELabel alloc] init];
 	[self addSubview:label];
 	

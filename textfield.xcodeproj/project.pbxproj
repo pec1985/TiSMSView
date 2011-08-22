@@ -28,6 +28,7 @@
 		24DE9E1211C5FE74003F90F6 /* PecTfModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* PecTfModuleAssets.m */; };
 		AA747D9F0F9514B9006C5449 /* PecTf_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* PecTf_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		B67EF5EE140227F8006B037B /* win.js in Sources */ = {isa = PBXBuildFile; fileRef = B67EF5ED140227F8006B037B /* win.js */; };
 		B6A5206213C3701C0016C96A /* PecTfTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B6A5205E13C3701A0016C96A /* PecTfTextField.h */; };
 		B6A5206313C3701C0016C96A /* PecTfTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A5205F13C3701B0016C96A /* PecTfTextField.m */; };
 		B6A5206413C3701C0016C96A /* PecTfTextFieldProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = B6A5206013C3701B0016C96A /* PecTfTextFieldProxy.h */; };
@@ -64,6 +65,7 @@
 		24DE9E1011C5FE74003F90F6 /* PecTfModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PecTfModuleAssets.m; path = Classes/PecTfModuleAssets.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* PecTf_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PecTf_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B67EF5ED140227F8006B037B /* win.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = win.js; sourceTree = "<group>"; };
 		B6A51F9C13C158BA0016C96A /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		B6A5204C13C23C520016C96A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		B6A5205E13C3701A0016C96A /* PecTfTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PecTfTextField.h; path = Classes/PecTfTextField.h; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				B6A51F9C13C158BA0016C96A /* app.js */,
+				B67EF5ED140227F8006B037B /* win.js */,
 			);
 			path = example;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				B6F6BD3313F97C8200AD29C4 /* PETextArea.m in Sources */,
 				B6F6BD3913F97F5500AD29C4 /* HPGrowingTextView.m in Sources */,
 				B6F6BD3B13F97F5500AD29C4 /* HPTextViewInternal.m in Sources */,
+				B67EF5EE140227F8006B037B /* win.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
