@@ -51,7 +51,7 @@ var tf = Ti.Pedro.createTextField({
 win.add(tf);
 
 tf.addEventListener('buttonClicked', function(e) {
-					if(tf.value == 'e'){
+					if(tf.value == 'exit' || tf.value == 'Exit'){
 					win.close();
 					} else {
 					tf.sendMessage(e.value);
