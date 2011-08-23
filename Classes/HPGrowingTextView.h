@@ -103,4 +103,14 @@
 - (BOOL)hasText;
 - (void)scrollRangeToVisible:(NSRange)range;
 
+
+-(void)setText:(NSString *)newText;
+-(void)setFont:(UIFont *)afont;
+-(void)setTextColor:(UIColor *)color;
+-(void)setTextAlignment:(UITextAlignment)aligment;
+-(void)setEditable:(BOOL)beditable;
+-(void)setReturnKeyType:(UIReturnKeyType)keyType;
+-(void)setAutocorrectionType:(UITextAutocorrectionType)autocorrection;
+
+
 @end

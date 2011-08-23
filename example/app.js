@@ -37,12 +37,12 @@ function rand() {
 			space + larticle[larticleIndex] +
 			space + noun[nounIndex2] + ".");
 }
-Titanium.Pedro = require('pec.tf');
+Titanium.Pedro = require('ti.pedro');
 
 
 function SMSWindow(){
 	var win = Ti.UI.createWindow();
-	var tf = Ti.Pedro.createTextField({
+	var tf = Ti.Pedro.createSMSView({
 									backgroundImage: 'bg.png',
 									sendColor: 'Purple',
 									recieveColor: 'Green',

@@ -6,9 +6,9 @@
 //  Copyright 2011 Appcelerator. All rights reserved.
 //
 
-#import "PEScrollView.h"
+#import "PESMSScrollView.h"
 
-@implementation PEScrollView
+@implementation PESMSScrollView
 @synthesize delegate, labelsPosition, sColor, rColor;
 
 -(void)dealloc
@@ -27,11 +27,11 @@
     return self;
 }
 
--(PELabel *)label:(NSString *)text
+-(PESMSLabel *)label:(NSString *)text
 {
 	[self performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
 	
-	label = [[PELabel alloc] init];
+	label = [[PESMSLabel alloc] init];
 	[self addSubview:label];
 	
 	[label addText:text];

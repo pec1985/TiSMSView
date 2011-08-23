@@ -6,17 +6,17 @@
 //  Copyright 2011 Appcelerator. All rights reserved.
 //
 
-#import "PecTfTextField.h"
-#import "PecTfTextFieldProxy.h"
+#import "TiPedroSMSView.h"
+#import "TiPedroSMSViewProxy.h"
 #import "TiUtils.h"
 
-@implementation PecTfTextFieldProxy
+@implementation TiPedroSMSViewProxy
 
--(PecTfTextField *)ourView
+-(TiPedroSMSView *)ourView
 {
 	if(!ourView)
 	{
-		ourView = (PecTfTextField *)[self view];
+		ourView = (TiPedroSMSView *)[self view];
 	}
 	return ourView;
 }

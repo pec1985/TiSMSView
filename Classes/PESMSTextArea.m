@@ -6,12 +6,12 @@
 //  Copyright 2011 Appcelerator. All rights reserved.
 //
 
-#import "PETextArea.h"
+#import "PESMSTextArea.h"
 
 // titanium project:
 #import "TiHost.h"
 
-@implementation PETextArea
+@implementation PESMSTextArea
 @synthesize delegate, text;
 
 -(void)dealloc
@@ -84,8 +84,8 @@
 		[doneBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 		[doneBtn addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
 		
-		UIImage *sendBtnBackground = [[self resourcesImage:@"textarea.bundle/MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
-		UIImage *selectedSendBtnBackground = [[self resourcesImage:@"textarea.bundle/MessageEntrySendButton.png"]stretchableImageWithLeftCapWidth:13 topCapHeight:0];
+		UIImage *sendBtnBackground = [[self resourcesImage:@"smsview.bundle/MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
+		UIImage *selectedSendBtnBackground = [[self resourcesImage:@"smsview.bundle/MessageEntrySendButton.png"]stretchableImageWithLeftCapWidth:13 topCapHeight:0];
 		
 		[doneBtn setBackgroundImage:sendBtnBackground forState:UIControlStateNormal];
 		[doneBtn setBackgroundImage:selectedSendBtnBackground forState:UIControlStateSelected];
@@ -101,7 +101,7 @@
 		entryImageView = [[UIImageView alloc] init];
 		entryImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 		
-		UIImage *rawEntryBackground = [self resourcesImage:@"textarea.bundle/MessageEntryInputField.png"];
+		UIImage *rawEntryBackground = [self resourcesImage:@"smsview.bundle/MessageEntryInputField.png"];
 		UIImage *entryBackground = [rawEntryBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
 		
 		[entryImageView setImage:entryBackground];
@@ -119,7 +119,7 @@
 	if(!imageView)
 	{
 		imageView = [[UIImageView alloc] init];
-		UIImage *rawBackground = [self resourcesImage:@"textarea.bundle/MessageEntryBackground.png"];
+		UIImage *rawBackground = [self resourcesImage:@"smsview.bundle/MessageEntryBackground.png"];
 		UIImage *background = [rawBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
 		[imageView setImage:background];
 		imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;

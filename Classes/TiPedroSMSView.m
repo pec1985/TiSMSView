@@ -6,13 +6,13 @@
 //  Copyright 2011 Appcelerator. All rights reserved.
 //
 
-#import "PecTfTextField.h"
+#import "TiPedroSMSView.h"
 #import "TiBase.h"
 #import "TiUtils.h"
 #import "TiHost.h"
 
 
-@implementation PecTfTextField
+@implementation TiPedroSMSView
 @synthesize value;
 @synthesize firstTime;
 @synthesize returnType;
@@ -43,16 +43,16 @@
 	return self;
 }
 
--(PETextArea *)textArea 
+-(PESMSTextArea *)textArea 
 {
 	if(!textArea){
-		textArea = [[PETextArea alloc] initWithFrame:self.frame];
+		textArea = [[PESMSTextArea alloc] initWithFrame:self.frame];
 		textArea.delegate = self;
 	}
 	return textArea;
 }
 
--(PEScrollView *)scrollView
+-(PESMSScrollView *)scrollView
 {
 	if(!scrollView)
 	{
@@ -60,7 +60,7 @@
 		CGRect a = self.frame;
 		a.size.height = h - 40;
 		a.origin.y = 0;
-		scrollView = [[PEScrollView alloc] initWithFrame:a];
+		scrollView = [[PESMSScrollView alloc] initWithFrame:a];
 		scrollView.delegate = self;
 	}
 	return scrollView;

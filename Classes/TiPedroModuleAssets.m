@@ -1,11 +1,11 @@
 /**
  * This is a generated file. Do not edit or your changes will be lost
  */
-#import "PecTfModuleAssets.h"
+#import "TiPedroModuleAssets.h"
 
 extern NSData * dataWithHexString (NSString * hexString);
 
-@implementation PecTfModuleAssets
+@implementation TiPedroModuleAssets
 
 - (NSData*) moduleAsset
 {

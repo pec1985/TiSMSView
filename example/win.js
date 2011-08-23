@@ -40,9 +40,9 @@ function rand() {
 
 
 var win = Ti.UI.currentWindow;
-Titanium.Pedro = require('pec.tf');
+Titanium.Pedro = require('ti.pedro');
 
-var tf = Ti.Pedro.createTextField({
+var tf = Ti.Pedro.createSMSView({
 								  backgroundColor: '#b7d4fa',
 								  sendColor: 'Purple',
 								  recieveColor: 'Green',

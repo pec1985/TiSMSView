@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PELabel.h"
+#import "PESMSLabel.h"
 
-@protocol PEScrollViewDelegate<UIScrollViewDelegate>
+@protocol PESMSScrollViewDelegate<UIScrollViewDelegate>
 @optional
 
 -(void)scrollViewClicked:(NSSet *)touches withEvent:(UIEvent *)event;
@@ -17,14 +17,14 @@
 @end
 
 
-@interface PEScrollView : UIScrollView {
-	id<PEScrollViewDelegate> delegate;
+@interface PESMSScrollView : UIScrollView {
+	id<PESMSScrollViewDelegate> delegate;
 	UILabel *sentLabel;
 	UILabel *recieveLabel;
-	PELabel *label;
+	PESMSLabel *label;
 }
 
-@property(nonatomic, assign) id<PEScrollViewDelegate>  delegate;
+@property(nonatomic, assign) id<PESMSScrollViewDelegate>  delegate;
 @property(nonatomic) CGRect labelsPosition;
 @property(nonatomic, retain)NSString *sColor;
 @property(nonatomic, retain)NSString *rColor;

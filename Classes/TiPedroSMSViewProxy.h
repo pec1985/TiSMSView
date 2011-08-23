@@ -9,8 +9,8 @@
 #import "TiViewProxy.h"
 
 
-@interface PecTfTextFieldProxy : TiViewProxy {
-	PecTfTextField *ourView;
+@interface TiPedroSMSViewProxy : TiViewProxy {
+	TiPedroSMSView *ourView;
 }
 
 @end

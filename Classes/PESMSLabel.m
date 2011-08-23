@@ -6,12 +6,12 @@
 //  Copyright 2011 Appcelerator. All rights reserved.
 //
 
-#import "PELabel.h"
+#import "PESMSLabel.h"
 // titanium project:
 #import "TiHost.h"
 
 
-@implementation PELabel
+@implementation PESMSLabel
 
 @synthesize rColor, sColor;
 
@@ -98,7 +98,7 @@
 	if([color isEqualToString:@""] || !color)
 		color = @"Green";
 	
-	NSString *imgName = [[[[@"textarea.bundle/"
+	NSString *imgName = [[[[@"smsview.bundle/"
 							stringByAppendingString:color ]
 						   stringByAppendingString:@"Balloon"]
 						  stringByAppendingString:pos]

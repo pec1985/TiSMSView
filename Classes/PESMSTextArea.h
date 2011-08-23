@@ -11,7 +11,7 @@
 
 @class HPGrowingTextView;
 
-@protocol PETextAreaDelegate
+@protocol PESMSTextAreaDelegate
 @optional
 
 -(void)heightOfTextViewDidChange:(float)height;
@@ -22,8 +22,8 @@
 
 @end
 
-@interface PETextArea : UIView<HPGrowingTextViewDelegate> {
-	NSObject <PETextAreaDelegate>* delegate;
+@interface PESMSTextArea : UIView<HPGrowingTextViewDelegate> {
+	NSObject <PESMSTextAreaDelegate>* delegate;
     HPGrowingTextView *textView;
 	UIButton *doneBtn;
 	UIImageView *entryImageView;
@@ -33,11 +33,13 @@
 	BOOL firstTime;
 }
 
-@property(assign) NSObject<PETextAreaDelegate> *delegate;
+@property(assign) NSObject<PESMSTextAreaDelegate> *delegate;
 @property(nonatomic, retain)NSString *text;
 -(void)resize;
 -(void)resignTextView;
 -(void)emptyTextView;
 -(void)becomeTextView;
 -(void)buttonTitle:(NSString *)title;
+- (HPGrowingTextView *)textView;
+
 @end
