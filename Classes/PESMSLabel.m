@@ -17,7 +17,6 @@
 
 -(void)dealloc
 {
-	[backgroundImage release];
 	[label release];
 	
 	[super dealloc];
@@ -112,17 +111,14 @@
 		[[self label] setFrame:a];
 		CGRect b = self.frame;
 		b.size.width +=10;
-		[self setFrame:b];
-		
-		backgroundImage = [[[UIImage alloc ] initWithContentsOfFile:imgName] stretchableImageWithLeftCapWidth:22  topCapHeight:14];
-		self.image = backgroundImage;
+		[self setFrame:b];		
+		self.image = [[UIImage imageWithContentsOfFile:imgName] stretchableImageWithLeftCapWidth:22 topCapHeight:14];
 		//		[self performSelectorOnMainThread:@selector(setImage:) withObject:backgroundImage waitUntilDone:YES];
 	}
 	else if([pos isEqualToString:@"Right"])
 	{
-		backgroundImage = [[[UIImage alloc ] initWithContentsOfFile:imgName] stretchableImageWithLeftCapWidth:20  topCapHeight:14];
 		//	[self performSelectorOnMainThread:@selector(setImage:) withObject:backgroundImage waitUntilDone:YES];
-		self.image = backgroundImage;
+		self.image = [[UIImage imageWithContentsOfFile:imgName] stretchableImageWithLeftCapWidth:20 topCapHeight:14];
 		CGRect a = self.frame;
 		
 		a.origin.x = (self.superview.frame.size.width-self.frame.size.width)-20;

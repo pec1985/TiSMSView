@@ -10,7 +10,6 @@
 
 
 @interface PESMSLabel : UIImageView {
-    UIImage *backgroundImage;
 	UILabel *label;
 }
 
