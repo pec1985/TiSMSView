@@ -127,7 +127,9 @@
 		
 		a.origin.x = (self.superview.frame.size.width-self.frame.size.width)-20;
 		a.size.width +=10;
-		[[self label] setTextAlignment:UITextAlignmentRight];
+		
+		// this makes it look gay, commenting for now
+		//[[self label] setTextAlignment:UITextAlignmentRight];
 		
 		[self setFrame:a];
 	}

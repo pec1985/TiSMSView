@@ -43,12 +43,22 @@ Titanium.Pedro = require('pec.tf');
 function SMSWindow(){
 	var win = Ti.UI.createWindow();
 	var tf = Ti.Pedro.createTextField({
-									   backgroundColor: '#b7d4fa',
-									   sendColor: 'Purple',
-									   recieveColor: 'Green'
-									   });
+									backgroundImage: 'bg.png',
+									sendColor: 'Purple',
+									recieveColor: 'Green',
+									font:{
+									  fontSize:25,
+									  fontWeight:'bold',
+									  fontFamily:'arial'
+									},
+									textColor:'blue',
+									textAlignment:'right',
+									autocorrect:false
+									});
 	
 	win.add(tf);
+	tf.returnKeyType = Ti.Pedro.RETURNKEY_YAHOO;
+
 	
 	tf.addEventListener('buttonClicked', function(e) {
 						if(tf.value == 'exit' || tf.value == 'Exit'){

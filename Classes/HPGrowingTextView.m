@@ -41,6 +41,7 @@
 @synthesize dataDetectorTypes; 
 @synthesize animateHeightChange;
 @synthesize returnKeyType;
+@synthesize autocorrectionType;
 
 
 - (id)initWithFrame:(CGRect)frame {
@@ -397,6 +398,21 @@
 {
 	[internalTextView scrollRangeToVisible:range];
 }
+
+
+//========== Pedro Enrique ===============
+
+-(void)setAutocorrectionType:(UITextAutocorrectionType)autocorrection
+{
+	internalTextView.autocorrectionType = autocorrection;
+}
+
+-(UITextAutocorrectionType)autocorrectionType
+{
+	return internalTextView.autocorrectionType;
+}
+
+//========== Pedro Enrique ===============
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////

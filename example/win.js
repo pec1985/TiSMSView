@@ -45,7 +45,8 @@ Titanium.Pedro = require('pec.tf');
 var tf = Ti.Pedro.createTextField({
 								  backgroundColor: '#b7d4fa',
 								  sendColor: 'Purple',
-								  recieveColor: 'Green'
+								  recieveColor: 'Green',
+								  editable:true
 								  });
 
 win.add(tf);

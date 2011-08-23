@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.95
+version: 0.99
 description: My module
 author: Your Name
 license: Specify your license

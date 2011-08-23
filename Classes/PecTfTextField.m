@@ -13,33 +13,35 @@
 
 
 @implementation PecTfTextField
-@synthesize value, bgColor;
+@synthesize value;
+@synthesize firstTime;
+@synthesize returnType;
+@synthesize font;
+@synthesize textColor;
+@synthesize textAlignment;
+@synthesize autocorrect;
+@synthesize beditable;
 
 -(void)dealloc
 {
 	RELEASE_TO_NIL(textArea);
 	RELEASE_TO_NIL(scrollView);
-	RELEASE_TO_NIL(bgColor);
-	RELEASE_TO_NIL(value);
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 	
 	[super dealloc];
 }
 
-//-(id)init
-//{
-//    if(self = [super init])
-//	{
-//		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-//		[[NSNotificationCenter defaultCenter] addObserver:self  
-//												 selector:@selector(keyboardWillHide:) 
-//													 name:UIKeyboardWillHideNotification 
-//												   object:nil];	
-//
-//	}
-//	return self;
-//}
+-(id)init
+{
+    if(self = [super init])
+	{
+		self.firstTime = YES;
+		self.autocorrect = YES;
+		self.beditable = YES;
+	}
+	return self;
+}
 
 -(PETextArea *)textArea 
 {
@@ -59,7 +61,6 @@
 		a.size.height = h - 40;
 		a.origin.y = 0;
 		scrollView = [[PEScrollView alloc] initWithFrame:a];
-		scrollView.backgroundColor = self.bgColor;
 		scrollView.delegate = self;
 	}
 	return scrollView;
@@ -183,21 +184,35 @@
 	[self blur];
 }
 
-
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
     [TiUtils setView:self positionRect:self.superview.bounds];
+
     CGRect a = self.frame;
     CGFloat h = CGRectGetHeight(self.frame);
     a.size.height = h - 40;
     [[self scrollView] setFrame:a];
 	
-	if(!firstTime)
+	if(self.firstTime)
 	{
-		firstTime = YES;
+		self.firstTime = YES;
 		[self addSubview: [self scrollView]];
 		[self addSubview: [self textArea]];
 		
+		if(self.returnType)
+			[[[self textArea] textView] setReturnKeyType:self.returnType];
+		if(self.font)
+			[[[self textArea] textView] setFont:[self.font font]];
+		if(self.textColor)
+			[[[self textArea] textView] setTextColor:[self.textColor _color]];
+		if(self.textAlignment)
+			[[[self textArea] textView] setTextAlignment:self.textAlignment];
+		if(self.value)
+			[[[self textArea] textView]setText:self.value];
+
+		[[[self textArea] textView] setEditable:self.beditable];
+		[[[self textArea] textView ]setAutocorrectionType:self.autocorrect ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
+		[[[self textArea] textView] setDataDetectorTypes:UIDataDetectorTypeAll];
 	}
     else
     {
@@ -217,72 +232,59 @@
 	
 }
 
--(void)setBackground_:(id)col
-{
-	TiColor *color = [TiUtils colorValue:col];
-	[[self scrollView] setBackgroundColor: [color _color]];
-	[[self scrollView] reloadContentSize];
-	
-}
-
 -(void)setButtonTitle_:(id)title
 {
 	[[self textArea] buttonTitle:[TiUtils stringValue:title]];
 	[[self scrollView] reloadContentSize];
 }
-/*
+
 -(void)setReturnKeyType_:(id)val
 {
-	[[self textArea] setReturnKeyType:[TiUtils intValue:val]];
+	self.returnType = [TiUtils intValue:val];
+	if(!self.firstTime)
+		[[[self textArea] textView] setReturnKeyType:self.returnType];
 }
 
+-(void)setFont_:(id)val
+{
+	self.font = [TiUtils fontValue:val def:nil];
+	if(!self.firstTime)
+		[[[self textArea] textView] setFont:[self.font font]];
+}
+
+-(void)setTextColor_:(id)val
+{
+	self.textColor = [TiUtils colorValue:val];
+	if(!self.firstTime)
+		[[[self textArea] textView] setTextColor:[self.textColor _color]];
+}
+
+-(void)setTextAlignment_:(id)val
+{
+	self.textAlignment = [TiUtils textAlignmentValue:val];
+	if(!self.firstTime)
+		[[[self textArea] textView] setTextAlignment:self.textAlignment];
+}
+
+-(void)setAutocorrect_:(id)val
+{
+	self.autocorrect = [TiUtils boolValue:val];
+	if(!self.firstTime)
+		[[[self textArea] textView ]setAutocorrectionType:[TiUtils boolValue:val] ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
+}
+
+-(void)setEditable_:(id)val
+{
+	self.beditable = [TiUtils boolValue:val];
+	if(!self.firstTime)
+		[[[self textArea] textView] setEditable:self.beditable];
+}
+
+-(void)setValue_:(id)val
+{
+	self.value = [TiUtils stringValue:val];
+	if(!self.firstTime)
+		[[[self textArea] textView]setText:self.value];
+}
  
- #pragma mark JavaScript setters and getters
- 
- -(void)setValue_:(id)value
- {
- [[self textView] setText:[TiUtils stringValue:value]];
- }
- 
- 
- -(void)setColor_:(id)color
- {
- UIColor * newColor = [[TiUtils colorValue:color] _color];
- [(id)[self textView] setTextColor:(newColor != nil)?newColor:[UIColor darkTextColor]];
- }
- 
- 
- -(void)setTextAlign_:(id)alignment
- {
- [(id)[self textView] setTextAlignment:[TiUtils textAlignmentValue:alignment]];
- }
- 
- 
- -(void)setEnableReturnKey_:(id)value
- {
- [(id)[self textView] setEnablesReturnKeyAutomatically:[TiUtils boolValue:value]];
- }
- 
- -(void)setKeyboardType_:(id)value
- {
- [(id)[self textView] setKeyboardType:[TiUtils intValue:value]];
- }
- 
- -(void)setAutocorrect_:(id)value
- {
- [(id)[self textView] setAutocorrectionType:[TiUtils boolValue:value] ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
- }
- 
- -(void)setButtonTitle_:(id)value
- {
- ENSURE_SINGLE_ARG(value, NSString);
- 
- [[self doneBtn] setTitle:[TiUtils stringValue:value] forState: UIControlStateNormal];
- }
- 
- -(id)value
- {
- return [[self textView] text];
- }
- */
 @end

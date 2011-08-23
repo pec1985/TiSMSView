@@ -42,7 +42,6 @@
 	return source;
 }
 
-
 -(UIImage *)resourcesImage:(NSString *)url
 {
 	// normal project:
@@ -61,7 +60,7 @@
 		textView = [[HPGrowingTextView alloc] init];
 		textView.minNumberOfLines = 1;
 		textView.maxNumberOfLines = 4;
-		textView.returnKeyType = UIReturnKeyGo; //just as an example
+		textView.returnKeyType = UIReturnKeyDefault;
 		textView.font = [UIFont boldSystemFontOfSize:15.0f];
 		textView.delegate = self;
 		[textView sizeToFit];
@@ -94,6 +93,7 @@
 	}
 	return doneBtn;
 }
+
 -(UIImageView *)entryImageView
 {
 	if(!entryImageView)
@@ -138,7 +138,6 @@
 	[self					setFrame: CGRectMake(0, h - 40, w, 40)];
 	
 }
-
 
 - (void)layoutSubviews
 {

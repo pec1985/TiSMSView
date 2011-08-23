@@ -10,16 +10,23 @@
 #import "PETextArea.h"
 #import "PEScrollView.h"
 
+
 @interface PecTfTextField : TiUIView<PETextAreaDelegate, PEScrollViewDelegate> {
 	PETextArea *textArea;
 	PEScrollView *scrollView;
-	BOOL firstTime;
 	BOOL deallocOnce;
-	UIColor *bgColor;
 	NSString *value;
 }
+
 @property(nonatomic, retain)NSString *value;
-@property(nonatomic, retain)UIColor *bgColor;
+@property(nonatomic)BOOL firstTime;
+@property(nonatomic)UIReturnKeyType returnType;
+@property(nonatomic, retain)WebFont* font;
+@property(nonatomic, retain)TiColor *textColor;
+@property(nonatomic)UITextAlignment textAlignment;
+@property(nonatomic)BOOL autocorrect;
+@property(nonatomic)BOOL beditable;
+
 -(void)sendMessage:(NSString *)msg;
 -(void)recieveMessage:(NSString *)msg;
 

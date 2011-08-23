@@ -93,6 +93,7 @@
 @property(nonatomic) UIDataDetectorTypes dataDetectorTypes __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_3_0);
 @property (nonatomic) UIReturnKeyType returnKeyType;
 @property (assign) UIEdgeInsets contentInset;
+@property(nonatomic)UITextAutocorrectionType autocorrectionType;
 
 //uitextview methods
 //need others? use .internalTextView
