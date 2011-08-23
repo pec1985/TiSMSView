@@ -1,4 +1,4 @@
-Most of the code taken from: http://www.hanspinckaers.com/multi-line-uitextview-similar-to-sms
+Most of the magic code taken from: http://www.hanspinckaers.com/multi-line-uitextview-similar-to-sms
 
 Please, for a demo, look at this: http://www.screenr.com/BrBs
 EDIT: Better video: http://www.screenr.com/dnxs
@@ -17,7 +17,7 @@ Register your module with your application by editing `tiapp.xml` and adding you
 Example:
 
 <modules>
-	<module version="0.1">pec.tf</module>
+	<module version="1.0">ti.pedro</module>
 </modules>
 
 When you run your project, the compiler will know automatically compile in your module
@@ -30,7 +30,8 @@ To use your module in code, you will need to require it.
 
 For example,
 
-	var my_module = require('pec.tf');
-	my_module.foo();
+	Titanium.Pedro = require('ti.pedro');
+	var smsView = Ti.Pedro.createSMSView();
 
+Take a look in the documentation folder for details
 

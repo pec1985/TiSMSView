@@ -1,39 +1,20 @@
-# textfield Module
+# Pedro Module
 
 ## Description
 
-TODO: Enter your module description here
+This module contains the SMS-like view for texting with the autoresizable text area and the "balloons" for the messages
 
 ## Accessing the textfield Module
 
 To access this module from JavaScript, you would do the following:
 
-	var textfield = require("pec.tf");
-
-The textfield variable is a reference to the Module object.	
-
-## Reference
-
-TODO: If your module has an API, you should document
-the reference here.
-
-### ___PROJECTNAMEASIDENTIFIER__.function
-
-TODO: This is an example of a module function.
-
-### ___PROJECTNAMEASIDENTIFIER__.property
-
-TODO: This is an example of a module property.
-
-## Usage
-
-TODO: Enter your usage example here
-
+	Titanium.Pedro = require("ti.pedro");
+	
 ## Author
 
-TODO: Enter your author name, email and other contact
-details you want to share here. 
+Pedro Enrique, also known as @pec1985 and @pecdev 
+With the help of Hans Pinckaers who created the HPGrowingTextView
 
 ## License
 
-TODO: Enter your license/legal information here.
+MIT or Apache 2, still undecided.
