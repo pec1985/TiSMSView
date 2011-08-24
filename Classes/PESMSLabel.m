@@ -15,8 +15,7 @@
 
 -(void)dealloc
 {
-	[label release];
-	
+	RELEASE_TO_NIL(label);
 	[super dealloc];
 }
 

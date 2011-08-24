@@ -7,15 +7,17 @@
 //
 
 #import "PESMSScrollView.h"
+#import "TiUtils.h"
 
 @implementation PESMSScrollView
-@synthesize delegate, labelsPosition, sColor, rColor;
+@synthesize delegate;
+@synthesize labelsPosition;
+@synthesize sColor;
+@synthesize rColor;
 
 -(void)dealloc
 {
-	[label release];
-	label = nil;
-	
+	RELEASE_TO_NIL(label);
 	[super dealloc];
 }
 
@@ -91,6 +93,7 @@
         self.rColor = @"Green";
     
 	[[self label:text] position:@"Left":self.rColor];
+	RELEASE_TO_NIL(label);
 }
 
 -(void)sendMessage:(NSString *)text;
@@ -99,6 +102,7 @@
         self.sColor = @"White";
 	
 	[[self label:text] position:@"Right":self.sColor];
+	RELEASE_TO_NIL(label);
 }
 
 @end
