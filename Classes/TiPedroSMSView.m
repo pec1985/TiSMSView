@@ -186,7 +186,7 @@
 	
 	[self.proxy fireEvent:@"click" withObject:tiEvent];
 	
-	[self blur];
+	[self _blur];
 }
 
 
