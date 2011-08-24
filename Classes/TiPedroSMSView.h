@@ -26,6 +26,7 @@
 @property(nonatomic)UITextAlignment textAlignment;
 @property(nonatomic)BOOL autocorrect;
 @property(nonatomic)BOOL beditable;
+@property(nonatomic)BOOL hasCam;
 
 -(void)sendMessage:(NSString *)msg;
 -(void)recieveMessage:(NSString *)msg;

@@ -10,24 +10,19 @@
 #import "TiHost.h"
 
 @implementation PESMSTextArea
-@synthesize delegate, text;
+@synthesize delegate;
+@synthesize text;
+@synthesize hasCam;
+@synthesize firstTime;
 
 -(void)dealloc
 {
-	[textView release];
-	textView = nil;
-	[entryImageView release];
-	entryImageView = nil;
-	[imageView release];
-	imagesPath = nil;
+	
+	RELEASE_TO_NIL(textView);
+	RELEASE_TO_NIL(entryImageView);
+	RELEASE_TO_NIL(imageView);
 	
 	[super dealloc];
-}
-
--(id)init
-{
-	self = [super init];
-	return self;
 }
 
 -(NSString*)getNormalizedPath:(NSString*)source
@@ -41,7 +36,6 @@
 
 -(UIImage *)resourcesImage:(NSString *)url
 {
-//	images = [[[UIImage alloc] initWithContentsOfFile: [[TiHost resourcePath] stringByAppendingPathComponent:[self getNormalizedPath:url]]]autorelease ];	
 	return [UIImage imageWithContentsOfFile:[[TiHost resourcePath] stringByAppendingPathComponent:[self getNormalizedPath:url]]];
 }
 
@@ -74,16 +68,42 @@
 		doneBtn.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
 		
 		[doneBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-		[doneBtn addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
+		[doneBtn addTarget:self action:@selector(doneButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 		
-		UIImage *sendBtnBackground = [[self resourcesImage:@"smsview.bundle/MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
-		UIImage *selectedSendBtnBackground = [[self resourcesImage:@"smsview.bundle/MessageEntrySendButton.png"]stretchableImageWithLeftCapWidth:13 topCapHeight:0];
-		
-		[doneBtn setBackgroundImage:sendBtnBackground forState:UIControlStateNormal];
-		[doneBtn setBackgroundImage:selectedSendBtnBackground forState:UIControlStateSelected];
-		
+		[doneBtn setBackgroundImage:
+						   [[self resourcesImage:@"smsview.bundle/MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0]
+						   forState:UIControlStateNormal];
+
+		[doneBtn setBackgroundImage:
+						   [[self resourcesImage:@"smsview.bundle/MessageEntrySendButton.png"]stretchableImageWithLeftCapWidth:13 topCapHeight:0]
+						   forState:UIControlStateSelected];
 	}
 	return doneBtn;
+}
+
+-(UIButton *)camButton
+{
+	if(!camButton)
+	{
+		camButton = [UIButton buttonWithType:UIButtonTypeCustom];
+		camButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+		
+		[camButton setTitle:@"Send" forState:UIControlStateNormal];
+		
+		[camButton setTitleShadowColor:[UIColor colorWithWhite:0 alpha:0.4] forState:UIControlStateNormal];
+		camButton.titleLabel.shadowOffset = CGSizeMake (0.0, -1.0);
+		camButton.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
+		
+		[camButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+		[camButton addTarget:self action:@selector(camButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+				
+		[camButton setBackgroundImage:[self resourcesImage:@"smsview.bundle/cameraButtonN.png"] forState:UIControlStateNormal];
+		[camButton setBackgroundImage:[self resourcesImage:@"smsview.bundle/cameraButtonP.png"] forState:UIControlStateSelected];
+		camButton.backgroundColor = [UIColor clearColor];
+		[self addSubview:camButton];
+	}
+	return camButton;
+
 }
 
 -(UIImageView *)entryImageView
@@ -92,11 +112,9 @@
 	{
 		entryImageView = [[UIImageView alloc] init];
 		entryImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-		
-		UIImage *rawEntryBackground = [self resourcesImage:@"smsview.bundle/MessageEntryInputField.png"];
-		UIImage *entryBackground = [rawEntryBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
-		
-		[entryImageView setImage:entryBackground];
+		[entryImageView setImage:
+			[[self resourcesImage:@"smsview.bundle/MessageEntryInputField.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:22]
+		];
 	}
 	return entryImageView;
 }
@@ -111,9 +129,10 @@
 	if(!imageView)
 	{
 		imageView = [[UIImageView alloc] init];
-		UIImage *rawBackground = [self resourcesImage:@"smsview.bundle/MessageEntryBackground.png"];
-		UIImage *background = [rawBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
-		[imageView setImage:background];
+		imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+		[imageView setImage:
+			[[self resourcesImage:@"smsview.bundle/MessageEntryBackground.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:22]
+		];
 		imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	}
 	return imageView;
@@ -123,34 +142,57 @@
 {
 	CGFloat w = CGRectGetWidth(self.superview.frame);
 	CGFloat h = CGRectGetHeight(self.superview.frame);
-	[[self textView]		setFrame: CGRectMake(6, 3, w - 80, 40)];
-	[[self doneBtn ]		setFrame: CGRectMake(w - 69, 8, 63, 27)];
-	[[self imageView]		setFrame: CGRectMake(0, 0, w, h)];
-	[[self entryImageView]	setFrame: CGRectMake(5, 0, w-72, 40)];
-	[self					setFrame: CGRectMake(0, h - 40, w, 40)];
+	CGFloat height = 40;
 	
+	[self					setFrame: CGRectMake(0, h - height, w, height)];
+	[[self imageView]		setFrame: CGRectMake(0, 0, w, height)];
+	[[self textView]		setFrame: CGRectMake(6, 3, w - 80, height)];
+	[[self entryImageView]	setFrame: CGRectMake(5, 0, w-72, height)];
+	[[self doneBtn ]		setFrame: CGRectMake(w - 69, 8, 63, 27)];
+
+	if(self.hasCam)
+	{
+		[[self textView]		setFrame: CGRectMake(41, 3, w - 116, height)];
+		[[self entryImageView]	setFrame: CGRectMake(40, 0, w-107, height)];
+		[[self camButton]		setFrame: CGRectMake(5, 7, 30, 30)];
+	}
 }
+
+-(void)setCamera:(BOOL)val
+{
+	self.hasCam = val;
+}
+
 
 - (void)layoutSubviews
 {
-	if(!firstTime)
+	if(!self.firstTime)
 	{
-		firstTime = YES;
-		[self resize];
+		self.backgroundColor = [UIColor clearColor];
+		self.firstTime = YES;
 		// view hierachy
 		[self addSubview:[self imageView]];
 		[self addSubview:[self textView]];
 		[self addSubview:[self entryImageView]];
 		[self addSubview:[self doneBtn]];	
+		[self resize];
 	}
 }
 
--(void)buttonPressed
+-(void)doneButtonPressed
 {
-	if ([delegate respondsToSelector:@selector(textViewButtonPressed:)]) {
-		[delegate textViewButtonPressed:[self textView].text];
+	if ([delegate respondsToSelector:@selector(textViewSendButtonPressed:)]) {
+		[delegate textViewSendButtonPressed:[self textView].text];
 	}	
 	
+}
+
+-(void)camButtonPressed
+{
+	if ([delegate respondsToSelector:@selector(textViewCamButtonPressed:)]) {
+		[delegate textViewCamButtonPressed:[self textView].text];
+	}	
+
 }
 
 -(void)becomeTextView

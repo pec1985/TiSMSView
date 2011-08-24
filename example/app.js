@@ -46,6 +46,7 @@ function SMSWindow(){
 									backgroundImage: 'bg.png',
 									sendColor: 'White',
 									recieveColor: 'Green',
+									camButton:true
 									});
 	
 	win.add(tf);
@@ -62,17 +63,15 @@ function SMSWindow(){
 								   }, 1000);
 						}
 						});
+	tf.addEventListener('camButtonClicked',function(e){
+						alert(e.value);
+						});
 	
 	win.addEventListener('open', function(){
 						tf.recieveMessage('Type "exit" to exit'); 
 						});
 	
-	setTimeout(function(){
-			   tf.focus();
-			   setTimeout(function(){
-						  tf.blur();
-						  },2000);
-			   },2000);
+
 	
 	return win;
 }

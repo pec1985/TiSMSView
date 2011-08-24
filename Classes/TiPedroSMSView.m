@@ -21,6 +21,7 @@
 @synthesize textAlignment;
 @synthesize autocorrect;
 @synthesize beditable;
+@synthesize hasCam;
 
 -(void)dealloc
 {
@@ -39,6 +40,7 @@
 		self.firstTime = YES;
 		self.autocorrect = YES;
 		self.beditable = YES;
+		self.hasCam = NO;
 	}
 	return self;
 }
@@ -164,7 +166,14 @@
 
 #pragma mark Event listeners
 
--(void)textViewButtonPressed:(NSString *)text
+-(void)textViewCamButtonPressed:(NSString *)text
+{
+	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
+	[tiEvent setObject:text forKey:@"value"];
+	[self.proxy fireEvent:@"camButtonClicked" withObject:tiEvent];
+}
+
+-(void)textViewSendButtonPressed:(NSString *)text
 {
 	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
 	[tiEvent setObject:text forKey:@"value"];
@@ -222,9 +231,10 @@
 			[[[self textArea] textView] setTextAlignment:self.textAlignment];
 		if(self.value)
 			[[[self textArea] textView]setText:self.value];
-
+		
+		[[self textArea] setCamera:self.hasCam];
 		[[[self textArea] textView] setEditable:self.beditable];
-		[[[self textArea] textView ]setAutocorrectionType:self.autocorrect ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
+		[[[self textArea] textView] setAutocorrectionType:self.autocorrect ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
 		[[[self textArea] textView] setDataDetectorTypes:UIDataDetectorTypeAll];
 	}
     else
@@ -236,6 +246,16 @@
 }
 
 #pragma mark Titanium's setters
+
+-(void)setCamButton_:(id)args
+{
+	self.hasCam = [TiUtils boolValue:args];
+	if(!self.firstTime)
+	{
+		[[self textArea] setCamera:self.hasCam];
+		[[self textArea] resize];
+	}
+}	
 
 -(void)setSendColor_:(id)col
 {

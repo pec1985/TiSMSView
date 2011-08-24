@@ -15,7 +15,8 @@
 @optional
 
 -(void)heightOfTextViewDidChange:(float)height;
--(void)textViewButtonPressed:(NSString *)text;
+-(void)textViewSendButtonPressed:(NSString *)text;
+-(void)textViewCamButtonPressed:(NSString *)text;
 -(void)textViewFocus;
 -(void)textViewBlur;
 -(void)textViewTextChange:(NSString *)text;;
@@ -26,20 +27,24 @@
 	NSObject <PESMSTextAreaDelegate>* delegate;
     HPGrowingTextView *textView;
 	UIButton *doneBtn;
+	UIButton *camButton;
 	UIImageView *entryImageView;
 	UIImageView *imageView;
 	UIImage *images;
 	NSString *imagesPath;
-	BOOL firstTime;
 }
 
 @property(assign) NSObject<PESMSTextAreaDelegate> *delegate;
 @property(nonatomic, retain)NSString *text;
+@property(nonatomic)BOOL hasCam;
+@property(nonatomic)BOOL firstTime;
+
 -(void)resize;
 -(void)resignTextView;
 -(void)emptyTextView;
 -(void)becomeTextView;
 -(void)buttonTitle:(NSString *)title;
+-(void)setCamera:(BOOL)val;
 - (HPGrowingTextView *)textView;
 
 @end
