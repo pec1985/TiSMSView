@@ -43,6 +43,8 @@
 	return self;
 }
 
+#pragma mark UI Elements
+
 -(PESMSTextArea *)textArea 
 {
 	if(!textArea){
@@ -66,6 +68,7 @@
 	return scrollView;
 }
 
+#pragma mark Keyboard stuff
 
 //Code from Brett Schumann
 -(void) keyboardWillShow:(NSNotification *)note{
@@ -96,10 +99,6 @@
 	[[self scrollView] reloadContentSize];
 }
 
--(void)changeHeightOfScrollView
-{
-
-}
 
 -(void) keyboardWillHide:(NSNotification *)note{
     // get keyboard size and location
@@ -128,6 +127,7 @@
 	// commit animations
 	[UIView commitAnimations];
 }
+
 -(void)heightOfTextViewDidChange:(float)height
 {
 	CGRect scrollViewFrame = [self scrollView].frame;	
@@ -135,13 +135,16 @@
 	[[self scrollView]setFrame: scrollViewFrame];
 	[[self scrollView] reloadContentSize];
 }
--(void)blur
+
+#pragma mark methods to be used in Javascript
+
+-(void)_blur
 {
-	[[self textArea] resignTextView];
+	[[[self textArea] textView] performSelectorOnMainThread:@selector(resignFirstResponder) withObject:nil waitUntilDone:YES];
 }
--(void)focus
+-(void)_focus
 {
-	[[self textArea] becomeTextView];
+	[[[self textArea] textView] performSelectorOnMainThread:@selector(becomeFirstResponder) withObject:nil waitUntilDone:YES];
 }
 
 -(void)sendMessage:(NSString *)msg
@@ -158,6 +161,8 @@
 	[[self scrollView] performSelectorOnMainThread:@selector(recieveMessage:) withObject:msg waitUntilDone:YES];
 	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
 }
+
+#pragma mark Event listeners
 
 -(void)textViewButtonPressed:(NSString *)text
 {
@@ -183,6 +188,14 @@
 	
 	[self blur];
 }
+
+
+-(void)changeHeightOfScrollView
+{
+	// Empty for now, we don't need this, it is completely useless for the JS app
+}
+
+#pragma mark Titanium's resize/init function
 
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
@@ -222,10 +235,13 @@
 	
 }
 
+#pragma mark Titanium's setters
+
 -(void)setSendColor_:(id)col
 {
     [[self scrollView] performSelectorOnMainThread:@selector(sendColor:) withObject:[TiUtils stringValue:col] waitUntilDone:YES];
 }
+
 -(void)setRecieveColor_:(id)col
 {
     [[self scrollView] performSelectorOnMainThread:@selector(recieveColor:) withObject:[TiUtils stringValue:col] waitUntilDone:YES];

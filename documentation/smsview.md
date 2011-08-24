@@ -5,7 +5,7 @@
 Displays an SMS-like view with the text area, scrollable view, and the message "balloons"
 
 ----
-## Functions
+## Methods
 
 ### sendMessage( string )
 
@@ -13,6 +13,15 @@ displays a message on the right side of the scrollView
 ### recieveMessage( string )
 
 displays a message on the left side of the scrollView
+
+### blur()
+void
+
+blurs the text area and brings the keyboard down
+
+### focus()
+
+focuses the text area and brings the keyboard up
 
 ----
 ## Properties

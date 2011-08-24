@@ -41,19 +41,11 @@ Titanium.Pedro = require('ti.pedro');
 
 
 function SMSWindow(){
-	var win = Ti.UI.createWindow();
+	var win = Ti.UI.createWindow({tabBarHidden:'true'});
 	var tf = Ti.Pedro.createSMSView({
 									backgroundImage: 'bg.png',
-									sendColor: 'Purple',
+									sendColor: 'White',
 									recieveColor: 'Green',
-									font:{
-									  fontSize:25,
-									  fontWeight:'bold',
-									  fontFamily:'arial'
-									},
-									textColor:'blue',
-									textAlignment:'right',
-									autocorrect:false
 									});
 	
 	win.add(tf);
@@ -75,6 +67,13 @@ function SMSWindow(){
 						tf.recieveMessage('Type "exit" to exit'); 
 						});
 	
+	setTimeout(function(){
+			   tf.focus();
+			   setTimeout(function(){
+						  tf.blur();
+						  },2000);
+			   },2000);
+	
 	return win;
 }
 
@@ -82,8 +81,7 @@ function SMSWindow(){
 function tg(){
 	var tabGroup = Ti.UI.createTabGroup();
 	var win = Ti.UI.createWindow({
-								 backgroundColor:'black',
-								 tabBarHidden:'true'
+								 backgroundColor:'#999'
 								 });
 	var btn = Ti.UI.createButton({
 								 title:'open sms',
@@ -114,7 +112,7 @@ function tg(){
 function ng(){
 	var mainWin = Ti.UI.createWindow();
 	var win = Ti.UI.createWindow({
-								 backgroundColor:'black',
+								 backgroundColor:'#666',
 								 tabBarHidden:'true'
 								 });
 	var btn = Ti.UI.createButton({
@@ -151,7 +149,7 @@ function ng(){
 function StartWindow(){
 	
 	var win = Ti.UI.createWindow({
-								 backgroundColor: 'white',
+								 backgroundColor: '#333',
 								 layout:'vertical'
 								 });
 	

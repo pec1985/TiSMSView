@@ -7,9 +7,7 @@
 //
 
 #import "PESMSLabel.h"
-// titanium project:
 #import "TiHost.h"
-
 
 @implementation PESMSLabel
 
@@ -55,7 +53,6 @@
 	b.origin.y = 3;
 	b.origin.x = 15;
 	[[self label] setFrame:b];
-	
 }
 
 -(void)addText:(NSString *)text
@@ -70,7 +67,6 @@
 	
 }
 
-// titanium project:
 -(NSString*)getNormalizedPath:(NSString*)source
 {
 	if ([source hasPrefix:@"file:/"]) {
@@ -79,7 +75,6 @@
 	}
 	return source;
 }
-// titanium project
 
 -(NSString *)resourcesDir:(NSString *)url
 {
@@ -87,8 +82,6 @@
 	
 	return url;
 }
-
-
 
 -(void)position:(NSString *)pos:(NSString *)color
 {
@@ -99,11 +92,12 @@
 	
 	NSString *imgName = [[[[@"smsview.bundle/"
 							stringByAppendingString:color ]
-						   stringByAppendingString:@"Balloon"]
-						  stringByAppendingString:pos]
-						 stringByAppendingString:@".png" ];
-	// titanium project
+							stringByAppendingString:@"Balloon"]
+							stringByAppendingString:pos]
+							stringByAppendingString:@".png" ];
+	
 	imgName = [self resourcesDir:imgName];
+	
 	if([pos isEqualToString:@"Left"])
 	{
 		CGRect a = [self label].frame;
@@ -113,20 +107,13 @@
 		b.size.width +=10;
 		[self setFrame:b];		
 		self.image = [[UIImage imageWithContentsOfFile:imgName] stretchableImageWithLeftCapWidth:22 topCapHeight:14];
-		//		[self performSelectorOnMainThread:@selector(setImage:) withObject:backgroundImage waitUntilDone:YES];
 	}
 	else if([pos isEqualToString:@"Right"])
 	{
-		//	[self performSelectorOnMainThread:@selector(setImage:) withObject:backgroundImage waitUntilDone:YES];
 		self.image = [[UIImage imageWithContentsOfFile:imgName] stretchableImageWithLeftCapWidth:20 topCapHeight:14];
 		CGRect a = self.frame;
-		
 		a.origin.x = (self.superview.frame.size.width-self.frame.size.width)-20;
 		a.size.width +=10;
-		
-		// this makes it look gay, commenting for now
-		//[[self label] setTextAlignment:UITextAlignmentRight];
-		
 		[self setFrame:a];
 	}
 	else

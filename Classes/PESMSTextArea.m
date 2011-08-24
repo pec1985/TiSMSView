@@ -7,8 +7,6 @@
 //
 
 #import "PESMSTextArea.h"
-
-// titanium project:
 #import "TiHost.h"
 
 @implementation PESMSTextArea
@@ -32,7 +30,6 @@
 	return self;
 }
 
-// titanium project:
 -(NSString*)getNormalizedPath:(NSString*)source
 {
 	if ([source hasPrefix:@"file:/"]) {
@@ -44,13 +41,8 @@
 
 -(UIImage *)resourcesImage:(NSString *)url
 {
-	// normal project:
-	// images = [UIImage imageNamed:url];
-	
-	// titanium project:
-	images = [[[UIImage alloc] initWithContentsOfFile: [[TiHost resourcePath] stringByAppendingPathComponent:[self getNormalizedPath:url]]]autorelease ];
-	
-	return images;
+//	images = [[[UIImage alloc] initWithContentsOfFile: [[TiHost resourcePath] stringByAppendingPathComponent:[self getNormalizedPath:url]]]autorelease ];	
+	return [UIImage imageWithContentsOfFile:[[TiHost resourcePath] stringByAppendingPathComponent:[self getNormalizedPath:url]]];
 }
 
 
@@ -173,7 +165,6 @@
 {
 	[self becomeTextView];
 }
-
 
 -(void)resignTextView
 {

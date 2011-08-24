@@ -16,7 +16,6 @@
 
 @end
 
-
 @interface PESMSScrollView : UIScrollView {
 	id<PESMSScrollViewDelegate> delegate;
 	UILabel *sentLabel;
@@ -28,8 +27,6 @@
 @property(nonatomic) CGRect labelsPosition;
 @property(nonatomic, retain)NSString *sColor;
 @property(nonatomic, retain)NSString *rColor;
-
-
 
 -(void)sendMessage:(NSString *)text;;
 -(void)recieveMessage:(NSString *)text;;

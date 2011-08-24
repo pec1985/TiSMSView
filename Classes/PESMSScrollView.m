@@ -87,40 +87,18 @@
 
 -(void)recieveMessage:(NSString *)text;
 {
-	/*
-	 Colors:
-	 Blue
-	 Purple
-	 Green
-	 Gray
-	 White
-	 */
-    
     if(!self.rColor)
         self.rColor = @"Green";
     
 	[[self label:text] position:@"Left":self.rColor];
-	//	[self reloadContentSize];
-	
 }
 
 -(void)sendMessage:(NSString *)text;
-{
-	/*
-	 Colors:
-	 Blue
-	 Purple
-	 Green
-	 Gray
-	 White
-	 */
-	
-	
+{	
     if(!self.sColor)
         self.sColor = @"White";
 	
 	[[self label:text] position:@"Right":self.sColor];
-	//	[self reloadContentSize];
 }
 
 @end

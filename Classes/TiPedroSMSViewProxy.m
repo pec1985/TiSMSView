@@ -34,6 +34,16 @@
 	[super viewDidAttach];
 }
 
+-(void)blur:(id)args
+{
+	[[self ourView] _blur];
+}
+
+-(void)focus:(id)args
+{
+	[[self ourView] _focus];
+}
+
 -(void)message:(id)args
 {
 	ENSURE_SINGLE_ARG(args,NSDictionary);

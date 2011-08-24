@@ -29,5 +29,7 @@
 
 -(void)sendMessage:(NSString *)msg;
 -(void)recieveMessage:(NSString *)msg;
+-(void)_blur;
+-(void)_focus;
 
 @end
