@@ -28,6 +28,9 @@
 		24DE9E1211C5FE74003F90F6 /* TiPedroModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiPedroModuleAssets.m */; };
 		AA747D9F0F9514B9006C5449 /* PecTf_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* PecTf_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		B671D1771405C71B00C5F651 /* TTTAttributedLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B671D1751405C71B00C5F651 /* TTTAttributedLabel.h */; };
+		B671D1781405C71B00C5F651 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B671D1761405C71B00C5F651 /* TTTAttributedLabel.m */; };
+		B671D17B1405C80400C5F651 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B671D17A1405C80400C5F651 /* CoreText.framework */; };
 		B6A5206213C3701C0016C96A /* TiPedroSMSView.h in Headers */ = {isa = PBXBuildFile; fileRef = B6A5205E13C3701A0016C96A /* TiPedroSMSView.h */; };
 		B6A5206313C3701C0016C96A /* TiPedroSMSView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A5205F13C3701B0016C96A /* TiPedroSMSView.m */; };
 		B6A5206413C3701C0016C96A /* TiPedroSMSViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = B6A5206013C3701B0016C96A /* TiPedroSMSViewProxy.h */; };
@@ -62,6 +65,9 @@
 		24DE9E1011C5FE74003F90F6 /* TiPedroModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiPedroModuleAssets.m; path = Classes/TiPedroModuleAssets.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* PecTf_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PecTf_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B671D1751405C71B00C5F651 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		B671D1761405C71B00C5F651 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		B671D17A1405C80400C5F651 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B67EF5ED140227F8006B037B /* win.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = win.js; sourceTree = "<group>"; };
 		B6A51F9C13C158BA0016C96A /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		B6A5204C13C23C520016C96A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -87,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B671D17B1405C80400C5F651 /* CoreText.framework in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +125,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B671D17A1405C80400C5F651 /* CoreText.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -151,6 +159,8 @@
 		B6A51F8113C1575C0016C96A /* GrowingTextView */ = {
 			isa = PBXGroup;
 			children = (
+				B671D1751405C71B00C5F651 /* TTTAttributedLabel.h */,
+				B671D1761405C71B00C5F651 /* TTTAttributedLabel.m */,
 				B6F6BD3413F97F5400AD29C4 /* HPGrowingTextView.h */,
 				B6F6BD3513F97F5400AD29C4 /* HPGrowingTextView.m */,
 				B6F6BD3613F97F5500AD29C4 /* HPTextViewInternal.h */,
@@ -199,6 +209,7 @@
 				B6F6BD3213F97C8200AD29C4 /* PESMSTextArea.h in Headers */,
 				B6F6BD3813F97F5500AD29C4 /* HPGrowingTextView.h in Headers */,
 				B6F6BD3A13F97F5500AD29C4 /* HPTextViewInternal.h in Headers */,
+				B671D1771405C71B00C5F651 /* TTTAttributedLabel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +292,7 @@
 				B6F6BD3313F97C8200AD29C4 /* PESMSTextArea.m in Sources */,
 				B6F6BD3913F97F5500AD29C4 /* HPGrowingTextView.m in Sources */,
 				B6F6BD3B13F97F5500AD29C4 /* HPTextViewInternal.m in Sources */,
+				B671D1781405C71B00C5F651 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

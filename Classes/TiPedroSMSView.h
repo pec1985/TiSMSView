@@ -28,6 +28,8 @@
 @property(nonatomic)BOOL beditable;
 @property(nonatomic)BOOL hasCam;
 
+-(void)sendImage:(UIImage *)image;
+-(void)recieveImage:(UIImage *)image;
 -(void)sendMessage:(NSString *)msg;
 -(void)recieveMessage:(NSString *)msg;
 -(void)_blur;

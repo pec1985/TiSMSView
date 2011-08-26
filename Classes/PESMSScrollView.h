@@ -30,6 +30,8 @@
 
 -(void)sendMessage:(NSString *)text;;
 -(void)recieveMessage:(NSString *)text;;
+-(void)sendImage:(UIImage *)image;;
+-(void)recieveImage:(UIImage *)image;;
 -(void)reloadContentSize;
 -(void)backgroundColor:(UIColor *)col;
 -(void)sendColor:(NSString *)col;

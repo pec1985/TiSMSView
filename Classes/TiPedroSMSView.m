@@ -149,6 +149,17 @@
 	[[[self textArea] textView] performSelectorOnMainThread:@selector(becomeFirstResponder) withObject:nil waitUntilDone:YES];
 }
 
+-(void)sendImage:(UIImage *)image
+{
+	[[self scrollView] performSelectorOnMainThread:@selector(sendImage:) withObject:image waitUntilDone:YES];
+	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
+}
+-(void)recieveImage:(UIImage *)image
+{
+	[[self scrollView] performSelectorOnMainThread:@selector(recieveImage:) withObject:image waitUntilDone:YES];
+	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
+}
+
 -(void)sendMessage:(NSString *)msg
 {
 	if([msg isEqualToString:@""])
@@ -156,6 +167,7 @@
 	[[self scrollView] performSelectorOnMainThread:@selector(sendMessage:) withObject:msg waitUntilDone:YES];
 	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
 }
+
 -(void)recieveMessage:(NSString *)msg
 {
 	if([msg isEqualToString:@""])

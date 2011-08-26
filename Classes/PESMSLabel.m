@@ -11,12 +11,26 @@
 
 @implementation PESMSLabel
 
-@synthesize rColor, sColor;
+@synthesize rColor;
+@synthesize sColor;
+@synthesize isText;
+@synthesize isImage;
 
 -(void)dealloc
 {
 	RELEASE_TO_NIL(label);
+	RELEASE_TO_NIL(innerImage);
 	[super dealloc];
+}
+
+-(UIImageView *)innerImage:(UIImage *)image
+{
+	if(!innerImage)
+	{
+		innerImage = [[UIImageView alloc] initWithImage:image];
+		self.isImage = YES;
+	}
+	return innerImage;
 }
 
 -(UILabel *)label
@@ -27,11 +41,12 @@
 		label.numberOfLines = 0;
 		label.backgroundColor = [UIColor clearColor];
 		[label setFont:[UIFont fontWithName:@"Helvica" size:50]];
+		self.isText = YES;
 	}
 	return label;
 }
 
--(void)setUpImageSize
+-(void)setUpTextImageSize
 {
 	CGRect x = [self label].frame;
 	if(x.size.width > self.superview.frame.size.width-100)
@@ -54,16 +69,47 @@
 	[[self label] setFrame:b];
 }
 
+-(void)setUpInnerImageImageSize
+{
+	CGRect x = [self innerImage:nil].frame;
+	if(x.size.width > self.superview.frame.size.width-100)
+	{
+		x.size.width = self.superview.frame.size.width-100;
+		[[self innerImage:nil] setFrame:x];
+		[[self innerImage:nil] sizeToFit];
+		
+	}
+	CGRect a = [self innerImage:nil].frame;
+	a.size.width +=25;
+	a.size.height +=20;
+	a.origin.y = 10;
+	a.origin.x = 10;
+	self.frame = a;
+	
+	CGRect b = [self innerImage:nil].frame;
+	b.origin.y = 8;
+	
+	b.origin.x = 15;
+	
+	[[self innerImage:nil] setFrame:b];
+}
+
+
 -(void)addText:(NSString *)text
 {
 	
-	NSString *a = [@"" stringByAppendingString:text];
-	
-	[[self label] performSelectorOnMainThread : @selector(setText:) withObject:a waitUntilDone:YES];
+	[[self label] performSelectorOnMainThread : @selector(setText:) withObject:text waitUntilDone:YES];
 	[self addSubview:[self label]];
 	[[self label] sizeToFit];
-	[self setUpImageSize];
+	[self setUpTextImageSize];
 	
+}
+
+-(void)addImage:(UIImage *)image
+{
+	[self addSubview:[self innerImage:image]];
+	[[self innerImage:nil] sizeToFit];
+	[self setUpInnerImageImageSize];
 }
 
 -(NSString*)getNormalizedPath:(NSString*)source
@@ -99,9 +145,19 @@
 	
 	if([pos isEqualToString:@"Left"])
 	{
-		CGRect a = [self label].frame;
-		a.origin.x +=5;
-		[[self label] setFrame:a];
+		if(self.isText)
+		{
+			CGRect a = [self label].frame;
+			a.origin.x +=5;
+			[[self label] setFrame:a];
+		}
+		if(self.isImage)
+		{
+			CGRect a = [self innerImage:nil].frame;
+			a.origin.x +=5;
+			[[self innerImage:nil] setFrame:a];
+		}
+		
 		CGRect b = self.frame;
 		b.size.width +=10;
 		[self setFrame:b];		

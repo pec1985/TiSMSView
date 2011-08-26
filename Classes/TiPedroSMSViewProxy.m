@@ -12,6 +12,22 @@
 
 @implementation TiPedroSMSViewProxy
 
+-(void)_destroy
+{
+	// This method is called from the dealloc method and is good place to
+	// release any objects and memory that have been allocated for the view proxy.
+	RELEASE_TO_NIL(ourView);
+	[super _destroy];
+}
+
+-(void)dealloc
+{
+	// This method is called when the view proxy is being deallocated. The superclass
+	// method calls the _destroy method.
+
+	[super dealloc];
+}
+
 -(TiPedroSMSView *)ourView
 {
 	if(!ourView)
@@ -57,17 +73,62 @@
 		[ourView recieveMessage:recieve];
 }
 
+
+-(UIImage *)returnImage:(id)arg
+{
+	UIImage *image = nil;
+	if ([arg isKindOfClass:[UIImage class]]) 
+	{
+		image = (UIImage*)arg;
+	}
+	else if ([arg isKindOfClass:[TiBlob class]])
+	{
+		TiBlob *blob = (TiBlob*)arg;
+		image = [blob image];
+		
+	}
+/*	else if (image == nil) 
+	{
+		if ([arg isKindOfClass:[NSString class]])
+		{
+			NSLog(@"-=-=-= NSString -=--=-");
+		}
+		if ([arg isKindOfClass:[NSURL class]])
+		{
+			NSLog(@"-=-=-= NSURL -=--=-");
+		}
+		
+	} else {
+		image = [TiUtils image:arg proxy:self];
+	}
+*/
+	else
+	{
+		NSLog(@"The image MUST be a blob.");
+	}
+	return image;
+}
+
 -(void)sendMessage:(id)args
 {
-	ENSURE_SINGLE_ARG(args, NSString);
-	[ourView sendMessage:args];
+	ENSURE_UI_THREAD(sendMessage,args);
+	ENSURE_TYPE(args, NSArray);
+	id arg = [args objectAtIndex:0];
+	if([arg isKindOfClass:[NSString class]])
+		[ourView sendMessage:arg];
+	else
+		[ourView sendImage:[self returnImage:arg]];
 }
 
 -(void)recieveMessage:(id)args
 {
-	ENSURE_SINGLE_ARG(args, NSString);
-	[ourView recieveMessage:args];
-	
+	ENSURE_UI_THREAD(recieveMessage,args);
+	ENSURE_TYPE(args, NSArray);
+	id arg = [args objectAtIndex:0];
+	if([arg isKindOfClass:[NSString class]])
+		[ourView recieveMessage:arg];
+	else
+		[ourView recieveImage:[self returnImage:arg]];
 }
 
 -(id)value

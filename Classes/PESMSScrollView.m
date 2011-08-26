@@ -29,14 +29,17 @@
     return self;
 }
 
--(PESMSLabel *)label:(NSString *)text
+-(PESMSLabel *)label:(NSString *)text:(UIImage *)image
 {
 	[self performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
-	
+
 	label = [[PESMSLabel alloc] init];
 	[self addSubview:label];
 	
-	[label addText:text];
+	if(text)
+		[label addText:text];
+	if(image)
+		[label addImage:image];
 	
 	CGRect frame = label.frame;
 	frame.origin.y += labelsPosition.origin.y;	
@@ -87,12 +90,29 @@
 	self.backgroundColor = col;
 }
 
+-(void)recieveImage:(UIImage *)image
+{
+	if(!self.rColor)
+		self.rColor = @"Green";
+	[[self label:nil:image] position:@"Left":self.sColor];
+	RELEASE_TO_NIL(label);
+}
+
+-(void)sendImage:(UIImage *)image
+{
+	if(!self.sColor)
+		self.sColor = @"White";
+	[[self label:nil:image] position:@"Right":self.sColor];
+	RELEASE_TO_NIL(label);
+}
+
+
 -(void)recieveMessage:(NSString *)text;
 {
     if(!self.rColor)
         self.rColor = @"Green";
     
-	[[self label:text] position:@"Left":self.rColor];
+	[[self label:text:nil] position:@"Left":self.rColor];
 	RELEASE_TO_NIL(label);
 }
 
@@ -101,7 +121,7 @@
     if(!self.sColor)
         self.sColor = @"White";
 	
-	[[self label:text] position:@"Right":self.sColor];
+	[[self label:text:nil] position:@"Right":self.sColor];
 	RELEASE_TO_NIL(label);
 }
 
