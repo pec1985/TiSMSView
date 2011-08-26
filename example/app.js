@@ -1,3 +1,4 @@
+// random sentence generator for the resonse :)
 function rand() {
 	var i, uarticle = ["The", "A", "One", "Some", "Any"],
 		noun = ["boy", "girl", "dog", "town", "car", "kid", "boss", "table", "chair"],
@@ -25,22 +26,10 @@ function rand() {
 
 	return (uarticle[uarticleIndex] + space + noun[nounIndex1] + space + verb[verbIndex] + space + preposition[prepositionIndex] + space + larticle[larticleIndex] + space + noun[nounIndex2] + ".");
 }
+
 Titanium.Pedro = require('ti.pedro');
 
-
-
-function selectImageToSend(callback) {
-	Titanium.Media.openPhotoGallery({
-		success: function(event) {
-			callback(event.media);
-		},
-		allowEditing: true,
-		mediaTypes: [Ti.Media.MEDIA_TYPE_VIDEO, Ti.Media.MEDIA_TYPE_PHOTO]
-	});
-}
-
-
-
+// SMS Window, this is it!
 function SMSWindow() {
 	var win = Ti.UI.createWindow({
 		tabBarHidden: 'true'
@@ -75,13 +64,21 @@ function SMSWindow() {
 		options.show();
 		options.addEventListener('click', function(e) {
 			if(e.index == 0){
+			// --------------- open the photo gallery and send an image ------------------
 				Titanium.Media.openPhotoGallery({
 					success: function(event) {
+												
+						// uncomment to set a specific width, in this case 100
+												
+						//var image = Ti.UI.createImageView({image:event.media});
+						//image.width = 100;
+						//image.height = (100/event.media.width)*event.media.height
+						// tf.sendMessage(image.toImage());
 						tf.sendMessage(event.media);
-						tf.recieveMessage(event.media);
 					},
-					mediaTypes: [Ti.Media.MEDIA_TYPE_VIDEO, Ti.Media.MEDIA_TYPE_PHOTO]
+					mediaTypes: [Ti.Media.MEDIA_TYPE_PHOTO]
 				});
+			// ---------------------------------------------------------------------------
 			}
 		});
 
@@ -94,40 +91,7 @@ function SMSWindow() {
 	return win;
 }
 
-
-
-function otherwindow() {
-	var win = Ti.UI.createWindow({
-		backgroundColor: 'green'
-	});
-	var button = Ti.UI.createButton({
-		left: 20,
-		right: 20,
-		height: 50,
-		top: 20
-	});
-	button.addEventListener('click', function() {
-		var view = Ti.Pedro.createTestView({
-			left: 20,
-			right: 20,
-			height: 100,
-			bottom: 20
-		});
-		win.add(view);
-		Titanium.Media.openPhotoGallery({
-			success: function(event) {
-				view.laImage(event.media);
-			},
-			mediaTypes: [Ti.Media.MEDIA_TYPE_VIDEO, Ti.Media.MEDIA_TYPE_PHOTO]
-		});
-
-	});
-	win.add(button);
-	return win;
-}
-
-
-
+// tab group
 function tg() {
 	var tabGroup = Ti.UI.createTabGroup();
 	var win = Ti.UI.createWindow({
@@ -159,8 +123,7 @@ function tg() {
 	return tabGroup;
 }
 
-
-
+// navigation group
 function ng() {
 	var mainWin = Ti.UI.createWindow();
 	var win = Ti.UI.createWindow({
@@ -197,8 +160,7 @@ function ng() {
 	return mainWin;
 }
 
-
-
+// our main widndow, the one used to select tests
 function StartWindow() {
 
 	var win = Ti.UI.createWindow({
@@ -217,7 +179,7 @@ function StartWindow() {
 	win.add(btn1);
 
 	var btn2 = Ti.UI.createButton({
-		title: 'mornal',
+		title: 'normal',
 		left: 20,
 		right: 20,
 		height: 40,
@@ -244,6 +206,7 @@ function StartWindow() {
 		top: 30
 	});
 	win.add(btn4);
+
 	var btn5 = Ti.UI.createButton({
 		title: 'other context',
 		left: 20,
@@ -264,16 +227,10 @@ function StartWindow() {
 	btn4.addEventListener('click', function() {
 		ng().open();
 	});
+
 	btn3.addEventListener('click', function() {
-		var btn = Ti.UI.createButton({
-			title: 'close'
-		});
-		SMSWindow().open({
-			modal: true
-		});
-		btn.addEventListener('click', function() {
-			w.close();
-		});
+		SMSWindow().open({modal: true});
+	
 	});
 	btn2.addEventListener('click', function() {
 		SMSWindow().open();
