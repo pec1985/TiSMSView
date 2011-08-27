@@ -62,19 +62,6 @@
 	[[self ourView] _focus];
 }
 
--(void)message:(id)args
-{
-	ENSURE_SINGLE_ARG(args,NSDictionary);
-	NSString *send = [args objectForKey:@"send"]?[args objectForKey:@"send"]:@"";
-	NSString *recieve = [args objectForKey:@"recieve"]?[args objectForKey:@"recieve"]:@"";
-	if(![send isEqualToString:@""]){
-		
-		[ourView sendMessage:send];
-	}
-	if(![recieve isEqualToString:@""])
-		[ourView recieveMessage:recieve];
-}
-
 
 -(UIImage *)returnImage:(id)arg
 {
@@ -149,10 +136,29 @@
 	ENSURE_UI_THREAD(recieveMessage,args);
 	ENSURE_TYPE(args, NSArray);
 	id arg = [args objectAtIndex:0];
+	
 	if([arg isKindOfClass:[NSString class]])
 		[ourView recieveMessage:arg];
 	else
 		[ourView recieveImage:[self returnImage:arg]];
+}
+
+-(void)loadMessages:(id)args
+{
+	ENSURE_SINGLE_ARG(args,NSArray);
+	for(int i = 0; i < [args count]; i++)
+	{
+		id obj = [args objectAtIndex:i];
+		ENSURE_SINGLE_ARG(obj, NSObject);
+		if([obj objectForKey:@"send"])
+		{
+			[self sendMessage: [NSArray arrayWithObject:[obj objectForKey:@"send"]]];
+		}
+		if([obj objectForKey:@"recieve"])
+		{
+			[self recieveMessage: [NSArray arrayWithObject:[obj objectForKey:@"recieve"]]];
+		}
+	}
 }
 
 -(id)value

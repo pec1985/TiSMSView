@@ -99,21 +99,120 @@ function SMSWindow() {
 
 	win.addEventListener('open', function() {
 		tf.recieveMessage('Type "exit" to exit');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
-						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+//						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.loadMessages([
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()},
+										  {send:rand()},
+										  {recieve:rand()}
+										 ]);
 						 tf.animated = true;
 	});
 
