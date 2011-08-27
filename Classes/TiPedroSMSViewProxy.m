@@ -9,6 +9,7 @@
 #import "TiPedroSMSView.h"
 #import "TiPedroSMSViewProxy.h"
 #import "TiUtils.h"
+#import "UIImage+Resize.h"
 
 @implementation TiPedroSMSViewProxy
 
@@ -16,7 +17,6 @@
 {
 	// This method is called from the dealloc method and is good place to
 	// release any objects and memory that have been allocated for the view proxy.
-	RELEASE_TO_NIL(ourView);
 	[super _destroy];
 }
 
@@ -43,12 +43,14 @@
 											 selector:@selector(keyboardWillShow:) 
 												 name:UIKeyboardWillShowNotification 
 											   object:nil];
+	
 	[[NSNotificationCenter defaultCenter] addObserver:[self ourView] 
 											 selector:@selector(keyboardWillHide:) 
 												 name:UIKeyboardWillHideNotification 
 											   object:nil];	
 	[super viewDidAttach];
 }
+
 
 -(void)blur:(id)args
 {
@@ -104,8 +106,30 @@
 */
 	else
 	{
-		NSLog(@"The image MUST be a blob.");
+		NSLog(@"[WARN] The image MUST be a blob.");
+		NSLog(@"[WARN]");
+		NSLog(@"[WARN] This is a workaround:");
+		NSLog(@"[WARN]");
+		NSLog(@"[WARN] var img = Ti.UI.createImageView({image:'whatever.png'}).toImage();");
+		NSLog(@"[WARN] xx.sendMessage(img);");
+		NSLog(@"[WARN]      or");
+		NSLog(@"[WARN] xx.recieveMessage(img);");
+		NSLog(@"[WARN]");
 	}
+		
+	if(image != nil)
+	{
+		CGSize imageSize = image.size;		
+		if(imageSize.width > [[self ourView] superview].frame.size.width-100)
+		{
+			float x = ([[self ourView] superview].frame.size.width-100);
+			float y = ((x/imageSize.width)*imageSize.height);
+			CGSize newSize = CGSizeMake(x, y);
+			image = [UIImageResize resizedImage:newSize interpolationQuality:kCGInterpolationDefault image:image  hires:YES];
+		}
+		
+	}		
+	
 	return image;
 }
 

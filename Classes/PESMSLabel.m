@@ -18,8 +18,10 @@
 
 -(void)dealloc
 {
-	RELEASE_TO_NIL(label);
-	RELEASE_TO_NIL(innerImage);
+	if(self.isText)
+		RELEASE_TO_NIL(label);
+	if(self.isImage)
+		RELEASE_TO_NIL(innerImage);
 	[super dealloc];
 }
 
@@ -40,7 +42,6 @@
 		label = [[UILabel alloc] init];
 		label.numberOfLines = 0;
 		label.backgroundColor = [UIColor clearColor];
-		[label setFont:[UIFont fontWithName:@"Helvica" size:50]];
 		self.isText = YES;
 	}
 	return label;
@@ -71,14 +72,6 @@
 
 -(void)setUpInnerImageImageSize
 {
-	CGRect x = [self innerImage:nil].frame;
-	if(x.size.width > self.superview.frame.size.width-100)
-	{
-		x.size.width = self.superview.frame.size.width-100;
-		[[self innerImage:nil] setFrame:x];
-		[[self innerImage:nil] sizeToFit];
-		
-	}
 	CGRect a = [self innerImage:nil].frame;
 	a.size.width +=25;
 	a.size.height +=20;
@@ -87,13 +80,16 @@
 	self.frame = a;
 	
 	CGRect b = [self innerImage:nil].frame;
-	b.origin.y = 8;
-	
+	b.origin.y = 8;	
 	b.origin.x = 15;
 	
 	[[self innerImage:nil] setFrame:b];
 }
 
+-(BOOL)isUserInteractionEnabled
+{
+	return YES;	
+}
 
 -(void)addText:(NSString *)text
 {
@@ -175,7 +171,21 @@
 	{
 		NSLog(@"[ERROR] need to know if it's \"Left\" or \"Right\", stupid!");
 	}
+
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	id whatever;
+	if(self.isText)
+	{
+		whatever = [[self label] text];
+	}
+	if(isImage)
+	{
+		whatever = [[self innerImage:nil] image];
+	}
+	NSLog(@"clicked on: %@",whatever);
+}
 
 @end

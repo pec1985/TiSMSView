@@ -21,12 +21,14 @@
 	UILabel *sentLabel;
 	UILabel *recieveLabel;
 	PESMSLabel *label;
+	NSMutableArray *views;
 }
 
 @property(nonatomic, assign) id<PESMSScrollViewDelegate>  delegate;
 @property(nonatomic) CGRect labelsPosition;
 @property(nonatomic, retain)NSString *sColor;
 @property(nonatomic, retain)NSString *rColor;
+@property(nonatomic)BOOL animated;
 
 -(void)sendMessage:(NSString *)text;;
 -(void)recieveMessage:(NSString *)text;;
@@ -36,4 +38,7 @@
 -(void)backgroundColor:(UIColor *)col;
 -(void)sendColor:(NSString *)col;
 -(void)recieveColor:(NSString *)col;
+-(void)animate:(BOOL)arg;
+
+
 @end

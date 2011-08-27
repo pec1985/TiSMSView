@@ -60,7 +60,7 @@
 {
 	if(!scrollView)
 	{
-		CGFloat h = CGRectGetHeight(self.frame);// - CGRectGetHeight(self.navigationController.navigationBar.frame);
+		CGFloat h = CGRectGetHeight(self.frame);
 		CGRect a = self.frame;
 		a.size.height = h - 40;
 		a.origin.y = 0;
@@ -175,6 +175,7 @@
 	[[self scrollView] performSelectorOnMainThread:@selector(recieveMessage:) withObject:msg waitUntilDone:YES];
 	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
 }
+
 
 #pragma mark Event listeners
 
@@ -334,5 +335,11 @@
 	if(!self.firstTime)
 		[[[self textArea] textView]setText:self.value];
 }
+
+-(void)setAnimated_:(id)args
+{
+	[[self scrollView] animate:[TiUtils boolValue:args]];	
+}
+
  
 @end

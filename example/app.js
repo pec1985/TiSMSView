@@ -38,7 +38,8 @@ function SMSWindow() {
 		backgroundImage: 'bg.png',
 		sendColor: 'White',
 		recieveColor: 'Green',
-		camButton: true
+		camButton: true,
+		animated:false
 	});
 
 	win.add(tf);
@@ -55,6 +56,9 @@ function SMSWindow() {
 			1000);
 		}
 	});
+//	tf.addEventListener('click', function(e){
+//						alert(e);
+//						});
 	tf.addEventListener('camButtonClicked', function(e) {
 		var options = Ti.UI.createOptionDialog({
 			options: ['Photo Gallery', 'Cancel'],
@@ -70,11 +74,20 @@ function SMSWindow() {
 												
 						// uncomment to set a specific width, in this case 100
 												
-						//var image = Ti.UI.createImageView({image:event.media});
-						//image.width = 100;
-						//image.height = (100/event.media.width)*event.media.height
-						// tf.sendMessage(image.toImage());
-						tf.sendMessage(event.media);
+						var image = Ti.UI.createImageView({image:event.media});
+//						image.width = 100;
+//						image.height = (100/event.media.width)*event.media.height
+						tf.sendMessage(image);
+						tf.sendMessage(image.toBlob());
+						tf.sendMessage(image.toImage());
+							
+						//						tf.sendMessage(event.media);
+						//						tf.sendMessage(event.media);
+						//						tf.sendMessage(event.media);
+						//						tf.sendMessage(event.media);
+						//						tf.sendMessage(event.media);
+						//						tf.sendMessage(event.media);
+						//						tf.sendMessage(event.media);
 					},
 					mediaTypes: [Ti.Media.MEDIA_TYPE_PHOTO]
 				});
@@ -86,6 +99,22 @@ function SMSWindow() {
 
 	win.addEventListener('open', function() {
 		tf.recieveMessage('Type "exit" to exit');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.sendMessage('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan vestibulum nisl, at aliquam nisl mattis ut. Morbi auctor hendrerit consequat. In hac habitasse platea dictumst.');
+						 tf.animated = true;
 	});
 
 	return win;
@@ -148,7 +177,9 @@ function ng() {
 
 	mainWin.add(nav);
 	btn.addEventListener('click', function() {
-		var xx = SMSWindow();
+		var xx = Ti.UI.createWindow({
+			url: 'win.js'
+		});
 		nav.open(xx);
 		xx.addEventListener('close', function() {
 			nav.close(xx);
