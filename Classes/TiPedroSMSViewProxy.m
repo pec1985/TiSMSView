@@ -48,9 +48,15 @@
 											 selector:@selector(keyboardWillHide:) 
 												 name:UIKeyboardWillHideNotification 
 											   object:nil];	
+	[self retain];
 	[super viewDidAttach];
 }
 
+-(void)viewDidDetach
+{
+	[self autorelease];
+	[super viewDidDetach];
+}
 
 -(void)blur:(id)args
 {

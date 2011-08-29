@@ -15,10 +15,12 @@
 @synthesize sColor;
 @synthesize rColor;
 @synthesize animated;
+@synthesize selectedColor;
 
 -(void)dealloc
 {
 	RELEASE_TO_NIL(label);
+	// does this do anything???
 	for (int i = 0; i<[views count]; i++) {
 		id a = [views objectAtIndex:i];
 		RELEASE_TO_NIL(a);
@@ -47,6 +49,8 @@
 	[self performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
 
 	label = [[PESMSLabel alloc] init];
+	label.delegate = self;
+	
 	[self addSubview:label];
 	
 	if(text)
@@ -83,6 +87,13 @@
 	[self scrollRectToVisible: contentSize2 animated: self.animated];	
 }
 
+-(void)PESMSLabelClicked:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text
+{
+	if ([delegate respondsToSelector:@selector(label:withEvent:::)]) {
+		[delegate label:touches withEvent:event:image:text];
+	}		
+}
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	if ([delegate respondsToSelector:@selector(scrollViewClicked:withEvent:)]) {
@@ -99,6 +110,11 @@
     self.rColor = col;
 }
 
+-(void)selectedColor:(NSString *)col
+{
+	self.selectedColor = col;
+}
+
 -(void)backgroundColor:(UIColor *)col
 {
 	self.backgroundColor = col;
@@ -107,35 +123,34 @@
 -(void)recieveImage:(UIImage *)image
 {
 	if(!self.rColor)
-		self.rColor = @"Green";
-	[[self label:nil:image] position:@"Left":self.sColor];
+		self.rColor = @"White";
+	[[self label:nil:image] position:@"Left":self.rColor:self.selectedColor];
 	RELEASE_TO_NIL(label);
 }
 
 -(void)sendImage:(UIImage *)image
 {
 	if(!self.sColor)
-		self.sColor = @"White";
-	[[self label:nil:image] position:@"Right":self.sColor];
+		self.sColor = @"Green";
+	[[self label:nil:image] position:@"Right":self.sColor:self.selectedColor];
 	RELEASE_TO_NIL(label);
 }
-
 
 -(void)recieveMessage:(NSString *)text;
 {
     if(!self.rColor)
-        self.rColor = @"Green";
+        self.rColor = @"White";
     
-	[[self label:text:nil] position:@"Left":self.rColor];
+	[[self label:text:nil] position:@"Left":self.rColor:self.selectedColor];
 	RELEASE_TO_NIL(label);
 }
 
 -(void)sendMessage:(NSString *)text;
 {	
     if(!self.sColor)
-        self.sColor = @"White";
+        self.sColor = @"Green";
 	
-	[[self label:text:nil] position:@"Right":self.sColor];
+	[[self label:text:nil] position:@"Right":self.sColor:self.selectedColor];
 	RELEASE_TO_NIL(label);
 }
 

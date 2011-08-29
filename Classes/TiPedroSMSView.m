@@ -211,6 +211,18 @@
 	[self _blur];
 }
 
+-(void)label:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text
+{
+	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
+	if(text)
+		[tiEvent setObject:text forKey:@"text"];
+	if(image)
+	{
+		TiBlob *blob = [[[TiBlob alloc] initWithImage:image] autorelease];
+		[tiEvent setObject:blob forKey:@"image"];
+	}
+	[self.proxy fireEvent:@"messageClicked" withObject:tiEvent];
+}
 
 -(void)changeHeightOfScrollView
 {
@@ -279,6 +291,11 @@
 {
     [[self scrollView] performSelectorOnMainThread:@selector(recieveColor:) withObject:[TiUtils stringValue:col] waitUntilDone:YES];
 	
+}
+
+-(void)setSelectedColor_:(id)col
+{
+	[[self scrollView] performSelectorOnMainThread:@selector(selectedColor:) withObject:[TiUtils stringValue:col] waitUntilDone:YES];
 }
 
 -(void)setButtonTitle_:(id)title

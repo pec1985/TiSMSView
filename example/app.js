@@ -36,8 +36,9 @@ function SMSWindow() {
 	});
 	var tf = Ti.Pedro.createSMSView({
 		backgroundImage: 'bg.png',
-		sendColor: 'White',
-		recieveColor: 'Green',
+	//	sendColor: 'White',
+	//	recieveColor: 'Green',
+		selectedColor:'Purple',
 		camButton: true,
 		animated:false
 	});
@@ -59,6 +60,9 @@ function SMSWindow() {
 //	tf.addEventListener('click', function(e){
 //						alert(e);
 //						});
+	tf.addEventListener('messageClicked', function(e){
+		alert(e);
+	});
 	tf.addEventListener('camButtonClicked', function(e) {
 		var options = Ti.UI.createOptionDialog({
 			options: ['Photo Gallery', 'Cancel'],
@@ -77,12 +81,12 @@ function SMSWindow() {
 						var image = Ti.UI.createImageView({image:event.media});
 //						image.width = 100;
 //						image.height = (100/event.media.width)*event.media.height
-						tf.sendMessage(image);
-						tf.sendMessage(image.toBlob());
-						tf.sendMessage(image.toImage());
+//						tf.sendMessage(image);
+//						tf.sendMessage(image.toBlob());
+//						tf.sendMessage(image.toImage());
 							
-						//						tf.sendMessage(event.media);
-						//						tf.sendMessage(event.media);
+												tf.sendMessage(event.media);
+												tf.recieveMessage(event.media);
 						//						tf.sendMessage(event.media);
 						//						tf.sendMessage(event.media);
 						//						tf.sendMessage(event.media);

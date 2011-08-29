@@ -15,6 +15,10 @@
 @synthesize sColor;
 @synthesize isText;
 @synthesize isImage;
+@synthesize thisPos;
+@synthesize thisColor;
+@synthesize selectedColor;
+@synthesize delegate;
 
 -(void)dealloc
 {
@@ -124,20 +128,30 @@
 	return url;
 }
 
--(void)position:(NSString *)pos:(NSString *)color
+-(NSString *)pathOfImage:(NSString *)pos:(NSString *)color
+{
+	NSString *imgName = [[[[@"smsview.bundle/"
+							stringByAppendingString:color ]
+						   stringByAppendingString:@"Balloon"]
+						  stringByAppendingString:pos]
+						 stringByAppendingString:@".png" ];
+	return [self resourcesDir:imgName];
+}
+
+-(void)position:(NSString *)pos:(NSString *)color:(NSString *)selCol
 {
 	if([pos isEqualToString:@""] || !pos)
 		pos = @"Left";
 	if([color isEqualToString:@""] || !color)
 		color = @"Green";
+	if([selCol isEqualToString:@""] || !selCol)
+		selCol = @"Blue";
 	
-	NSString *imgName = [[[[@"smsview.bundle/"
-							stringByAppendingString:color ]
-							stringByAppendingString:@"Balloon"]
-							stringByAppendingString:pos]
-							stringByAppendingString:@".png" ];
+	self.thisColor = color;
+	self.thisPos = pos;
+	self.selectedColor = selCol;
 	
-	imgName = [self resourcesDir:imgName];
+	NSString *imgName = [self pathOfImage:pos :color];
 	
 	if([pos isEqualToString:@"Left"])
 	{
@@ -174,18 +188,45 @@
 
 }
 
+-(void)resetImage
+{
+	self.image = [[UIImage imageWithContentsOfFile:[self pathOfImage:self.thisPos:self.thisColor]] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	[self resetImage];
+}
+
+-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	[self resetImage];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	[self resetImage];
+	id whatever;
+	if ([delegate respondsToSelector:@selector(PESMSLabelClicked:withEvent:::)])
+	{
+		if(self.isText)
+		{
+			whatever = [[self label] text];
+			[delegate PESMSLabelClicked:touches withEvent:event:nil:whatever];
+		}
+		if(self.isImage)
+		{
+			whatever = [[self innerImage:nil] image];
+			[delegate PESMSLabelClicked:touches withEvent:event:whatever:nil];
+		}
+	}		
+}
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	id whatever;
-	if(self.isText)
-	{
-		whatever = [[self label] text];
-	}
-	if(isImage)
-	{
-		whatever = [[self innerImage:nil] image];
-	}
-	NSLog(@"clicked on: %@",whatever);
+	NSString *imgName = [self pathOfImage:self.thisPos:self.selectedColor];
+	self.image = [[UIImage imageWithContentsOfFile:imgName] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
+
 }
 
 @end

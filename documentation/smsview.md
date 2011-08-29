@@ -14,6 +14,17 @@ displays a message on the right side of the scrollView
 
 displays a message on the left side of the scrollView
 
+### loadMessages( array )
+
+Loads messages from an array
+
+Ex: loadMessages(
+		[
+			{send:'Hello'},
+			{recieve:'World'}
+		]
+	);
+
 ### blur()
 void
 
@@ -38,7 +49,7 @@ Color of the "send" message balloon, these are the options:
 
 - 'Blue'
 - 'Purple'
-- 'Green'
+- 'Green' -- Default
 - 'Gray'
 - 'White'
 
@@ -49,6 +60,18 @@ String
 Color of the "recieve" message balloon, these are the options:
 
 - 'Blue'
+- 'Purple'
+- 'Green'
+- 'Gray'
+- 'White' -- Default
+
+### selectedColor
+
+String
+
+Color of the "recieve" message balloon, these are the options:
+
+- 'Blue' -- Default
 - 'Purple'
 - 'Green'
 - 'Gray'
@@ -122,6 +145,12 @@ Fires when the "send" button is clicked
 ### change
 
 Fires when the value of the text area changed
+
+### messageClicked
+
+Fires when a message has been clicked.
+
+Returns either an image or text
 
 
 
