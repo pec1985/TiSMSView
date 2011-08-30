@@ -15,10 +15,12 @@
 @synthesize sColor;
 @synthesize isText;
 @synthesize isImage;
+@synthesize isView;
 @synthesize thisPos;
 @synthesize thisColor;
 @synthesize selectedColor;
 @synthesize delegate;
+@synthesize innerView;
 
 -(void)dealloc
 {
@@ -26,6 +28,8 @@
 		RELEASE_TO_NIL(label);
 	if(self.isImage)
 		RELEASE_TO_NIL(innerImage);
+	if(self.isView)
+		RELEASE_TO_NIL(innerView);
 	[super dealloc];
 }
 
@@ -90,6 +94,22 @@
 	[[self innerImage:nil] setFrame:b];
 }
 
+-(void)setUpInnerImageViewSize
+{
+	CGRect a = self.innerView.frame;
+	a.size.width +=25;
+	a.size.height +=20;
+	a.origin.y = 10;
+	a.origin.x = 10;
+	self.frame = a;
+	
+	CGRect b = self.innerView.frame;
+	b.origin.y = 8;	
+	b.origin.x = 10;
+	
+	[self.innerView setFrame:b];
+}
+
 -(BOOL)isUserInteractionEnabled
 {
 	return YES;	
@@ -97,12 +117,10 @@
 
 -(void)addText:(NSString *)text
 {
-	
 	[[self label] performSelectorOnMainThread : @selector(setText:) withObject:text waitUntilDone:YES];
 	[self addSubview:[self label]];
 	[[self label] sizeToFit];
 	[self setUpTextImageSize];
-	
 }
 
 -(void)addImage:(UIImage *)image
@@ -110,6 +128,19 @@
 	[self addSubview:[self innerImage:image]];
 	[[self innerImage:nil] sizeToFit];
 	[self setUpInnerImageImageSize];
+}
+
+-(void)addImageView:(UIView *)view
+{
+	self.isView = YES;
+	self.innerView = [[UIView alloc] init];
+	self.innerView = view;
+	CGRect a = view.frame;
+	a.origin.x = 0;
+	a.origin.y = 0;
+	[view setFrame:a];
+	[self performSelectorOnMainThread:@selector(addSubview:) withObject:view waitUntilDone:YES];
+	[self setUpInnerImageViewSize];
 }
 
 -(NSString*)getNormalizedPath:(NSString*)source
@@ -166,6 +197,12 @@
 			CGRect a = [self innerImage:nil].frame;
 			a.origin.x +=5;
 			[[self innerImage:nil] setFrame:a];
+		}
+		if(self.isView)
+		{
+			CGRect a = self.innerView.frame;
+			a.origin.x +=5;
+			[self.innerView setFrame:a];
 		}
 		
 		CGRect b = self.frame;

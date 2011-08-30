@@ -82,21 +82,6 @@
 		image = [blob image];
 		
 	}
-/*	else if (image == nil) 
-	{
-		if ([arg isKindOfClass:[NSString class]])
-		{
-			NSLog(@"-=-=-= NSString -=--=-");
-		}
-		if ([arg isKindOfClass:[NSURL class]])
-		{
-			NSLog(@"-=-=-= NSURL -=--=-");
-		}
-		
-	} else {
-		image = [TiUtils image:arg proxy:self];
-	}
-*/
 	else
 	{
 		NSLog(@"[WARN] The image MUST be a blob.");
@@ -138,8 +123,13 @@
 	id arg = [args objectAtIndex:0];
 	if([arg isKindOfClass:[NSString class]])
 		[ourView sendMessage:arg];
+	else if ([arg isKindOfClass:[TiViewProxy class]])
+	{
+		TiViewProxy *a = arg;
+		[ourView sendImageView:a.view];
+	}
 	else
-		[ourView sendImage:[self returnImage:arg]];
+		 [ourView sendImage:[self returnImage:arg]];
 }
 
 -(void)recieveMessage:(id)args
@@ -150,6 +140,11 @@
 	
 	if([arg isKindOfClass:[NSString class]])
 		[ourView recieveMessage:arg];
+	else if ([arg isKindOfClass:[TiViewProxy class]])
+	{
+		TiViewProxy *a = arg;
+		[ourView sendImageView:a.view];
+	}
 	else
 		[ourView recieveImage:[self returnImage:arg]];
 }

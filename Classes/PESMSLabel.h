@@ -20,6 +20,7 @@
 	NSObject <PESMSLabelDelegate> *delegate;
 	UILabel *label;
 	UIImageView *innerImage;
+	UIView *innerView;
 }
 
 @property(nonatomic, retain)NSString *sColor;
@@ -27,13 +28,16 @@
 @property(nonatomic, retain)NSString *thisPos;
 @property(nonatomic, retain)NSString *thisColor;
 @property(nonatomic, retain)NSString *selectedColor;
+@property(nonatomic, retain)UIView *innerView;
 @property(nonatomic)BOOL isImage;
 @property(nonatomic)BOOL isText;
+@property(nonatomic)BOOL isView;
 @property(assign) NSObject <PESMSLabelDelegate> *delegate;
 
 
 -(void)addImage:(UIImage *)image;
 -(void)addText:(NSString *)text;
 -(void)position:(NSString *)pos:(NSString *)color:(NSString *)selCol;
+-(void)addImageView:(UIView *)view;
 
 @end

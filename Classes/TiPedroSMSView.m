@@ -151,29 +151,46 @@
 
 -(void)sendImage:(UIImage *)image
 {
-	[[self scrollView] performSelectorOnMainThread:@selector(sendImage:) withObject:image waitUntilDone:YES];
-	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
+	ENSURE_UI_THREAD(sendImage, image);
+	[[self scrollView] sendImage:image];
+	[[self scrollView] reloadContentSize];
 }
 -(void)recieveImage:(UIImage *)image
 {
-	[[self scrollView] performSelectorOnMainThread:@selector(recieveImage:) withObject:image waitUntilDone:YES];
-	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
+	ENSURE_UI_THREAD(recieveImage, image);
+	[[self scrollView] recieveImage:image];
+	[[self scrollView] reloadContentSize];
+}
+
+-(void)sendImageView:(UIView *)view
+{
+	ENSURE_UI_THREAD(sendImageView, view);
+	[[self scrollView] sendImageView:view];
+	[[self scrollView] reloadContentSize];
+}
+-(void)recieveImageView:(UIView *)view
+{
+	ENSURE_UI_THREAD(recieveImageView, view);
+	[[self scrollView] recieveImageView:view];
+	[[self scrollView] reloadContentSize];
 }
 
 -(void)sendMessage:(NSString *)msg
 {
+	ENSURE_UI_THREAD(sendMessage,msg);
 	if([msg isEqualToString:@""])
 		return;
-	[[self scrollView] performSelectorOnMainThread:@selector(sendMessage:) withObject:msg waitUntilDone:YES];
-	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
+	[[self scrollView] sendMessage:msg];
+	[[self scrollView] reloadContentSize];
 }
 
 -(void)recieveMessage:(NSString *)msg
 {
+	ENSURE_UI_THREAD(recieveMessage, msg);
 	if([msg isEqualToString:@""])
 		return;
-	[[self scrollView] performSelectorOnMainThread:@selector(recieveMessage:) withObject:msg waitUntilDone:YES];
-	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
+	[[self scrollView] recieveMessage:msg];
+	[[self scrollView] reloadContentSize];
 }
 
 -(void)empty

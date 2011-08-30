@@ -32,8 +32,10 @@
     return self;
 }
 
--(PESMSLabel *)label:(NSString *)text:(UIImage *)image
+-(PESMSLabel *)label:(NSString *)text:(UIImage *)image:(UIView *)view
 {
+	ENSURE_UI_THREAD_WITH_OBJS(label,text,image,view);
+	
 	[self performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
 
 	label = [[PESMSLabel alloc] init];
@@ -45,6 +47,8 @@
 		[label addText:text];
 	if(image)
 		[label addImage:image];
+	if(view)
+		[label addImageView:view];
 	
 	CGRect frame = label.frame;
 	frame.origin.y += labelsPosition.origin.y;	
@@ -111,7 +115,7 @@
 {
 	if(!self.rColor)
 		self.rColor = @"White";
-	[[self label:nil:image] position:@"Left":self.rColor:self.selectedColor];
+	[[self label:nil:image:nil] position:@"Left":self.rColor:self.selectedColor];
 	RELEASE_TO_NIL(label);
 }
 
@@ -119,7 +123,23 @@
 {
 	if(!self.sColor)
 		self.sColor = @"Green";
-	[[self label:nil:image] position:@"Right":self.sColor:self.selectedColor];
+	[[self label:nil:image:nil] position:@"Right":self.sColor:self.selectedColor];
+	RELEASE_TO_NIL(label);
+}
+
+-(void)recieveImageView:(UIView *)view
+{
+	if(!self.rColor)
+		self.rColor = @"White";
+	[[self label:nil:nil:view] position:@"Left":self.rColor:self.selectedColor];
+	RELEASE_TO_NIL(label);
+}
+
+-(void)sendImageView:(UIView *)view
+{
+	if(!self.sColor)
+		self.sColor = @"Green";
+	[[self label:nil:nil:view] position:@"Right":self.sColor:self.selectedColor];
 	RELEASE_TO_NIL(label);
 }
 
@@ -128,7 +148,7 @@
     if(!self.rColor)
         self.rColor = @"White";
     
-	[[self label:text:nil] position:@"Left":self.rColor:self.selectedColor];
+	[[self label:text:nil:nil] position:@"Left":self.rColor:self.selectedColor];
 	RELEASE_TO_NIL(label);
 }
 
@@ -137,7 +157,7 @@
     if(!self.sColor)
         self.sColor = @"Green";
 	
-	[[self label:text:nil] position:@"Right":self.sColor:self.selectedColor];
+	[[self label:text:nil:nil] position:@"Right":self.sColor:self.selectedColor];
 	RELEASE_TO_NIL(label);
 }
 

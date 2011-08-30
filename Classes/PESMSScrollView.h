@@ -31,10 +31,12 @@
 @property(nonatomic, retain)NSString *selectedColor;
 @property(nonatomic)BOOL animated;
 
--(void)sendMessage:(NSString *)text;;
--(void)recieveMessage:(NSString *)text;;
--(void)sendImage:(UIImage *)image;;
--(void)recieveImage:(UIImage *)image;;
+-(void)sendMessage:(NSString *)text;
+-(void)recieveMessage:(NSString *)text;
+-(void)sendImageView:(UIView *)view;
+-(void)recieveImageView:(UIView *)view;
+-(void)sendImage:(UIImage *)image;
+-(void)recieveImage:(UIImage *)image;
 -(void)reloadContentSize;
 -(void)backgroundColor:(UIColor *)col;
 -(void)sendColor:(NSString *)col;
