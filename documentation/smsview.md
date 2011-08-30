@@ -18,16 +18,15 @@ displays a message on the left side of the scrollView
 
 Loads messages from an array
 
-Ex: loadMessages(
+Ex:
+```
+loadMessages(
 		[
-		
 			{send:'Hello'},
-			
 			{recieve:'World'}
-			
 		]
 	);
-
+```
 ### blur()
 void
 
