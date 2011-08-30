@@ -7,10 +7,10 @@ Displays an SMS-like view with the text area, scrollable view, and the message "
 ----
 ## Methods
 
-### sendMessage( string )
+### sendMessage( string or blob )
 
 displays a message on the right side of the scrollView
-### recieveMessage( string )
+### recieveMessage( string or blob )
 
 displays a message on the left side of the scrollView
 
@@ -20,8 +20,11 @@ Loads messages from an array
 
 Ex: loadMessages(
 		[
+		
 			{send:'Hello'},
+			
 			{recieve:'World'}
+			
 		]
 	);
 
