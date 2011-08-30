@@ -34,6 +34,11 @@ blurs the text area and brings the keyboard down
 
 focuses the text area and brings the keyboard up
 
+### empty()
+
+void
+
+empties the view, clears all messages
 ----
 ## Properties
 
@@ -151,6 +156,11 @@ Fires when the value of the text area changed
 Fires when a message has been clicked.
 
 Returns either an image or text
+
+### camButtonClicked
+
+Fires when a the camera button has been clicked.
+
 
 
 

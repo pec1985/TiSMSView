@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 1.9
+version: 2.0
 description: SMS-like view
 author: Pedro Enrique
 license: Apache 2

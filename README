@@ -17,7 +17,7 @@ Register your module with your application by editing `tiapp.xml` and adding you
 Example:
 
 <modules>
-	<module version="1.0">ti.pedro</module>
+	<module version="2.0">ti.pedro</module>
 </modules>
 
 When you run your project, the compiler will know automatically compile in your module
