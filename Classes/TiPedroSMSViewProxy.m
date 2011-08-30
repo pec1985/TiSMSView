@@ -126,6 +126,11 @@
 	return image;
 }
 
+-(void)empty:(id)args
+{
+	[ourView empty];
+}
+
 -(void)sendMessage:(id)args
 {
 	ENSURE_UI_THREAD(sendMessage,args);

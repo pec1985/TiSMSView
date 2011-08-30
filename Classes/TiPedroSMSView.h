@@ -34,4 +34,6 @@
 -(void)recieveMessage:(NSString *)msg;
 -(void)_blur;
 -(void)_focus;
+-(void)empty;
+
 @end

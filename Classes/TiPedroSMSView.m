@@ -176,6 +176,10 @@
 	[[self scrollView] performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
 }
 
+-(void)empty
+{
+	[[self scrollView] empty];
+}
 
 #pragma mark Event listeners
 

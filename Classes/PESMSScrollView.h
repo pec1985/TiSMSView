@@ -22,7 +22,6 @@
 	UILabel *sentLabel;
 	UILabel *recieveLabel;
 	PESMSLabel *label;
-	NSMutableArray *views;
 }
 
 @property(nonatomic, assign) id<PESMSScrollViewDelegate>  delegate;
@@ -42,6 +41,6 @@
 -(void)recieveColor:(NSString *)col;
 -(void)animate:(BOOL)arg;
 -(void)selectedColor:(NSString *)col;
-
+-(void)empty;
 
 @end

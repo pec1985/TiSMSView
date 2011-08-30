@@ -20,12 +20,6 @@
 -(void)dealloc
 {
 	RELEASE_TO_NIL(label);
-	// does this do anything???
-	for (int i = 0; i<[views count]; i++) {
-		id a = [views objectAtIndex:i];
-		RELEASE_TO_NIL(a);
-	}
-	RELEASE_TO_NIL(views);
 	[super dealloc];
 }
 
@@ -38,12 +32,6 @@
     return self;
 }
 
--(NSMutableArray *)views
-{
-	if(!views)
-		views = [[NSMutableArray alloc] init];
-	return views;
-}
 -(PESMSLabel *)label:(NSString *)text:(UIImage *)image
 {
 	[self performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
@@ -65,7 +53,6 @@
 	CGRect a = self.labelsPosition;
 	a.origin.y = frame.origin.y+frame.size.height;
 	self.labelsPosition = a;
-	[views addObject:label];
 
 	return label;
 }
@@ -157,6 +144,15 @@
 -(void)animate:(BOOL)arg
 {
 	self.animated = arg;
+}
+
+-(void)empty
+{
+	ENSURE_UI_THREAD_0_ARGS
+	[[self subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+	self.labelsPosition = self.frame;
+	[self reloadContentSize];
+	[self setNeedsDisplay];
 }
 
 @end
