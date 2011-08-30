@@ -15,12 +15,11 @@ var win = Ti.UI.createWindow({
 
 var textArea = Ti.Pedro.createSMSView({
 	backgroundColor: '#b7d4fa',
-	// sendColor: 'Blue',		// <--- Defaults to "Blue"
-	// recieveColor: 'White',	// <--- Defaults to "White"
 	// sendColor: 'Green',		// <--- Defaults to "Green"
 	// recieveColor: 'White',	// <--- Defaults to "White"
-	// editable: true,			// <--- Defautls to true, do no change it
-	// animated:false,			// <--- Defaults to true
+	// selectedColor: 'Blue',	// <--- Defaults to "Blue"
+	// editable: true,		// <--- Defautls to true, do no change it
+	// animated:false,		// <--- Defaults to true
 	// buttonTitle:'Somethine',	// <--- Defaults to "Send"
 	// font:{fontSize:12...},	// <--- Defaults to... can't remember
 	// autocorrect: false,		// <--- Defaults to false
