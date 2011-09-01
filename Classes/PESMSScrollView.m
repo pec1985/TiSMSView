@@ -79,10 +79,10 @@
 	[self scrollRectToVisible: contentSize2 animated: self.animated];	
 }
 
--(void)PESMSLabelClicked:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text
+-(void)PESMSLabelClicked:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text: (UIView *)view
 {
-	if ([delegate respondsToSelector:@selector(label:withEvent:::)]) {
-		[delegate label:touches withEvent:event:image:text];
+	if ([delegate respondsToSelector:@selector(label:withEvent::::)]) {
+		[delegate label:touches withEvent:event:image:text:view];
 	}		
 }
 

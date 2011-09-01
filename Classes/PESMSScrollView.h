@@ -13,7 +13,7 @@
 @optional
 
 -(void)scrollViewClicked:(NSSet *)touches withEvent:(UIEvent *)event;
--(void)label:(NSSet *)touches withEvent:(UIEvent *)event:(UIImage *)image:(NSString *)text;
+-(void)label:(NSSet *)touches withEvent:(UIEvent *)event:(UIImage *)image:(NSString *)text:(UIView *)view;
 
 @end
 

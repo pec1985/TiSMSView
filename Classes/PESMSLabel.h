@@ -11,7 +11,7 @@
 @protocol PESMSLabelDelegate
 @optional
 
--(void)PESMSLabelClicked:(NSSet *)touches withEvent:(UIEvent *)event:(UIImage *)image:(NSString *)text;
+-(void)PESMSLabelClicked:(NSSet *)touches withEvent:(UIEvent *)event:(UIImage *)image:(NSString *)text:(UIView *)view;
 
 @end
 

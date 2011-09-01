@@ -233,8 +233,10 @@
 	[self _blur];
 }
 
--(void)label:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text
+-(void)label:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text :(UIView *)view
 {
+	
+	NSLog(@"121212121212");
 	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
 	if(text)
 		[tiEvent setObject:text forKey:@"text"];
@@ -242,6 +244,11 @@
 	{
 		TiBlob *blob = [[[TiBlob alloc] initWithImage:image] autorelease];
 		[tiEvent setObject:blob forKey:@"image"];
+	}
+	if(view)
+	{
+		TiUIView *a = (TiUIView *)view;
+		[tiEvent setObject:a.proxy forKey:@"view"];
 	}
 	[self.proxy fireEvent:@"messageClicked" withObject:tiEvent];
 }

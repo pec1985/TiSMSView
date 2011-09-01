@@ -163,7 +163,7 @@
 -(NSString *)pathOfImage:(NSString *)pos:(NSString *)color
 {
 	NSString *imgName = [[[[[self.folder
-							stringByAppendingString:@"smsview.bundle/"]
+							 stringByAppendingString:@"smsview.bundle/"]
 							stringByAppendingString:color ]
 						   stringByAppendingString:@"Balloon"]
 						  stringByAppendingString:pos]
@@ -246,17 +246,22 @@
 {
 	[self resetImage];
 	id whatever;
-	if ([delegate respondsToSelector:@selector(PESMSLabelClicked:withEvent:::)])
+	if ([delegate respondsToSelector:@selector(PESMSLabelClicked:withEvent::::)])
 	{
 		if(self.isText)
 		{
 			whatever = [[self label] text];
-			[delegate PESMSLabelClicked:touches withEvent:event:nil:whatever];
+			[delegate PESMSLabelClicked:touches withEvent:event:nil:whatever:nil];
 		}
 		if(self.isImage)
 		{
 			whatever = [[self innerImage:nil] image];
-			[delegate PESMSLabelClicked:touches withEvent:event:whatever:nil];
+			[delegate PESMSLabelClicked:touches withEvent:event:whatever:nil:nil];
+		}
+		if(self.isView)
+		{
+			whatever = (UIView *)self.innerView;
+			[delegate PESMSLabelClicked:touches withEvent:event:nil:nil:whatever];
 		}
 	}		
 }
