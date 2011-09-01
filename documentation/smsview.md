@@ -44,6 +44,12 @@ empties the view, clears all messages
 ----
 ## Properties
 
+### assets
+
+String
+
+Folder where the smsview.bundle lives
+
 ### backgroundImage
 String or blob
 

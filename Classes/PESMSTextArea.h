@@ -36,6 +36,7 @@
 
 @property(assign) NSObject<PESMSTextAreaDelegate> *delegate;
 @property(nonatomic, retain)NSString *text;
+@property(nonatomic, retain)NSString *folder;
 @property(nonatomic)BOOL hasCam;
 @property(nonatomic)BOOL firstTime;
 

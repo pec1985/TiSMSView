@@ -19,6 +19,7 @@
 }
 
 @property(nonatomic, retain)NSString *value;
+@property(nonatomic, retain)NSString *folder;
 @property(nonatomic)BOOL firstTime;
 @property(nonatomic)UIReturnKeyType returnType;
 @property(nonatomic, retain)WebFont* font;

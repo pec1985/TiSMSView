@@ -29,6 +29,7 @@
 @property(nonatomic, retain)NSString *sColor;
 @property(nonatomic, retain)NSString *rColor;
 @property(nonatomic, retain)NSString *selectedColor;
+@property(nonatomic, retain)NSString *folder;
 @property(nonatomic)BOOL animated;
 
 -(void)sendMessage:(NSString *)text;

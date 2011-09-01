@@ -29,6 +29,7 @@
 @property(nonatomic, retain)NSString *thisColor;
 @property(nonatomic, retain)NSString *selectedColor;
 @property(nonatomic, retain)UIView *innerView;
+@property(nonatomic, retain)NSString *folder;
 @property(nonatomic)BOOL isImage;
 @property(nonatomic)BOOL isText;
 @property(nonatomic)BOOL isView;

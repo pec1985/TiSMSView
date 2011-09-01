@@ -22,6 +22,7 @@
 @synthesize autocorrect;
 @synthesize beditable;
 @synthesize hasCam;
+@synthesize folder;
 
 -(void)dealloc
 {
@@ -277,7 +278,11 @@
 			[[[self textArea] textView] setTextAlignment:self.textAlignment];
 		if(self.value)
 			[[[self textArea] textView]setText:self.value];
-		
+		if(self.folder)
+		{
+			[[self textArea] setFolder:self.folder];
+			[[self scrollView] setFolder:self.folder];
+		}
 		[[self textArea] setCamera:self.hasCam];
 		[[[self textArea] textView] setEditable:self.beditable];
 		[[[self textArea] textView] setAutocorrectionType:self.autocorrect ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
@@ -379,5 +384,14 @@
 	[[self scrollView] animate:[TiUtils boolValue:args]];	
 }
 
+-(void)setAssets_:(id)args
+{
+	self.folder =  [[TiUtils stringValue:args] stringByAppendingString:@"/"];
+	if(!self.firstTime)
+	{
+		[[self textArea] setFolder:args];
+		[[self scrollView] setFolder:args];
+	}
+}
  
 @end

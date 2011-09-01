@@ -15,6 +15,7 @@ var win = Ti.UI.createWindow({
 
 var textArea = Ti.Pedro.createSMSView({
 	backgroundColor: '#b7d4fa',
+	assets:'assets',
 	// sendColor: 'Green',		// <--- Defaults to "Green"
 	// recieveColor: 'White',	// <--- Defaults to "White"
 	// selectedColor: 'Blue',	// <--- Defaults to "Blue"

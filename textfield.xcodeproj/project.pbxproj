@@ -64,7 +64,6 @@
 		AA747D9E0F9514B9006C5449 /* PecTf_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PecTf_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B671D17A1405C80400C5F651 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		B67EF5ED140227F8006B037B /* win.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = win.js; sourceTree = "<group>"; };
 		B6A51F9C13C158BA0016C96A /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		B6A5204C13C23C520016C96A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		B6A5205E13C3701A0016C96A /* TiPedroSMSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiPedroSMSView.h; path = Classes/TiPedroSMSView.h; sourceTree = "<group>"; };
@@ -173,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				B6A51F9C13C158BA0016C96A /* app.js */,
-				B67EF5ED140227F8006B037B /* win.js */,
 			);
 			path = example;
 			sourceTree = "<group>";

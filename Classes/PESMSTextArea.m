@@ -14,6 +14,7 @@
 @synthesize text;
 @synthesize hasCam;
 @synthesize firstTime;
+@synthesize folder;
 
 -(void)dealloc
 {
@@ -27,6 +28,7 @@
 
 -(NSString*)getNormalizedPath:(NSString*)source
 {
+	source = [self.folder stringByAppendingString:source];
 	if ([source hasPrefix:@"file:/"]) {
 		NSURL* url = [NSURL URLWithString:source];
 		return [url path];
@@ -242,7 +244,6 @@
 		[delegate heightOfTextViewDidChange:diff];
 	}	
 }
-
 
 
 @end

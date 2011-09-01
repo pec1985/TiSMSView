@@ -16,6 +16,7 @@
 @synthesize rColor;
 @synthesize animated;
 @synthesize selectedColor;
+@synthesize folder;
 
 -(void)dealloc
 {
@@ -34,11 +35,11 @@
 
 -(PESMSLabel *)label:(NSString *)text:(UIImage *)image:(UIView *)view
 {
-	ENSURE_UI_THREAD_WITH_OBJS(label,text,image,view);
 	
 	[self performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
 
 	label = [[PESMSLabel alloc] init];
+	[label setFolder:self.folder];
 	label.delegate = self;
 	
 	[self addSubview:label];

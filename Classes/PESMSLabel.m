@@ -21,6 +21,7 @@
 @synthesize selectedColor;
 @synthesize delegate;
 @synthesize innerView;
+@synthesize folder;
 
 -(void)dealloc
 {
@@ -161,7 +162,8 @@
 
 -(NSString *)pathOfImage:(NSString *)pos:(NSString *)color
 {
-	NSString *imgName = [[[[@"smsview.bundle/"
+	NSString *imgName = [[[[[self.folder
+							stringByAppendingString:@"smsview.bundle/"]
 							stringByAppendingString:color ]
 						   stringByAppendingString:@"Balloon"]
 						  stringByAppendingString:pos]
