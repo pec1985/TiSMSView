@@ -3,8 +3,12 @@
 ## Description
 
 Displays an SMS-like view with the text area, scrollable view, and the message "balloons"
+## Requirements
 
+- Minimun Ti SDK is 1.7.2
+- Move the smsview.bundle found in the "example" folder and put it your Resources dir
 ----
+
 ## Methods
 
 ### sendMessage( string or blob )
