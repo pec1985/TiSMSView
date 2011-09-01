@@ -129,7 +129,7 @@
 		[ourView sendImageView:a.view];
 	}
 	else
-		 [ourView sendImage:[self returnImage:arg]];
+		[ourView sendImage:[self returnImage:arg]];
 }
 
 -(void)recieveMessage:(id)args
@@ -143,7 +143,7 @@
 	else if ([arg isKindOfClass:[TiViewProxy class]])
 	{
 		TiViewProxy *a = arg;
-		[ourView sendImageView:a.view];
+		[ourView recieveImageView:a.view];
 	}
 	else
 		[ourView recieveImage:[self returnImage:arg]];
