@@ -89,14 +89,7 @@
 	{
 		camButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		camButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-		
-		[camButton setTitle:@"Send" forState:UIControlStateNormal];
-		
-		[camButton setTitleShadowColor:[UIColor colorWithWhite:0 alpha:0.4] forState:UIControlStateNormal];
-		camButton.titleLabel.shadowOffset = CGSizeMake (0.0, -1.0);
-		camButton.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
-		
-		[camButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+				
 		[camButton addTarget:self action:@selector(camButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 				
 		[camButton setBackgroundImage:[self resourcesImage:@"smsview.bundle/cameraButtonN.png"] forState:UIControlStateNormal];
