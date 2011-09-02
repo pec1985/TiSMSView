@@ -33,7 +33,7 @@
     return self;
 }
 
--(PESMSLabel *)label:(NSString *)text:(UIImage *)image:(UIView *)view
+-(PESMSLabel *)label:(NSString *)text:(UIImage *)image:(TiUIView *)view
 {
 	
 	[self performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
@@ -79,7 +79,7 @@
 	[self scrollRectToVisible: contentSize2 animated: self.animated];	
 }
 
--(void)PESMSLabelClicked:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text: (UIView *)view
+-(void)PESMSLabelClicked:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text: (TiProxy *)view
 {
 	if ([delegate respondsToSelector:@selector(label:withEvent::::)]) {
 		[delegate label:touches withEvent:event:image:text:view];
@@ -128,7 +128,7 @@
 	RELEASE_TO_NIL(label);
 }
 
--(void)recieveImageView:(UIView *)view
+-(void)recieveImageView:(TiUIView *)view
 {
 	if(!self.rColor)
 		self.rColor = @"White";
@@ -136,7 +136,7 @@
 	RELEASE_TO_NIL(label);
 }
 
--(void)sendImageView:(UIView *)view
+-(void)sendImageView:(TiUIView *)view
 {
 	if(!self.sColor)
 		self.sColor = @"Green";

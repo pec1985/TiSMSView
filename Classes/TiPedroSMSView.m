@@ -163,13 +163,13 @@
 	[[self scrollView] reloadContentSize];
 }
 
--(void)sendImageView:(UIView *)view
+-(void)sendImageView:(TiUIView *)view
 {
 	ENSURE_UI_THREAD(sendImageView, view);
 	[[self scrollView] sendImageView:view];
 	[[self scrollView] reloadContentSize];
 }
--(void)recieveImageView:(UIView *)view
+-(void)recieveImageView:(TiUIView *)view
 {
 	ENSURE_UI_THREAD(recieveImageView, view);
 	[[self scrollView] recieveImageView:view];
@@ -233,10 +233,9 @@
 	[self _blur];
 }
 
--(void)label:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text :(UIView *)view
+-(void)label:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text :(TiProxy *)view
 {
 	
-	NSLog(@"121212121212");
 	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
 	if(text)
 		[tiEvent setObject:text forKey:@"text"];
@@ -247,8 +246,7 @@
 	}
 	if(view)
 	{
-		TiUIView *a = (TiUIView *)view;
-		[tiEvent setObject:a.proxy forKey:@"view"];
+		[tiEvent setObject:view forKey:@"view"];
 	}
 	[self.proxy fireEvent:@"messageClicked" withObject:tiEvent];
 }

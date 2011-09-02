@@ -22,6 +22,7 @@
 @synthesize delegate;
 @synthesize innerView;
 @synthesize folder;
+@synthesize prox;
 
 -(void)dealloc
 {
@@ -131,10 +132,10 @@
 	[self setUpInnerImageImageSize];
 }
 
--(void)addImageView:(UIView *)view
+-(void)addImageView:(TiUIView *)view
 {
 	self.isView = YES;
-	self.innerView = [[UIView alloc] init];
+	self.prox = view.proxy;
 	self.innerView = view;
 	CGRect a = view.frame;
 	a.origin.x = 0;
@@ -260,7 +261,7 @@
 		}
 		if(self.isView)
 		{
-			whatever = (UIView *)self.innerView;
+			whatever = (TiProxy *)self.prox;
 			[delegate PESMSLabelClicked:touches withEvent:event:nil:nil:whatever];
 		}
 	}		

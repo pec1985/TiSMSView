@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "PESMSLabel.h"
+#import "TiUIView.h"
 
 @protocol PESMSScrollViewDelegate<UIScrollViewDelegate>
 @optional
 
 -(void)scrollViewClicked:(NSSet *)touches withEvent:(UIEvent *)event;
--(void)label:(NSSet *)touches withEvent:(UIEvent *)event:(UIImage *)image:(NSString *)text:(UIView *)view;
+-(void)label:(NSSet *)touches withEvent:(UIEvent *)event:(UIImage *)image:(NSString *)text:(TiProxy *)view;
 
 @end
 
@@ -34,8 +35,8 @@
 
 -(void)sendMessage:(NSString *)text;
 -(void)recieveMessage:(NSString *)text;
--(void)sendImageView:(UIView *)view;
--(void)recieveImageView:(UIView *)view;
+-(void)sendImageView:(TiUIView *)view;
+-(void)recieveImageView:(TiUIView *)view;
 -(void)sendImage:(UIImage *)image;
 -(void)recieveImage:(UIImage *)image;
 -(void)reloadContentSize;

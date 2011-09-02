@@ -29,8 +29,8 @@
 @property(nonatomic)BOOL beditable;
 @property(nonatomic)BOOL hasCam;
 
--(void)sendImageView:(UIView *)view;
--(void)recieveImageView:(UIView *)view;
+-(void)sendImageView:(TiUIView *)view;
+-(void)recieveImageView:(TiUIView *)view;
 -(void)sendImage:(UIImage *)image;
 -(void)recieveImage:(UIImage *)image;
 -(void)sendMessage:(NSString *)msg;

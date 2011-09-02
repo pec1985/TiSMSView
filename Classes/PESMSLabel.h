@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TiUIView.h"
+#import "TiProxy.h"
 
 @protocol PESMSLabelDelegate
 @optional
 
--(void)PESMSLabelClicked:(NSSet *)touches withEvent:(UIEvent *)event:(UIImage *)image:(NSString *)text:(UIView *)view;
+-(void)PESMSLabelClicked:(NSSet *)touches withEvent:(UIEvent *)event:(UIImage *)image:(NSString *)text:(TiProxy *)view;
 
 @end
 
@@ -30,6 +32,7 @@
 @property(nonatomic, retain)NSString *selectedColor;
 @property(nonatomic, retain)UIView *innerView;
 @property(nonatomic, retain)NSString *folder;
+@property(nonatomic, retain)TiProxy *prox;
 @property(nonatomic)BOOL isImage;
 @property(nonatomic)BOOL isText;
 @property(nonatomic)BOOL isView;
@@ -39,6 +42,6 @@
 -(void)addImage:(UIImage *)image;
 -(void)addText:(NSString *)text;
 -(void)position:(NSString *)pos:(NSString *)color:(NSString *)selCol;
--(void)addImageView:(UIView *)view;
+-(void)addImageView:(TiUIView *)view;
 
 @end
