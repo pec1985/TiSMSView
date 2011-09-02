@@ -134,15 +134,30 @@
 
 -(void)addImageView:(TiUIView *)view
 {
+	[view setUserInteractionEnabled:YES];
 	self.isView = YES;
 	self.prox = view.proxy;
+	[view setUserInteractionEnabled:YES];
 	self.innerView = view;
+	
+	//this is just a quick workaround, just for now
+	UITapGestureRecognizer *clickGestureRecognizer = [[UITapGestureRecognizer alloc]
+														  initWithTarget:self action:@selector(handleDoubleTap)];
+	clickGestureRecognizer.numberOfTapsRequired = 1; 
+	[self.innerView addGestureRecognizer:clickGestureRecognizer];
+	
 	CGRect a = view.frame;
 	a.origin.x = 0;
 	a.origin.y = 0;
 	[view setFrame:a];
 	[self performSelectorOnMainThread:@selector(addSubview:) withObject:view waitUntilDone:YES];
 	[self setUpInnerImageViewSize];
+}
+
+-(void)handleDoubleTap
+{
+	if ([delegate respondsToSelector:@selector(PESMSLabelClicked:withEvent::::)])
+		[delegate PESMSLabelClicked:nil withEvent:nil:nil:nil:self.prox];
 }
 
 -(NSString*)getNormalizedPath:(NSString*)source
