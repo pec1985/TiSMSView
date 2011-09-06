@@ -11,7 +11,7 @@
 #import "PESMSScrollView.h"
 
 
-@interface TiPedroSMSView : TiUIView<PESMSTextAreaDelegate, PESMSScrollViewDelegate> {
+@interface TiPedroSMSView : TiUIView<PESMSTextAreaDelegate> {
 	PESMSTextArea *textArea;
 	PESMSScrollView *scrollView;
 	BOOL deallocOnce;
@@ -20,6 +20,7 @@
 
 @property(nonatomic, retain)NSString *value;
 @property(nonatomic, retain)NSString *folder;
+@property(nonatomic, retain)NSString *buttonTitle;
 @property(nonatomic)BOOL firstTime;
 @property(nonatomic)UIReturnKeyType returnType;
 @property(nonatomic, retain)WebFont* font;

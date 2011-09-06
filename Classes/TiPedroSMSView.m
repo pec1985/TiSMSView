@@ -23,6 +23,7 @@
 @synthesize beditable;
 @synthesize hasCam;
 @synthesize folder;
+@synthesize buttonTitle;
 
 -(void)dealloc
 {
@@ -66,7 +67,10 @@
 		a.size.height = h - 40;
 		a.origin.y = 0;
 		scrollView = [[PESMSScrollView alloc] initWithFrame:a];
-		scrollView.delegate = self;
+		UITapGestureRecognizer *clickGestureRecognizer = [[UITapGestureRecognizer alloc]
+														  initWithTarget:self action:@selector(handleClick:)];
+		clickGestureRecognizer.numberOfTapsRequired = 1; 
+		[scrollView addGestureRecognizer:clickGestureRecognizer];
 	}
 	return scrollView;
 }
@@ -224,6 +228,8 @@
 	
 	self.value = text;
 }
+
+
 -(void)scrollViewClicked:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
@@ -232,6 +238,38 @@
 	
 	[self _blur];
 }
+
+
+-(void)handleClick:(UITapGestureRecognizer*)recognizer
+{
+	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
+
+	id view = recognizer.view;
+	CGPoint loc = [recognizer locationInView:view];
+	id subview = [view hitTest:loc withEvent:nil];
+	NSString *where;
+	if([subview isKindOfClass: [PESMSLabel class]])
+	{
+		PESMSLabel * a = subview;
+		where = @"message";
+		if(a.isText)
+			[tiEvent setObject:a.textValue forKey:@"text"];
+		if(a.isImage)
+		{
+			TiBlob *blob = [[[TiBlob alloc] initWithImage:a.imageValue] autorelease];
+			[tiEvent setObject:blob forKey:@"image"];
+
+		}
+		if(a.isView)
+			[tiEvent setObject:a.prox forKey:@"view"];
+	} else {
+		where = @"scrollView";
+		[tiEvent setObject:@"scrollView" forKey:@"scrollView"];
+	}
+	[tiEvent setObject:where forKey:@"where"];
+	[self.proxy fireEvent:@"messageClicked" withObject:tiEvent];
+}
+
 
 -(void)label:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text :(TiProxy *)view
 {
@@ -288,6 +326,8 @@
 			[[self textArea] setFolder:self.folder];
 			[[self scrollView] setFolder:self.folder];
 		}
+		if(self.buttonTitle)
+			[[self textArea] buttonTitle:self.buttonTitle];
 		[[self textArea] setCamera:self.hasCam];
 		[[[self textArea] textView] setEditable:self.beditable];
 		[[[self textArea] textView] setAutocorrectionType:self.autocorrect ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
@@ -331,8 +371,12 @@
 
 -(void)setButtonTitle_:(id)title
 {
-	[[self textArea] buttonTitle:[TiUtils stringValue:title]];
-	[[self scrollView] reloadContentSize];
+	self.buttonTitle = [TiUtils stringValue:title];
+	if(!self.firstTime)
+	{
+		[[self textArea] buttonTitle:[TiUtils stringValue:title]];
+		[[self scrollView] reloadContentSize];
+	}
 }
 
 -(void)setReturnKeyType_:(id)val

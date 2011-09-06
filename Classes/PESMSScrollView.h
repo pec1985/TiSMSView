@@ -10,22 +10,13 @@
 #import "PESMSLabel.h"
 #import "TiUIView.h"
 
-@protocol PESMSScrollViewDelegate<UIScrollViewDelegate>
-@optional
 
--(void)scrollViewClicked:(NSSet *)touches withEvent:(UIEvent *)event;
--(void)label:(NSSet *)touches withEvent:(UIEvent *)event:(UIImage *)image:(NSString *)text:(TiProxy *)view;
-
-@end
-
-@interface PESMSScrollView : UIScrollView<PESMSLabelDelegate> {
-	id<PESMSScrollViewDelegate> delegate;
+@interface PESMSScrollView : UIScrollView {
 	UILabel *sentLabel;
 	UILabel *recieveLabel;
 	PESMSLabel *label;
 }
 
-@property(nonatomic, assign) id<PESMSScrollViewDelegate>  delegate;
 @property(nonatomic) CGRect labelsPosition;
 @property(nonatomic, retain)NSString *sColor;
 @property(nonatomic, retain)NSString *rColor;

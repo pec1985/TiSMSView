@@ -19,9 +19,10 @@
 @synthesize thisPos;
 @synthesize thisColor;
 @synthesize selectedColor;
-@synthesize delegate;
+@synthesize textValue;
 @synthesize innerView;
 @synthesize folder;
+@synthesize imageValue;
 @synthesize prox;
 
 -(void)dealloc
@@ -119,6 +120,7 @@
 
 -(void)addText:(NSString *)text
 {
+	self.textValue = text;
 	[[self label] performSelectorOnMainThread : @selector(setText:) withObject:text waitUntilDone:YES];
 	[self addSubview:[self label]];
 	[[self label] sizeToFit];
@@ -127,6 +129,7 @@
 
 -(void)addImage:(UIImage *)image
 {
+	self.imageValue = image;
 	[self addSubview:[self innerImage:image]];
 	[[self innerImage:nil] sizeToFit];
 	[self setUpInnerImageImageSize];
@@ -134,17 +137,12 @@
 
 -(void)addImageView:(TiUIView *)view
 {
-	[view setUserInteractionEnabled:YES];
+	[view setUserInteractionEnabled:NO];
 	self.isView = YES;
 	self.prox = view.proxy;
-	[view setUserInteractionEnabled:YES];
 	self.innerView = view;
 	
 	//this is just a quick workaround, just for now
-	UITapGestureRecognizer *clickGestureRecognizer = [[UITapGestureRecognizer alloc]
-														  initWithTarget:self action:@selector(handleDoubleTap)];
-	clickGestureRecognizer.numberOfTapsRequired = 1; 
-	[self.innerView addGestureRecognizer:clickGestureRecognizer];
 	
 	CGRect a = view.frame;
 	a.origin.x = 0;
@@ -154,11 +152,6 @@
 	[self setUpInnerImageViewSize];
 }
 
--(void)handleDoubleTap
-{
-	if ([delegate respondsToSelector:@selector(PESMSLabelClicked:withEvent::::)])
-		[delegate PESMSLabelClicked:nil withEvent:nil:nil:nil:self.prox];
-}
 
 -(NSString*)getNormalizedPath:(NSString*)source
 {
@@ -260,26 +253,7 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[self resetImage];
-	id whatever;
-	if ([delegate respondsToSelector:@selector(PESMSLabelClicked:withEvent::::)])
-	{
-		if(self.isText)
-		{
-			whatever = [[self label] text];
-			[delegate PESMSLabelClicked:touches withEvent:event:nil:whatever:nil];
-		}
-		if(self.isImage)
-		{
-			whatever = [[self innerImage:nil] image];
-			[delegate PESMSLabelClicked:touches withEvent:event:whatever:nil:nil];
-		}
-		if(self.isView)
-		{
-			whatever = (TiProxy *)self.prox;
-			[delegate PESMSLabelClicked:touches withEvent:event:nil:nil:whatever];
-		}
-	}		
+	[self resetImage];		
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

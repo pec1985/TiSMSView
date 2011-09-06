@@ -40,7 +40,6 @@
 
 	label = [[PESMSLabel alloc] init];
 	[label setFolder:self.folder];
-	label.delegate = self;
 	
 	[self addSubview:label];
 	
@@ -77,20 +76,6 @@
 	CGRect contentSize2 = CGRectMake(0,0,self.frame.size.width, bottomOfContent);
 	
 	[self scrollRectToVisible: contentSize2 animated: self.animated];	
-}
-
--(void)PESMSLabelClicked:(NSSet *)touches withEvent:(UIEvent *)event :(UIImage *)image :(NSString *)text: (TiProxy *)view
-{
-	if ([delegate respondsToSelector:@selector(label:withEvent::::)]) {
-		[delegate label:touches withEvent:event:image:text:view];
-	}		
-}
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	if ([delegate respondsToSelector:@selector(scrollViewClicked:withEvent:)]) {
-		[delegate scrollViewClicked:touches withEvent:event];
-	}		
 }
 
 -(void)sendColor:(NSString *)col
