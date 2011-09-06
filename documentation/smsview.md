@@ -153,7 +153,11 @@ Return button of keyboard
 
 ### click
 
-Fires when the scroll view is clicked
+Fires when the scroll view is clicked. Returns the "image", "view", "text" or "scrollView" property where clicked.
+
+### messageClicked
+
+Identical as above.
 
 ### buttonClicked
 
@@ -162,12 +166,6 @@ Fires when the "send" button is clicked
 ### change
 
 Fires when the value of the text area changed
-
-### messageClicked
-
-Fires when a message has been clicked.
-
-Returns either an image or text
 
 ### camButtonClicked
 
