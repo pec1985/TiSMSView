@@ -41,7 +41,10 @@ empty.addEventListener('click', function(){
 	textArea.empty();
 });
 
-textArea.addEventListener('click', function(){
+textArea.addEventListener('click', function(e){
+	if(e.scrollView){
+		textArea.blur();
+	}
 	// fires when clicked on the scroll view
 	Ti.API.info('Clicked on the scrollview');
 });

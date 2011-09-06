@@ -230,16 +230,6 @@
 }
 
 
--(void)scrollViewClicked:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
-	
-	[self.proxy fireEvent:@"click" withObject:tiEvent];
-	
-	[self _blur];
-}
-
-
 -(void)handleClick:(UITapGestureRecognizer*)recognizer
 {
 	NSMutableDictionary *tiEvent = [NSMutableDictionary dictionary];
@@ -267,6 +257,7 @@
 		[tiEvent setObject:@"scrollView" forKey:@"scrollView"];
 	}
 	[tiEvent setObject:where forKey:@"where"];
+	[self.proxy fireEvent:@"click" withObject:tiEvent];
 	[self.proxy fireEvent:@"messageClicked" withObject:tiEvent];
 }
 
