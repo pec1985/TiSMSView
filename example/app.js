@@ -23,7 +23,7 @@ var textArea = Ti.Pedro.createSMSView({
 	// animated:false,		// <--- Defaults to true
 	// buttonTitle:'Somethine',	// <--- Defaults to "Send"
 	// font:{fontSize:12...},	// <--- Defaults to... can't remember
-	// autocorrect: false,		// <--- Defaults to false
+	// autocorrect: false,		// <--- Defaults to true
 	// textAlignment:'left',	// <--- Defaulst to left
 	// textColor: 'blue',		// <--- Defaults to "black"
 	// returnType: Ti.Pedro.RETURNKEY_DONE // <---- Defaults to Ti.Pedro.RETURNKEY_DEFAULT
