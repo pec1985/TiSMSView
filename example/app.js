@@ -21,7 +21,7 @@ var textArea = Ti.Pedro.createSMSView({
 	// selectedColor: 'Blue',	// <--- Defaults to "Blue"
 	// editable: true,		// <--- Defautls to true, do no change it
 	// animated:false,		// <--- Defaults to true
-	// buttonTitle:'Somethine',	// <--- Defaults to "Send"
+	buttonTitle:'Something',	// <--- Defaults to "Send"
 	// font:{fontSize:12...},	// <--- Defaults to... can't remember
 	// autocorrect: false,		// <--- Defaults to true
 	// textAlignment:'left',	// <--- Defaulst to left

@@ -151,6 +151,7 @@
 		[[self entryImageView]	setFrame: CGRectMake(40, 0, w-107, height)];
 		[[self camButton]		setFrame: CGRectMake(5, 7, 30, 30)];
 	}
+	[[self doneBtn].titleLabel setAdjustsFontSizeToFitWidth:YES];
 }
 
 -(void)setCamera:(BOOL)val
