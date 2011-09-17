@@ -15,6 +15,7 @@
 	UILabel *sentLabel;
 	UILabel *recieveLabel;
 	PESMSLabel *label;
+	NSMutableArray *allMessages;
 }
 
 @property(nonatomic) CGRect labelsPosition;
@@ -22,6 +23,7 @@
 @property(nonatomic, retain)NSString *rColor;
 @property(nonatomic, retain)NSString *selectedColor;
 @property(nonatomic, retain)NSString *folder;
+@property(nonatomic, retain)NSMutableArray *allMessages;
 @property(nonatomic)BOOL animated;
 
 -(void)sendMessage:(NSString *)text;

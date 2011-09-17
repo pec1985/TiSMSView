@@ -33,7 +33,32 @@
 		RELEASE_TO_NIL(innerImage);
 	if(self.isView)
 		RELEASE_TO_NIL(innerView);
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
+
 	[super dealloc];
+}
+
+-(id)init
+{
+	if(self = [super init])
+	{
+		[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
+	}
+	return self;
+}
+
+- (void)orientationChanged:(NSNotification *)note
+{
+	if([self.thisPos isEqualToString:@"Right"])
+	{
+		NSLog(@"%@",self.thisPos);
+		CGRect a = self.frame;
+		a.origin.x = (self.superview.frame.size.width-self.frame.size.width)-5;
+		[self setFrame:a];
+		[self setNeedsDisplay];
+
+	}
 }
 
 -(UIImageView *)innerImage:(UIImage *)image
@@ -72,7 +97,7 @@
 	a.size.width +=25;
 	a.size.height +=10;
 	a.origin.y = 10;
-	a.origin.x = 10;
+	a.origin.x = 5;
 	self.frame = a;
 	
 	CGRect b = [self label].frame;
@@ -226,7 +251,7 @@
 		self.image = [[UIImage imageWithContentsOfFile:imgName] stretchableImageWithLeftCapWidth:20 topCapHeight:14];
 		CGRect a = self.frame;
 		a.origin.x = (self.superview.frame.size.width-self.frame.size.width)-20;
-		a.size.width +=10;
+		a.size.width +=5;
 		[self setFrame:a];
 	}
 	else

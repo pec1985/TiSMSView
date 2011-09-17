@@ -17,10 +17,11 @@
 @synthesize animated;
 @synthesize selectedColor;
 @synthesize folder;
+@synthesize allMessages;
 
 -(void)dealloc
 {
-	RELEASE_TO_NIL(label);
+	RELEASE_TO_NIL(allMessages);
 	[super dealloc];
 }
 
@@ -29,6 +30,7 @@
     if (self) {
 		self.labelsPosition = self.frame;
 		self.animated = YES;
+		self.allMessages = [[NSMutableArray alloc] init];
 	}
     return self;
 }
@@ -38,7 +40,7 @@
 	
 	[self performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
 
-	label = [[PESMSLabel alloc] init];
+	label = [[[PESMSLabel alloc] init] autorelease];
 	[label setFolder:self.folder];
 	
 	[self addSubview:label];
@@ -57,7 +59,7 @@
 	CGRect a = self.labelsPosition;
 	a.origin.y = frame.origin.y+frame.size.height;
 	self.labelsPosition = a;
-
+	[self.allMessages addObject:label];
 	return label;
 }
 
@@ -159,6 +161,7 @@
 	self.labelsPosition = self.frame;
 	[self reloadContentSize];
 	[self setNeedsDisplay];
+	[self.allMessages removeAllObjects];
 }
 
 @end
