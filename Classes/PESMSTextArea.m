@@ -49,7 +49,7 @@
 		textView.minNumberOfLines = 1;
 		textView.maxNumberOfLines = 4;
 		textView.returnKeyType = UIReturnKeyDefault;
-		textView.font = [UIFont boldSystemFontOfSize:15.0f];
+		textView.font = [UIFont systemFontOfSize:15.0f];
 		textView.delegate = self;
 		[textView sizeToFit];
 	}
