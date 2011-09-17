@@ -60,11 +60,13 @@
 
 -(void)blur:(id)args
 {
+	ENSURE_UI_THREAD(blur, args);
 	[[self ourView] _blur];
 }
 
 -(void)focus:(id)args
 {
+	ENSURE_UI_THREAD(focus, args);
 	[[self ourView] _focus];
 }
 
@@ -113,6 +115,7 @@
 
 -(void)empty:(id)args
 {
+	ENSURE_UI_THREAD(empty, args);
 	[ourView empty];
 }
 
