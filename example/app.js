@@ -14,13 +14,13 @@ var win = Ti.UI.createWindow({
 });
 
 var textArea = Ti.Pedro.createSMSView({
-	backgroundColor: '#b7d4fa',
-	assets:'assets',			// <--- Defauls to nothing, smsview.bundle can be places in the resources dir
+	backgroundColor: '#b7d4fa',	// <--- Defaults to #dae1eb
+	assets:'assets',			// <--- Defauls to nothing, smsview.bundle can be places in the Resources dir
 	// sendColor: 'Green',		// <--- Defaults to "Green"
 	// recieveColor: 'White',	// <--- Defaults to "White"
 	// selectedColor: 'Blue',	// <--- Defaults to "Blue"
-	// editable: true,		// <--- Defautls to true, do no change it
-	// animated:false,		// <--- Defaults to true
+	// editable: true,			// <--- Defautls to true, do no change it
+	// animated:false,			// <--- Defaults to true
 	buttonTitle:'Something',	// <--- Defaults to "Send"
 	// font:{fontSize:12...},	// <--- Defaults to... can't remember
 	// autocorrect: false,		// <--- Defaults to true

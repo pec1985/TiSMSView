@@ -301,6 +301,8 @@
 		self.firstTime = YES;
 		[self addSubview: [self scrollView]];
 		[self addSubview: [self textArea]];
+		if(![self.proxy valueForUndefinedKey:@"backgroundColor"])
+		   self.backgroundColor = [[TiUtils colorValue:(id)@"#dae1eb"] _color];
 		
 		if(self.returnType)
 			[[[self textArea] textView] setReturnKeyType:self.returnType];
