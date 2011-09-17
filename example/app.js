@@ -10,7 +10,8 @@ var empty = Ti.UI.createButton({
 
 var win = Ti.UI.createWindow({
 	rightNavButton: recieve,
-	leftNavButton: empty
+	leftNavButton: empty,
+	orientationModes:[1,2,3,4]
 });
 
 var textArea = Ti.Pedro.createSMSView({

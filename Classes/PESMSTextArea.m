@@ -152,6 +152,9 @@
 		[[self camButton]		setFrame: CGRectMake(5, 7, 30, 30)];
 	}
 	[[self doneBtn].titleLabel setAdjustsFontSizeToFitWidth:YES];
+	
+	// still a little buggy here
+	[[self textView] setText:self.text];
 }
 
 -(void)setCamera:(BOOL)val
@@ -170,7 +173,9 @@
 		[self addSubview:[self imageView]];
 		[self addSubview:[self textView]];
 		[self addSubview:[self entryImageView]];
-		[self addSubview:[self doneBtn]];	
+		[self addSubview:[self doneBtn]];
+		[self addSubview:[self camButton]];
+
 		[self resize];
 	}
 }

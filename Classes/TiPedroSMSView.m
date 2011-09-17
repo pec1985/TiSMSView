@@ -77,14 +77,24 @@
 
 #pragma mark Keyboard stuff
 
+-(NSInteger)keyboardHeight:(NSNotification *)val
+{
+    // get keyboard size and location
+	NSDictionary* info = [val userInfo];
+	NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+	CGSize keyboardSize = [aValue CGRectValue].size;
+
+	 if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown)
+		return keyboardSize.height;
+	 else
+		 return keyboardSize.width;
+}
+
 //Code from Brett Schumann
 -(void) keyboardWillShow:(NSNotification *)note{
-    // get keyboard size and loctaion
-	CGRect keyboardBounds;
-    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
 	
 	// get the height since this is the main value that we need.
-	NSInteger kbSizeH = keyboardBounds.size.height;
+	NSInteger kbSizeH = [self keyboardHeight:note];
 	
 	// get a rect for the textView frame
 	CGRect containerFrame = [self textArea].frame;
@@ -108,14 +118,10 @@
 
 
 -(void) keyboardWillHide:(NSNotification *)note{
-    // get keyboard size and location
-	CGRect keyboardBounds;
-	
-    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
-	
+
 	// get the height since this is the main value that we need.
-	NSInteger kbSizeH = keyboardBounds.size.height;
-	
+	NSInteger kbSizeH = [self keyboardHeight:note];
+
 	// get a rect for the textView frame
 	CGRect containerFrame = [self textArea].frame;
 	containerFrame.origin.y += kbSizeH;
@@ -298,7 +304,7 @@
 	
 	if(self.firstTime)
 	{
-		self.firstTime = YES;
+		self.firstTime = NO;
 		[self addSubview: [self scrollView]];
 		[self addSubview: [self textArea]];
 		if(![self.proxy valueForUndefinedKey:@"backgroundColor"])
