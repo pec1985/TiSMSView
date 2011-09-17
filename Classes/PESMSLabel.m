@@ -24,6 +24,7 @@
 @synthesize folder;
 @synthesize imageValue;
 @synthesize prox;
+@synthesize index_;
 
 -(void)dealloc
 {

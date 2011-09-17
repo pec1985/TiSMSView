@@ -67,7 +67,7 @@
 		a.size.height = h - 40;
 		a.origin.y = 0;
 		scrollView = [[PESMSScrollView alloc] initWithFrame:a];
-		UITapGestureRecognizer *clickGestureRecognizer = [[UITapGestureRecognizer alloc]
+		clickGestureRecognizer = [[UITapGestureRecognizer alloc]
 														  initWithTarget:self action:@selector(handleClick:)];
 		clickGestureRecognizer.numberOfTapsRequired = 1; 
 		[scrollView addGestureRecognizer:clickGestureRecognizer];
@@ -258,6 +258,7 @@
 		}
 		if(a.isView)
 			[tiEvent setObject:a.prox forKey:@"view"];
+		[tiEvent setObject:[NSString stringWithFormat:@"%i",a.index_] forKey:@"index"];
 	} else {
 		where = @"scrollView";
 		[tiEvent setObject:@"scrollView" forKey:@"scrollView"];
@@ -265,6 +266,7 @@
 	[tiEvent setObject:where forKey:@"where"];
 	[self.proxy fireEvent:@"click" withObject:tiEvent];
 	[self.proxy fireEvent:@"messageClicked" withObject:tiEvent];
+	
 }
 
 

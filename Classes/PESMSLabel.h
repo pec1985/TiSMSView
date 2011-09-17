@@ -30,6 +30,7 @@
 @property(nonatomic)BOOL isImage;
 @property(nonatomic)BOOL isText;
 @property(nonatomic)BOOL isView;
+@property(nonatomic)int index_;
 
 
 -(void)addImage:(UIImage *)image;

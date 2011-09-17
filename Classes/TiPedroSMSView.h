@@ -16,6 +16,7 @@
 	PESMSScrollView *scrollView;
 	BOOL deallocOnce;
 	NSString *value;
+	UITapGestureRecognizer *clickGestureRecognizer;
 }
 
 @property(nonatomic, retain)NSString *value;

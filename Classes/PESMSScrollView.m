@@ -18,7 +18,7 @@
 @synthesize selectedColor;
 @synthesize folder;
 @synthesize allMessages;
-
+@synthesize numberOfMessage;
 -(void)dealloc
 {
 	RELEASE_TO_NIL(allMessages);
@@ -30,7 +30,9 @@
     if (self) {
 		self.labelsPosition = self.frame;
 		self.animated = YES;
-		self.allMessages = [[NSMutableArray alloc] init];
+		allMessages = [[NSMutableArray alloc] init];
+		self.allMessages = allMessages;
+		self.numberOfMessage = 0;
 	}
     return self;
 }
@@ -59,6 +61,7 @@
 	CGRect a = self.labelsPosition;
 	a.origin.y = frame.origin.y+frame.size.height;
 	self.labelsPosition = a;
+	[label setIndex_:self.numberOfMessage++];
 	[self.allMessages addObject:label];
 	return label;
 }
@@ -104,7 +107,6 @@
 	if(!self.rColor)
 		self.rColor = @"White";
 	[[self label:nil:image:nil] position:@"Left":self.rColor:self.selectedColor];
-	RELEASE_TO_NIL(label);
 }
 
 -(void)sendImage:(UIImage *)image
@@ -112,7 +114,6 @@
 	if(!self.sColor)
 		self.sColor = @"Green";
 	[[self label:nil:image:nil] position:@"Right":self.sColor:self.selectedColor];
-	RELEASE_TO_NIL(label);
 }
 
 -(void)recieveImageView:(TiUIView *)view
@@ -120,7 +121,6 @@
 	if(!self.rColor)
 		self.rColor = @"White";
 	[[self label:nil:nil:view] position:@"Left":self.rColor:self.selectedColor];
-	RELEASE_TO_NIL(label);
 }
 
 -(void)sendImageView:(TiUIView *)view
@@ -137,7 +137,6 @@
         self.rColor = @"White";
     
 	[[self label:text:nil:nil] position:@"Left":self.rColor:self.selectedColor];
-	RELEASE_TO_NIL(label);
 }
 
 -(void)sendMessage:(NSString *)text;
@@ -146,7 +145,6 @@
         self.sColor = @"Green";
 	
 	[[self label:text:nil:nil] position:@"Right":self.sColor:self.selectedColor];
-	RELEASE_TO_NIL(label);
 }
 
 -(void)animate:(BOOL)arg
@@ -160,8 +158,9 @@
 	[[self subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
 	self.labelsPosition = self.frame;
 	[self reloadContentSize];
-	[self setNeedsDisplay];
 	[self.allMessages removeAllObjects];
+	self.numberOfMessage = 0;
+	[self setNeedsDisplay];
 }
 
 @end

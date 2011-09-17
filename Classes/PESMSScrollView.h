@@ -25,6 +25,7 @@
 @property(nonatomic, retain)NSString *folder;
 @property(nonatomic, retain)NSMutableArray *allMessages;
 @property(nonatomic)BOOL animated;
+@property(nonatomic)int numberOfMessage;
 
 -(void)sendMessage:(NSString *)text;
 -(void)recieveMessage:(NSString *)text;

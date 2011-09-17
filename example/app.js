@@ -93,6 +93,7 @@ textArea.addEventListener('messageClicked', function(e){
 	if(e.image){
 		Ti.API.info('Image: '+e.image);
 	}
+	Ti.API.info('Index: ' + e.index);
 });
 
 win.open({modal:true,animated:false});
