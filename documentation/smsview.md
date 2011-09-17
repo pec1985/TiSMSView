@@ -45,6 +45,7 @@ focuses the text area and brings the keyboard up
 void
 
 empties the view, clears all messages
+
 ----
 ## Properties
 
@@ -52,7 +53,7 @@ empties the view, clears all messages
 
 String
 
-Folder where the smsview.bundle lives
+Folder where the "smsview.bundle" lives relative to the Resources directory. If nothing specified, then it has to places in the Resources itself.
 
 ### backgroundImage
 String or blob
