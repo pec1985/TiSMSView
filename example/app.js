@@ -1,7 +1,7 @@
 Titanium.Pedro = require('ti.pedro');
 
 var buttonBar = Ti.UI.createButtonBar({
-	labels:['Recieve','Empty','Get All'],
+	labels:['Recieve','Empty','Get All','Disable','Enable'],
 	backgroundColor:'green',
 	height:30
 });
@@ -42,6 +42,13 @@ buttonBar.addEventListener('click', function(e){
 		case 0:	textArea.recieveMessage('Hello World!'); break;
 		case 1: textArea.empty(); break;
 		case 2: Ti.API.info(textArea.getAllMessages()); break;
+		/*
+		the camera button dissable property:
+			case 3: textArea.camButtonDissabled = true; break;
+			case 4: textArea.setCamButtonDissabled(false); break;
+		*/
+		case 3: textArea.sendButtonDissabled = true; break;
+		case 4: textArea.setSendButtonDissabled(false); break;
 	}
 });
 

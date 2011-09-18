@@ -458,4 +458,15 @@
 {
 	[[self textArea] setMinLines:[TiUtils intValue:arg]];
 }
+
+-(void)setSendButtonDissabled_:(id)arg
+{
+	[[self textArea] dissableDoneButon:[TiUtils boolValue:arg]];
+}
+
+-(void)setCamButtonDissabled_:(id)arg
+{
+	[[self textArea] dissableCamButon:[TiUtils boolValue:arg]];
+}
+
 @end

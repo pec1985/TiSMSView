@@ -48,6 +48,8 @@
 -(void)becomeTextView;
 -(void)buttonTitle:(NSString *)title;
 -(void)setCamera:(BOOL)val;
+-(void)dissableDoneButon:(BOOL)arg;
+-(void)dissableCamButon:(BOOL)arg;
 - (HPGrowingTextView *)textView;
 
 @end

@@ -166,7 +166,22 @@
 	self.hasCam = val;
 }
 
+-(void)dissableDoneButon:(BOOL)arg
+{
+	if(arg == NO || !arg)
+		[[self doneBtn] setEnabled:YES];
+	if(arg == YES)
+		[[self doneBtn] setEnabled:NO];
+}
 
+-(void)dissableCamButon:(BOOL)arg
+{
+	if(arg == NO || !arg)
+		[[self camButton] setEnabled:YES];
+	if(arg == YES)
+		[[self camButton] setEnabled:NO];
+	
+}
 - (void)layoutSubviews
 {
 	if(!self.firstTime)
