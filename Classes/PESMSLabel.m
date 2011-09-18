@@ -53,7 +53,6 @@
 {
 	if([self.thisPos isEqualToString:@"Right"])
 	{
-		NSLog(@"%@",self.thisPos);
 		CGRect a = self.frame;
 		a.origin.x = (self.superview.frame.size.width-self.frame.size.width)-5;
 		[self setFrame:a];
@@ -251,7 +250,7 @@
 	{
 		self.image = [[UIImage imageWithContentsOfFile:imgName] stretchableImageWithLeftCapWidth:20 topCapHeight:14];
 		CGRect a = self.frame;
-		a.origin.x = (self.superview.frame.size.width-self.frame.size.width)-20;
+		a.origin.x = (self.superview.frame.size.width-self.frame.size.width)-8;
 		a.size.width +=5;
 		[self setFrame:a];
 	}
