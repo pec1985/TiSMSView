@@ -15,6 +15,8 @@
 @synthesize hasCam;
 @synthesize firstTime;
 @synthesize folder;
+@synthesize maxLines;
+@synthesize minLines;
 
 -(void)dealloc
 {
@@ -48,8 +50,8 @@
 	if(textView==nil)
 	{
 		textView = [[HPGrowingTextView alloc] init];
-		textView.minNumberOfLines = 1;
-		textView.maxNumberOfLines = 4;
+		textView.minNumberOfLines = self.minLines ? self.minLines : 1;
+		textView.maxNumberOfLines = self.maxLines ? self.maxLines : 4;
 		textView.returnKeyType = UIReturnKeyDefault;
 		textView.font = [UIFont systemFontOfSize:15.0f];
 		textView.delegate = self;

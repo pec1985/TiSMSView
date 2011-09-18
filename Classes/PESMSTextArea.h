@@ -39,6 +39,8 @@
 @property(nonatomic, retain)NSString *folder;
 @property(nonatomic)BOOL hasCam;
 @property(nonatomic)BOOL firstTime;
+@property(nonatomic)int maxLines;
+@property(nonatomic)int minLines;
 
 -(void)resize;
 -(void)resignTextView;

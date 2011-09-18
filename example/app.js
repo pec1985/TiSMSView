@@ -1,20 +1,23 @@
 Titanium.Pedro = require('ti.pedro');
 
-var recieve = Ti.UI.createButton({
-	title:'Recieve Message'
+var buttonBar = Ti.UI.createButtonBar({
+	labels:['Recieve','Empty','Get All'],
+	backgroundColor:'green',
+	height:30
 });
 
-var empty = Ti.UI.createButton({
-	title:'Empty'
-});
+var headerView = Ti.UI.createView();
+
+headerView.add(buttonBar);
 
 var win = Ti.UI.createWindow({
-	rightNavButton: recieve,
-	leftNavButton: empty,
+	titleControl:buttonBar,
 	orientationModes:[1,2,3,4]
 });
 
 var textArea = Ti.Pedro.createSMSView({
+	maxLines:6,
+	minLines:2,
 	backgroundColor: '#dae1eb',	// <--- Defaults to #dae1eb
 	assets: 'assets',			// <--- Defauls to nothing, smsview.bundle can be places in the Resources dir
 	// sendColor: 'Green',		// <--- Defaults to "Green"
@@ -34,12 +37,12 @@ var textArea = Ti.Pedro.createSMSView({
 
 win.add(textArea);
 
-recieve.addEventListener('click', function(){
-	textArea.recieveMessage('Hello World!');
-});
-
-empty.addEventListener('click', function(){
-	textArea.empty();
+buttonBar.addEventListener('click', function(e){
+	switch(e.index){
+		case 0:	textArea.recieveMessage('Hello World!'); break;
+		case 1: textArea.empty(); break;
+		case 2: Ti.API.info(textArea.getAllMessages()); break;
+	}
 });
 
 textArea.addEventListener('click', function(e){
@@ -97,3 +100,6 @@ textArea.addEventListener('messageClicked', function(e){
 });
 
 win.open({modal:true,animated:false});
+//textArea.animated = false;
+for(var i=0;i<100;i++) textArea.sendMessage('Hello World #'+i);
+textArea.animated = true;

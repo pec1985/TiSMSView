@@ -449,4 +449,13 @@
 	}
 }
  
+-(void)setMaxLines_:(id)arg
+{
+	[[self textArea] setMaxLines:[TiUtils intValue:arg]];	
+}
+
+-(void)setMinLines_:(id)arg
+{
+	[[self textArea] setMinLines:[TiUtils intValue:arg]];
+}
 @end
