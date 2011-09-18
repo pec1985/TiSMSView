@@ -16,6 +16,7 @@
 	UILabel *recieveLabel;
 	PESMSLabel *label;
 	NSMutableArray *allMessages;
+	NSMutableDictionary *tempDict;
 }
 
 @property(nonatomic) CGRect labelsPosition;
@@ -24,6 +25,7 @@
 @property(nonatomic, retain)NSString *selectedColor;
 @property(nonatomic, retain)NSString *folder;
 @property(nonatomic, retain)NSMutableArray *allMessages;
+@property(nonatomic, retain)NSMutableDictionary *tempDict;
 @property(nonatomic)BOOL animated;
 @property(nonatomic)int numberOfMessage;
 

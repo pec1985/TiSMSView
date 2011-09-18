@@ -40,5 +40,6 @@
 -(void)_blur;
 -(void)_focus;
 -(void)empty;
+-(NSArray *)getMessages;
 
 @end

@@ -170,6 +170,11 @@
 	}
 }
 
+-(NSArray *)getAllMessages:(id)arg
+{
+	return [ourView getMessages];
+}
+
 -(id)value
 {
 	return [[self ourView] value];

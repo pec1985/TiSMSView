@@ -209,6 +209,11 @@
 	[[self scrollView] empty];
 }
 
+-(NSArray *)getMessages
+{
+	return [[self scrollView] allMessages];
+}
+
 #pragma mark Event listeners
 
 -(void)textViewCamButtonPressed:(NSString *)text
