@@ -31,7 +31,7 @@
 @property(nonatomic)BOOL isText;
 @property(nonatomic)BOOL isView;
 @property(nonatomic)int index_;
-
+@property(nonatomic)UIDeviceOrientation orient;
 
 -(void)addImage:(UIImage *)image;
 -(void)addText:(NSString *)text;

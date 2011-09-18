@@ -25,6 +25,7 @@
 @synthesize imageValue;
 @synthesize prox;
 @synthesize index_;
+@synthesize orient;
 
 -(void)dealloc
 {
@@ -51,14 +52,23 @@
 
 - (void)orientationChanged:(NSNotification *)note
 {
-	if([self.thisPos isEqualToString:@"Right"])
+	UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+	
+	if (orientation == UIDeviceOrientationLandscapeLeft ||
+		orientation == UIDeviceOrientationLandscapeRight ||
+		orientation == UIDeviceOrientationPortrait ||
+		orientation == UIDeviceOrientationPortraitUpsideDown)
 	{
-		CGRect a = self.frame;
-		a.origin.x = (self.superview.frame.size.width-self.frame.size.width)-5;
-		[self setFrame:a];
-		[self setNeedsDisplay];
-
+		if(orientation != orient && [self.thisPos isEqualToString:@"Right"])
+		{
+			CGRect a = self.frame;
+			a.origin.x = (self.superview.frame.size.width-self.frame.size.width)-5;
+			[self setFrame:a];
+			[self setNeedsDisplay];
+			orient = orientation;
+		}
 	}
+
 }
 
 -(UIImageView *)innerImage:(UIImage *)image
