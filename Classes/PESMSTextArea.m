@@ -28,6 +28,8 @@
 
 -(NSString*)getNormalizedPath:(NSString*)source
 {
+	if(!self.folder)
+		self.folder = @"";
 	source = [self.folder stringByAppendingString:source];
 	if ([source hasPrefix:@"file:/"]) {
 		NSURL* url = [NSURL URLWithString:source];
