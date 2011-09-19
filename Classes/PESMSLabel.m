@@ -206,6 +206,8 @@
 
 -(NSString *)pathOfImage:(NSString *)pos:(NSString *)color
 {
+	if(!self.folder)
+		self.folder = @"";
 	NSString *imgName = [[[[[self.folder
 							 stringByAppendingString:@"smsview.bundle/"]
 							stringByAppendingString:color ]
