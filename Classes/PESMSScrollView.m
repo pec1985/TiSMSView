@@ -23,6 +23,7 @@
 
 -(void)dealloc
 {
+	RELEASE_TO_NIL(label);
 	RELEASE_TO_NIL(allMessages);
 	[super dealloc];
 }
@@ -46,7 +47,7 @@
 
 	[self performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
 
-	label = [[[PESMSLabel alloc] init] autorelease];
+	label = [[PESMSLabel alloc] init];
 	[label setFolder:self.folder];
 	
 	[self.tempDict removeAllObjects];
