@@ -28,7 +28,7 @@ MAKE_SYSTEM_PROP(RETURNKEY_EMERGENCY_CALL,UIReturnKeyEmergencyCall);
 // this is generated for your module, please do not change it
 -(id)moduleGUID
 {
-	return @"8e4fdf7d-b3e7-4ba4-b76a-697113808c33";
+	return @"701fef48-47e8-4eb3-bb02-d66bb240a8a9";
 }
 
 // this is generated for your module, please do not change it
