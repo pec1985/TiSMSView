@@ -16,7 +16,7 @@ Register your module with your application by editing `tiapp.xml` and adding you
 Example:
 
 <modules>
-	<module version="2.0">ti.pedro</module>
+	<module version="2.0">ti.smsview</module>
 </modules>
 
 When you run your project, the compiler will know automatically compile in your module
@@ -29,8 +29,8 @@ To use your module in code, you will need to require it.
 
 For example,
 
-	Titanium.Pedro = require('ti.pedro');
-	var smsView = Ti.Pedro.createSMSView();
+	Titanium.SMSView = require('ti.smsview');
+	var smsView = Ti.SMSView.createView();
 
 Take a look in the documentation folder for details
 
