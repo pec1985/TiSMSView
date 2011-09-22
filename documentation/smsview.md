@@ -1,13 +1,13 @@
-# Ti.Pedro.SMSView
+# Ti.SMSView.View
 
 ## Description
 
 Displays an SMS-like view with the text area, scrollable view, and the message "balloons"
+
 ## Requirements
 
 - Minimun Ti SDK is 1.7.2
 - Move the smsview.bundle found in the "example" folder and put it your Resources dir
-----
 
 ## Methods
 
@@ -31,8 +31,8 @@ loadMessages(
 		]
 	);
 ```
+
 ### blur()
-void
 
 blurs the text area and brings the keyboard down
 
@@ -42,23 +42,27 @@ focuses the text area and brings the keyboard up
 
 ### empty()
 
-void
-
 empties the view, clears all messages
 
-----
 ## Properties
 
 ### assets
 
 String
 
-Folder where the "smsview.bundle" lives relative to the Resources directory. If nothing specified, then it has to places in the Resources itself.
+Folder where the "smsview.bundle" lives relative to the Resources directory. If nothing specified, then it must to places in the Resources itself.
+
+NOTE: Feel free to modify the contents of the smsview.bundle (it's a folder)
 
 ### backgroundImage
 String or blob
 
 Backround image of the scroll view
+
+### backgroundColor
+String
+
+Backround color of the scroll view
 
 ### sendColor
 String
@@ -137,19 +141,18 @@ Constant
 
 Return button of keyboard
 
-- Ti.Pedro.RETURNKEY_DEFAULT
-- Ti.Pedro.RETURNKEY_GO
-- Ti.Pedro.RETURNKEY_GOOGLE
-- Ti.Pedro.RETURNKEY_JOIN
-- Ti.Pedro.RETURNKEY_NEXT
-- Ti.Pedro.RETURNKEY_ROUTE
-- Ti.Pedro.RETURNKEY_SEARCH
-- Ti.Pedro.RETURNKEY_SEND
-- Ti.Pedro.RETURNKEY_YAHOO
-- Ti.Pedro.RETURNKEY_DONE
-- Ti.Pedro.RETURNKEY_EMERGENCY_CALL
+- Ti.SMSView.RETURNKEY_DEFAULT
+- Ti.SMSView.RETURNKEY_GO
+- Ti.SMSView.RETURNKEY_GOOGLE
+- Ti.SMSView.RETURNKEY_JOIN
+- Ti.SMSView.RETURNKEY_NEXT
+- Ti.SMSView.RETURNKEY_ROUTE
+- Ti.SMSView.RETURNKEY_SEARCH
+- Ti.SMSView.RETURNKEY_SEND
+- Ti.SMSView.RETURNKEY_YAHOO
+- Ti.SMSView.RETURNKEY_DONE
+- Ti.SMSView.RETURNKEY_EMERGENCY_CALL
 
-----
 ## Events
 
 ### click
@@ -171,10 +174,3 @@ Fires when the value of the text area changed
 ### camButtonClicked
 
 Fires when a the camera button has been clicked.
-
-
-
-
-
-
-

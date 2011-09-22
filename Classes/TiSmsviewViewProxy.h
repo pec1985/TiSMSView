@@ -9,8 +9,8 @@
 #import "TiViewProxy.h"
 
 
-@interface TiPedroSMSViewProxy : TiViewProxy {
-	TiPedroSMSView *ourView;
+@interface TiSmsviewViewProxy : TiViewProxy {
+	TiSmsviewView *ourView;
 }
 
 @end

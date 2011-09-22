@@ -1,4 +1,20 @@
-Titanium.Pedro = require('ti.pedro');
+/*
+ Copyright 2011 Pedro Enrique
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
+Titanium.SMSView = require('ti.smsview');
 
 var buttonBar = Ti.UI.createButtonBar({
 	labels:['Recieve','Empty','Get All','Disable','Enable'],
@@ -11,13 +27,13 @@ var headerView = Ti.UI.createView();
 headerView.add(buttonBar);
 
 var win = Ti.UI.createWindow({
-	titleControl:buttonBar,
+	//titleControl:buttonBar,
 	orientationModes:[1,2,3,4]
 });
 
-var textArea = Ti.Pedro.createSMSView({
-	maxLines:6,
-	minLines:2,
+var textArea = Ti.SMSView.createView({
+	//maxLines:6,				// <--- Defaults to 4
+	//minLines:2,				// <--- Defaults to 1
 	backgroundColor: '#dae1eb',	// <--- Defaults to #dae1eb
 	assets: 'assets',			// <--- Defauls to nothing, smsview.bundle can be places in the Resources dir
 	// sendColor: 'Green',		// <--- Defaults to "Green"
@@ -25,12 +41,12 @@ var textArea = Ti.Pedro.createSMSView({
 	// selectedColor: 'Blue',	// <--- Defaults to "Blue"
 	// editable: true,			// <--- Defautls to true, do no change it
 	// animated: false,			// <--- Defaults to true
-	buttonTitle: 'Something',	// <--- Defaults to "Send"
+	// buttonTitle: 'Something',	// <--- Defaults to "Send"
 	// font: { fontSize: 12 ... },	// <--- Defaults to... can't remember
 	// autocorrect: false,		// <--- Defaults to true
 	// textAlignment: 'left',	// <--- Defaulst to left
 	// textColor: 'blue',		// <--- Defaults to "black"
-	// returnType: Ti.Pedro.RETURNKEY_DONE // <---- Defaults to Ti.Pedro.RETURNKEY_DEFAULT
+	returnType: Ti.SMSView.RETURNKEY_DONE, // <---- Defaults to Ti.SMSView.RETURNKEY_DEFAULT
 	camButton: true				// <--- Defaults to false
 			
 });
@@ -107,6 +123,3 @@ textArea.addEventListener('messageClicked', function(e){
 });
 
 win.open({modal:true,animated:false});
-//textArea.animated = false;
-for(var i=0;i<100;i++) textArea.sendMessage('Hello World #'+i);
-textArea.animated = true;

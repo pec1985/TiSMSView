@@ -6,12 +6,12 @@
 //  Copyright 2011 Appcelerator. All rights reserved.
 //
 
-#import "TiPedroSMSView.h"
-#import "TiPedroSMSViewProxy.h"
+#import "TiSmsviewView.h"
+#import "TiSmsviewViewProxy.h"
 #import "TiUtils.h"
 #import "UIImage+Resize.h"
 
-@implementation TiPedroSMSViewProxy
+@implementation TiSmsviewViewProxy
 
 -(void)_destroy
 {
@@ -28,11 +28,11 @@
 	[super dealloc];
 }
 
--(TiPedroSMSView *)ourView
+-(TiSmsviewView *)ourView
 {
 	if(!ourView)
 	{
-		ourView = (TiPedroSMSView *)[self view];
+		ourView = (TiSmsviewView *)[self view];
 	}
 	return ourView;
 }
@@ -100,9 +100,9 @@
 	if(image != nil)
 	{
 		CGSize imageSize = image.size;		
-		if(imageSize.width > [[self ourView] superview].frame.size.width-100)
+		if(imageSize.width > 270.0)//[[self ourView] superview].frame.size.width-100)
 		{
-			float x = ([[self ourView] superview].frame.size.width-100);
+			float x = 270.0;//([[self ourView] superview].frame.size.width-100);
 			float y = ((x/imageSize.width)*imageSize.height);
 			CGSize newSize = CGSizeMake(x, y);
 			image = [UIImageResize resizedImage:newSize interpolationQuality:kCGInterpolationDefault image:image  hires:YES];

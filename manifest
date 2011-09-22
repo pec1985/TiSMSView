@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 2.2
+version: 1.0
 description: SMS-like view
 author: Pedro Enrique
 license: Apache 2
@@ -10,8 +10,8 @@ copyright: Copyright (c) 2011 by pec1985
 
 
 # these should not be edited
-name: TiPedro
-moduleid: ti.pedro
+name: TiSMSView
+moduleid: ti.smsview
 guid: 8e4fdf7d-b3e7-4ba4-b76a-697113808c33
 platform: iphone
 minsdk: 1.7.1

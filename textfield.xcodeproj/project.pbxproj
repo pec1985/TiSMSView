@@ -22,17 +22,17 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		24DD6CF91134B3F500162E58 /* TiPedroModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* TiPedroModule.h */; };
-		24DD6CFA1134B3F500162E58 /* TiPedroModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiPedroModule.m */; };
-		24DE9E1111C5FE74003F90F6 /* TiPedroModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiPedroModuleAssets.h */; };
-		24DE9E1211C5FE74003F90F6 /* TiPedroModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiPedroModuleAssets.m */; };
-		AA747D9F0F9514B9006C5449 /* PecTf_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* PecTf_Prefix.pch */; };
+		24DD6CF91134B3F500162E58 /* TiSmsviewModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* TiSmsviewModule.h */; };
+		24DD6CFA1134B3F500162E58 /* TiSmsviewModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiSmsviewModule.m */; };
+		24DE9E1111C5FE74003F90F6 /* TiSmsviewModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiSmsviewModuleAssets.h */; };
+		24DE9E1211C5FE74003F90F6 /* TiSmsviewModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiSmsviewModuleAssets.m */; };
+		AA747D9F0F9514B9006C5449 /* TiSmsview_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiSmsview_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		B671D17B1405C80400C5F651 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B671D17A1405C80400C5F651 /* CoreText.framework */; };
-		B6A5206213C3701C0016C96A /* TiPedroSMSView.h in Headers */ = {isa = PBXBuildFile; fileRef = B6A5205E13C3701A0016C96A /* TiPedroSMSView.h */; };
-		B6A5206313C3701C0016C96A /* TiPedroSMSView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A5205F13C3701B0016C96A /* TiPedroSMSView.m */; };
-		B6A5206413C3701C0016C96A /* TiPedroSMSViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = B6A5206013C3701B0016C96A /* TiPedroSMSViewProxy.h */; };
-		B6A5206513C3701C0016C96A /* TiPedroSMSViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A5206113C3701C0016C96A /* TiPedroSMSViewProxy.m */; };
+		B6A5206213C3701C0016C96A /* TiSmsviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = B6A5205E13C3701A0016C96A /* TiSmsviewView.h */; };
+		B6A5206313C3701C0016C96A /* TiSmsviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A5205F13C3701B0016C96A /* TiSmsviewView.m */; };
+		B6A5206413C3701C0016C96A /* TiSmsviewViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = B6A5206013C3701B0016C96A /* TiSmsviewViewProxy.h */; };
+		B6A5206513C3701C0016C96A /* TiSmsviewViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A5206113C3701C0016C96A /* TiSmsviewViewProxy.m */; };
 		B6F6BD2E13F97C8200AD29C4 /* PESMSLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B6F6BD2813F97C7F00AD29C4 /* PESMSLabel.h */; };
 		B6F6BD2F13F97C8200AD29C4 /* PESMSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6BD2913F97C8000AD29C4 /* PESMSLabel.m */; };
 		B6F6BD3013F97C8200AD29C4 /* PESMSScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = B6F6BD2A13F97C8000AD29C4 /* PESMSScrollView.h */; };
@@ -56,20 +56,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		24DD6CF71134B3F500162E58 /* TiPedroModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiPedroModule.h; path = Classes/TiPedroModule.h; sourceTree = "<group>"; };
-		24DD6CF81134B3F500162E58 /* TiPedroModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiPedroModule.m; path = Classes/TiPedroModule.m; sourceTree = "<group>"; };
+		24DD6CF71134B3F500162E58 /* TiSmsviewModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiSmsviewModule.h; path = Classes/TiSmsviewModule.h; sourceTree = "<group>"; };
+		24DD6CF81134B3F500162E58 /* TiSmsviewModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiSmsviewModule.m; path = Classes/TiSmsviewModule.m; sourceTree = "<group>"; };
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
-		24DE9E0F11C5FE74003F90F6 /* TiPedroModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiPedroModuleAssets.h; path = Classes/TiPedroModuleAssets.h; sourceTree = "<group>"; };
-		24DE9E1011C5FE74003F90F6 /* TiPedroModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiPedroModuleAssets.m; path = Classes/TiPedroModuleAssets.m; sourceTree = "<group>"; };
-		AA747D9E0F9514B9006C5449 /* PecTf_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PecTf_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		24DE9E0F11C5FE74003F90F6 /* TiSmsviewModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiSmsviewModuleAssets.h; path = Classes/TiSmsviewModuleAssets.h; sourceTree = "<group>"; };
+		24DE9E1011C5FE74003F90F6 /* TiSmsviewModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiSmsviewModuleAssets.m; path = Classes/TiSmsviewModuleAssets.m; sourceTree = "<group>"; };
+		AA747D9E0F9514B9006C5449 /* TiSmsview_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiSmsview_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B671D17A1405C80400C5F651 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B6A51F9C13C158BA0016C96A /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		B6A5204C13C23C520016C96A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		B6A5205E13C3701A0016C96A /* TiPedroSMSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiPedroSMSView.h; path = Classes/TiPedroSMSView.h; sourceTree = "<group>"; };
-		B6A5205F13C3701B0016C96A /* TiPedroSMSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiPedroSMSView.m; path = Classes/TiPedroSMSView.m; sourceTree = "<group>"; };
-		B6A5206013C3701B0016C96A /* TiPedroSMSViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiPedroSMSViewProxy.h; path = Classes/TiPedroSMSViewProxy.h; sourceTree = "<group>"; };
-		B6A5206113C3701C0016C96A /* TiPedroSMSViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiPedroSMSViewProxy.m; path = Classes/TiPedroSMSViewProxy.m; sourceTree = "<group>"; };
+		B6A5205E13C3701A0016C96A /* TiSmsviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiSmsviewView.h; path = Classes/TiSmsviewView.h; sourceTree = "<group>"; };
+		B6A5205F13C3701B0016C96A /* TiSmsviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiSmsviewView.m; path = Classes/TiSmsviewView.m; sourceTree = "<group>"; };
+		B6A5206013C3701B0016C96A /* TiSmsviewViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiSmsviewViewProxy.h; path = Classes/TiSmsviewViewProxy.h; sourceTree = "<group>"; };
+		B6A5206113C3701C0016C96A /* TiSmsviewViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiSmsviewViewProxy.m; path = Classes/TiSmsviewViewProxy.m; sourceTree = "<group>"; };
 		B6F6BD2813F97C7F00AD29C4 /* PESMSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PESMSLabel.h; path = Classes/PESMSLabel.h; sourceTree = "<group>"; };
 		B6F6BD2913F97C8000AD29C4 /* PESMSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PESMSLabel.m; path = Classes/PESMSLabel.m; sourceTree = "<group>"; };
 		B6F6BD2A13F97C8000AD29C4 /* PESMSScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PESMSScrollView.h; path = Classes/PESMSScrollView.h; sourceTree = "<group>"; };
@@ -130,14 +130,14 @@
 			isa = PBXGroup;
 			children = (
 				B6A51F8113C1575C0016C96A /* GrowingTextView */,
-				24DE9E0F11C5FE74003F90F6 /* TiPedroModuleAssets.h */,
-				24DE9E1011C5FE74003F90F6 /* TiPedroModuleAssets.m */,
-				24DD6CF71134B3F500162E58 /* TiPedroModule.h */,
-				24DD6CF81134B3F500162E58 /* TiPedroModule.m */,
-				B6A5205E13C3701A0016C96A /* TiPedroSMSView.h */,
-				B6A5205F13C3701B0016C96A /* TiPedroSMSView.m */,
-				B6A5206013C3701B0016C96A /* TiPedroSMSViewProxy.h */,
-				B6A5206113C3701C0016C96A /* TiPedroSMSViewProxy.m */,
+				24DE9E0F11C5FE74003F90F6 /* TiSmsviewModuleAssets.h */,
+				24DE9E1011C5FE74003F90F6 /* TiSmsviewModuleAssets.m */,
+				24DD6CF71134B3F500162E58 /* TiSmsviewModule.h */,
+				24DD6CF81134B3F500162E58 /* TiSmsviewModule.m */,
+				B6A5205E13C3701A0016C96A /* TiSmsviewView.h */,
+				B6A5205F13C3701B0016C96A /* TiSmsviewView.m */,
+				B6A5206013C3701B0016C96A /* TiSmsviewViewProxy.h */,
+				B6A5206113C3701C0016C96A /* TiSmsviewViewProxy.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -145,7 +145,7 @@
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				AA747D9E0F9514B9006C5449 /* PecTf_Prefix.pch */,
+				AA747D9E0F9514B9006C5449 /* TiSmsview_Prefix.pch */,
 				24DD6D1B1134B66800162E58 /* titanium.xcconfig */,
 			);
 			name = "Other Sources";
@@ -191,11 +191,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA747D9F0F9514B9006C5449 /* PecTf_Prefix.pch in Headers */,
-				24DD6CF91134B3F500162E58 /* TiPedroModule.h in Headers */,
-				24DE9E1111C5FE74003F90F6 /* TiPedroModuleAssets.h in Headers */,
-				B6A5206213C3701C0016C96A /* TiPedroSMSView.h in Headers */,
-				B6A5206413C3701C0016C96A /* TiPedroSMSViewProxy.h in Headers */,
+				AA747D9F0F9514B9006C5449 /* TiSmsview_Prefix.pch in Headers */,
+				24DD6CF91134B3F500162E58 /* TiSmsviewModule.h in Headers */,
+				24DE9E1111C5FE74003F90F6 /* TiSmsviewModuleAssets.h in Headers */,
+				B6A5206213C3701C0016C96A /* TiSmsviewView.h in Headers */,
+				B6A5206413C3701C0016C96A /* TiSmsviewViewProxy.h in Headers */,
 				B6F6BD2E13F97C8200AD29C4 /* PESMSLabel.h in Headers */,
 				B6F6BD3013F97C8200AD29C4 /* PESMSScrollView.h in Headers */,
 				B6F6BD3213F97C8200AD29C4 /* PESMSTextArea.h in Headers */,
@@ -274,10 +274,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24DD6CFA1134B3F500162E58 /* TiPedroModule.m in Sources */,
-				24DE9E1211C5FE74003F90F6 /* TiPedroModuleAssets.m in Sources */,
-				B6A5206313C3701C0016C96A /* TiPedroSMSView.m in Sources */,
-				B6A5206513C3701C0016C96A /* TiPedroSMSViewProxy.m in Sources */,
+				24DD6CFA1134B3F500162E58 /* TiSmsviewModule.m in Sources */,
+				24DE9E1211C5FE74003F90F6 /* TiSmsviewModuleAssets.m in Sources */,
+				B6A5206313C3701C0016C96A /* TiSmsviewView.m in Sources */,
+				B6A5206513C3701C0016C96A /* TiSmsviewViewProxy.m in Sources */,
 				B6F6BD2F13F97C8200AD29C4 /* PESMSLabel.m in Sources */,
 				B6F6BD3113F97C8200AD29C4 /* PESMSScrollView.m in Sources */,
 				B6F6BD3313F97C8200AD29C4 /* PESMSTextArea.m in Sources */,
@@ -309,7 +309,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = PecTf_Prefix.pch;
+				GCC_PREFIX_HEADER = TiSmsview_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = PecTf;
@@ -326,7 +326,7 @@
 				DSTROOT = /tmp/PecTf.dst;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = PecTf_Prefix.pch;
+				GCC_PREFIX_HEADER = TiSmsview_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = PecTf;

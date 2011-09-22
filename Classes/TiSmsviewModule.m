@@ -4,12 +4,12 @@
  * Appcelerator Titanium is Copyright (c) 2009-2010 by Appcelerator, Inc.
  * and licensed under the Apache Public License (version 2)
  */
-#import "TiPedroModule.h"
+#import "TiSmsviewModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiUtils.h"
 
-@implementation TiPedroModule
+@implementation TiSmsviewModule
 
 MAKE_SYSTEM_PROP(RETURNKEY_DEFAULT,UIReturnKeyDefault);
 MAKE_SYSTEM_PROP(RETURNKEY_GO,UIReturnKeyGo);
@@ -34,7 +34,7 @@ MAKE_SYSTEM_PROP(RETURNKEY_EMERGENCY_CALL,UIReturnKeyEmergencyCall);
 // this is generated for your module, please do not change it
 -(NSString*)moduleId
 {
-	return @"pec.tf";
+	return @"ti.Smsview";
 }
 
 #pragma mark Lifecycle

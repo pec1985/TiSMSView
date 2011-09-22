@@ -11,7 +11,7 @@
 #import "PESMSScrollView.h"
 
 
-@interface TiPedroSMSView : TiUIView<PESMSTextAreaDelegate> {
+@interface TiSmsviewView : TiUIView<PESMSTextAreaDelegate> {
 	PESMSTextArea *textArea;
 	PESMSScrollView *scrollView;
 	BOOL deallocOnce;

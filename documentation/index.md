@@ -8,7 +8,7 @@ This module contains the SMS-like view for texting with the autoresizable text a
 
 To access this module from JavaScript, you would do the following:
 
-	Titanium.Pedro = require("ti.pedro");
+	Titanium.SMSView = require("ti.smsview");
 	
 ## Author
 

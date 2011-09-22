@@ -1,11 +1,11 @@
 /**
  * This is a generated file. Do not edit or your changes will be lost
  */
-#import "TiPedroModuleAssets.h"
+#import "TiSmsviewModuleAssets.h"
 
 extern NSData * dataWithHexString (NSString * hexString);
 
-@implementation TiPedroModuleAssets
+@implementation TiSmsviewModuleAssets
 
 - (NSData*) moduleAsset
 {

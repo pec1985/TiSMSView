@@ -6,7 +6,7 @@
  */
 #import "TiModule.h"
 
-@interface TiPedroModule : TiModule 
+@interface TiSmsviewModule : TiModule 
 {
 }
 

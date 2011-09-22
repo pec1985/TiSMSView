@@ -6,13 +6,13 @@
 //  Copyright 2011 Appcelerator. All rights reserved.
 //
 
-#import "TiPedroSMSView.h"
+#import "TiSmsviewView.h"
 #import "TiBase.h"
 #import "TiUtils.h"
 #import "TiHost.h"
 
 
-@implementation TiPedroSMSView
+@implementation TiSmsviewView
 @synthesize value;
 @synthesize firstTime;
 @synthesize returnType;
@@ -87,7 +87,7 @@
 	 if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown)
 		return keyboardSize.height;
 	 else
-		 return keyboardSize.width;
+		return keyboardSize.width;
 }
 
 //Code from Brett Schumann

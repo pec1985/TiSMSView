@@ -96,9 +96,9 @@
 -(void)setUpTextImageSize
 {
 	CGRect x = [self label].frame;
-	if(x.size.width > self.superview.frame.size.width-100)
+	if(x.size.width > 270)//self.superview.frame.size.width-100)
 	{
-		x.size.width = self.superview.frame.size.width-100;
+		x.size.width = 270;//self.superview.frame.size.width-100;
 		[[self label] setFrame:x];
 		[[self label] sizeToFit];
 		
