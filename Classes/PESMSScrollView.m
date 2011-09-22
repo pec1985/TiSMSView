@@ -23,7 +23,6 @@
 
 -(void)dealloc
 {
-	RELEASE_TO_NIL(label);
 	RELEASE_TO_NIL(allMessages);
 	[super dealloc];
 }
@@ -129,6 +128,7 @@
 	if(!self.rColor)
 		self.rColor = @"White";
 	[[self label:nil:image:nil:@"recieve"] position:@"Left":self.rColor:self.selectedColor];
+	RELEASE_TO_NIL(label);
 }
 
 -(void)sendImage:(UIImage *)image
@@ -136,6 +136,7 @@
 	if(!self.sColor)
 		self.sColor = @"Green";
 	[[self label:nil:image:nil:@"send"] position:@"Right":self.sColor:self.selectedColor];
+	RELEASE_TO_NIL(label);
 }
 
 -(void)recieveImageView:(TiUIView *)view
@@ -143,6 +144,7 @@
 	if(!self.rColor)
 		self.rColor = @"White";
 	[[self label:nil:nil:view:@"recieve"] position:@"Left":self.rColor:self.selectedColor];
+	RELEASE_TO_NIL(label);
 }
 
 -(void)sendImageView:(TiUIView *)view
@@ -159,6 +161,7 @@
         self.rColor = @"White";
     
 	[[self label:text:nil:nil:@"recieve"] position:@"Left":self.rColor:self.selectedColor];
+	RELEASE_TO_NIL(label);
 }
 
 -(void)sendMessage:(NSString *)text;
@@ -167,6 +170,7 @@
         self.sColor = @"Green";
 	
 	[[self label:text:nil:nil:@"send"] position:@"Right":self.sColor:self.selectedColor];
+	RELEASE_TO_NIL(label);
 }
 
 -(void)animate:(BOOL)arg
