@@ -459,12 +459,12 @@
 	[[self textArea] setMinLines:[TiUtils intValue:arg]];
 }
 
--(void)setSendButtonDissabled_:(id)arg
+-(void)setSendButtonDisabled_:(id)arg
 {
-	[[self textArea] dissableDoneButon:[TiUtils boolValue:arg]];
+	[[self textArea] DisabledoneButon:[TiUtils boolValue:arg]];
 }
 
--(void)setCamButtonDissabled_:(id)arg
+-(void)setCamButtonDisabled_:(id)arg
 {
 	[[self textArea] dissableCamButon:[TiUtils boolValue:arg]];
 }

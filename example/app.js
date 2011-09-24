@@ -60,11 +60,11 @@ buttonBar.addEventListener('click', function(e){
 		case 2: Ti.API.info(textArea.getAllMessages()); break;
 		/*
 		the camera button dissable property:
-			case 3: textArea.camButtonDissabled = true; break;
-			case 4: textArea.setCamButtonDissabled(false); break;
+			case 3: textArea.camButtonDisabled = true; break;
+			case 4: textArea.setCamButtonDisabled(false); break;
 		*/
-		case 3: textArea.sendButtonDissabled = true; break;
-		case 4: textArea.setSendButtonDissabled(false); break;
+		case 3: textArea.sendButtonDisabled = true; break;
+		case 4: textArea.setSendButtonDisabled(false); break;
 	}
 });
 
