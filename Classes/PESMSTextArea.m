@@ -166,7 +166,7 @@
 	self.hasCam = val;
 }
 
--(void)DisabledoneButon:(BOOL)arg
+-(void)disableDoneButon:(BOOL)arg
 {
 	if(arg == NO || !arg)
 		[[self doneBtn] setEnabled:YES];
@@ -174,7 +174,7 @@
 		[[self doneBtn] setEnabled:NO];
 }
 
--(void)dissableCamButon:(BOOL)arg
+-(void)disableCamButon:(BOOL)arg
 {
 	if(arg == NO || !arg)
 		[[self camButton] setEnabled:YES];
