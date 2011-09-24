@@ -461,12 +461,12 @@
 
 -(void)setSendButtonDisabled_:(id)arg
 {
-	[[self textArea] DisabledoneButon:[TiUtils boolValue:arg]];
+	[[self textArea] disableDoneButon:[TiUtils boolValue:arg]];
 }
 
 -(void)setCamButtonDisabled_:(id)arg
 {
-	[[self textArea] dissableCamButon:[TiUtils boolValue:arg]];
+	[[self textArea] disableCamButon:[TiUtils boolValue:arg]];
 }
 
 @end
