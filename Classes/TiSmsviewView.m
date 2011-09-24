@@ -83,8 +83,8 @@
 	NSDictionary* info = [val userInfo];
 	NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
 	CGSize keyboardSize = [aValue CGRectValue].size;
-
-	 if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown)
+	if ([[UIApplication sharedApplication]statusBarOrientation] == UIDeviceOrientationPortrait ||
+		[[UIApplication sharedApplication]statusBarOrientation] == UIDeviceOrientationPortraitUpsideDown)
 		return keyboardSize.height;
 	 else
 		return keyboardSize.width;
