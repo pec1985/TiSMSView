@@ -50,6 +50,38 @@
 	return self;
 }
 
+
+- (void)doLongTouch
+{
+	[self becomeFirstResponder];
+	UIMenuController *menu = [UIMenuController sharedMenuController];
+	[menu setTargetRect:CGRectMake(0,0,self.frame.size.width,self.frame.size.height) inView:self];
+	[menu setMenuVisible:YES animated:YES];
+}
+
+- (BOOL)canBecomeFirstResponder;
+{
+	return YES;
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender;
+{
+	BOOL r = NO;
+	if (action == @selector(copy:)) {
+		r = YES;
+	} else {
+		r = [super canPerformAction:action withSender:sender];
+	}
+	return r;
+}
+
+- (void)copy:(id)sender
+{
+	UIPasteboard *paste = [UIPasteboard generalPasteboard];
+	paste.persistent = YES;
+	[paste setString:self.textValue];	
+}
+
 - (void)orientationChanged:(NSNotification *)note
 {
 	UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
@@ -85,6 +117,9 @@
 {
 	if(!label)
 	{
+		hold = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(doLongTouch)];
+		[self addGestureRecognizer:hold];
+		[hold release];
 		label = [[UILabel alloc] init];
 		label.numberOfLines = 0;
 		label.backgroundColor = [UIColor clearColor];

@@ -15,6 +15,7 @@
 	UILabel *label;
 	UIImageView *innerImage;
 	UIView *innerView;
+	UILongPressGestureRecognizer *hold;
 }
 
 @property(nonatomic, retain)NSString *sColor;
