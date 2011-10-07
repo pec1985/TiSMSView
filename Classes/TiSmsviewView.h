@@ -31,6 +31,8 @@
 @property(nonatomic)BOOL beditable;
 @property(nonatomic)BOOL hasCam;
 @property(nonatomic)BOOL shouldAnimate;
+@property(nonatomic)BOOL sendDisabled;
+@property(nonatomic)BOOL camDisabled;
 
 -(void)sendImageView:(TiUIView *)view;
 -(void)recieveImageView:(TiUIView *)view;

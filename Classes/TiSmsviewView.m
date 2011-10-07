@@ -25,6 +25,8 @@
 @synthesize folder;
 @synthesize buttonTitle;
 @synthesize shouldAnimate;
+@synthesize sendDisabled;
+@synthesize camDisabled;
 
 -(void)dealloc
 {
@@ -45,6 +47,8 @@
 		self.beditable = YES;
 		self.hasCam = NO;
 		self.shouldAnimate = YES;
+		self.sendDisabled = NO;
+		self.camDisabled = NO;
 	}
 	return self;
 }
@@ -351,6 +355,9 @@
 		[[[self textArea] textView] setEditable:self.beditable];
 		[[[self textArea] textView] setAutocorrectionType:self.autocorrect ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
 		[[[self textArea] textView] setDataDetectorTypes:UIDataDetectorTypeAll];
+		[[self textArea] disableDoneButon:self.sendDisabled];
+		[[self textArea] disableCamButon:self.camDisabled];
+
 	}
     else
     {
@@ -482,12 +489,20 @@
 
 -(void)setSendButtonDisabled_:(id)arg
 {
-	[[self textArea] disableDoneButon:[TiUtils boolValue:arg]];
+	self.sendDisabled = [TiUtils boolValue:arg];
+	if(!self.firstTime)
+	{
+		[[self textArea] disableDoneButon:self.sendDisabled];
+	}
 }
 
 -(void)setCamButtonDisabled_:(id)arg
 {
-	[[self textArea] disableCamButon:[TiUtils boolValue:arg]];
+	self.camDisabled = [TiUtils boolValue:arg];
+	if(!self.firstTime)
+	{
+		[[self textArea] disableCamButon:self.camDisabled];
+	}
 }
 
 @end
