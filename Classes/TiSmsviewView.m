@@ -449,6 +449,13 @@
 	}
 }
  
+-(void)setReturnType_:(id)arg
+{
+	self.returnType = [TiUtils boolValue:arg];
+	if(!self.firstTime)
+		[[[self textArea] textView] setReturnKeyType:self.returnType];
+}
+
 -(void)setMaxLines_:(id)arg
 {
 	[[self textArea] setMaxLines:[TiUtils intValue:arg]];	
