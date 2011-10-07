@@ -26,6 +26,7 @@
 @synthesize prox;
 @synthesize index_;
 @synthesize orient;
+@synthesize label;
 
 -(void)dealloc
 {
@@ -95,6 +96,19 @@
 		{
 			CGRect a = self.frame;
 			a.origin.x = (self.superview.frame.size.width-self.frame.size.width)-5;
+			[self setFrame:a];
+			[self setNeedsDisplay];
+			orient = orientation;
+		}
+		if(orientation != orient && [self.thisPos isEqualToString:@"Center"])
+		{
+			CGRect a = self.frame;
+			a.size.width = self.superview.frame.size.width;///2-a.size.width/2;
+			a.origin.x = 0;
+			CGRect b = self.label.frame;
+			b.size.width = a.size.width;
+			b.origin.x = 0;
+			[self.label setFrame:b];
 			[self setFrame:a];
 			[self setNeedsDisplay];
 			orient = orientation;
@@ -306,8 +320,15 @@
         //only used by addLabel currently
         self.label.font= [UIFont boldSystemFontOfSize:14];
         self.label.textColor = [UIColor grayColor];
+		self.label.textAlignment = UITextAlignmentCenter;
 		CGRect a = self.frame;
-        a.origin.x = self.superview.frame.size.width/2-a.size.width/2;
+        a.size.width = self.superview.frame.size.width;///2-a.size.width/2;
+		a.origin.x = 0;
+		CGRect b = self.label.frame;
+		b.size.width = a.size.width;
+		b.origin.x = 0;
+		a.size.height = b.size.height;
+		[self.label setFrame:b];
 		[self setFrame:a];
 	}
 	else
