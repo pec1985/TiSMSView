@@ -27,7 +27,7 @@ var headerView = Ti.UI.createView();
 headerView.add(buttonBar);
 
 var win = Ti.UI.createWindow({
-	//titleControl:buttonBar,
+	titleControl:buttonBar,
 	orientationModes:[1,2,3,4]
 });
 
@@ -77,7 +77,8 @@ textArea.addEventListener('click', function(e){
 });
 textArea.addEventListener('buttonClicked', function(e){
 	// fires when clicked on the send button
-	textArea.sendMessage(e.value);
+    textArea.addLabel(new Date()+"");
+    textArea.sendMessage(e.value);
 });
 textArea.addEventListener('camButtonClicked', function(){
 	// fires when clicked on the camera button

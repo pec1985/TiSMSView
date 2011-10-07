@@ -152,6 +152,15 @@
 		[ourView recieveImage:[self returnImage:arg]];
 }
 
+-(void)addLabel:(id)args
+{
+	ENSURE_UI_THREAD(addLabel,args);
+	ENSURE_TYPE(args, NSArray);
+	id arg = [args objectAtIndex:0];
+	if([arg isKindOfClass:[NSString class]])
+		[ourView addLabel:arg];
+}
+
 -(void)loadMessages:(id)args
 {
 	ENSURE_SINGLE_ARG(args,NSArray);

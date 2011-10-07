@@ -204,6 +204,15 @@
 	[[self scrollView] reloadContentSize];
 }
 
+-(void)addLabel:(NSString *)msg
+{
+	ENSURE_UI_THREAD(addLabel,msg);
+	if([msg isEqualToString:@""])
+		return;
+	[[self scrollView] addLabel:msg];
+	[[self scrollView] reloadContentSize];
+}
+
 -(void)empty
 {
 	[[self scrollView] empty];

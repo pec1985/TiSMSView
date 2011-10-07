@@ -31,6 +31,7 @@
 
 -(void)sendMessage:(NSString *)text;
 -(void)recieveMessage:(NSString *)text;
+-(void)addLabel:(NSString *)msg;
 -(void)sendImageView:(TiUIView *)view;
 -(void)recieveImageView:(TiUIView *)view;
 -(void)sendImage:(UIImage *)image;
