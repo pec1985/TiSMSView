@@ -37,6 +37,7 @@
 -(void)recieveImage:(UIImage *)image;
 -(void)sendMessage:(NSString *)msg;
 -(void)recieveMessage:(NSString *)msg;
+-(void)addLabel:(NSString *)msg;
 -(void)_blur;
 -(void)_focus;
 -(void)empty;

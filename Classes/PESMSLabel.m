@@ -301,9 +301,18 @@
 		a.size.width +=5;
 		[self setFrame:a];
 	}
+	else if([pos isEqualToString:@"Center"])
+	{
+        //only used by addLabel currently
+        self.label.font= [UIFont boldSystemFontOfSize:14];
+        self.label.textColor = [UIColor grayColor];
+		CGRect a = self.frame;
+        a.origin.x = self.superview.frame.size.width/2-a.size.width/2;
+		[self setFrame:a];
+	}
 	else
 	{
-		NSLog(@"[ERROR] need to know if it's \"Left\" or \"Right\", stupid!");
+		NSLog(@"[ERROR] need to know if it's \"Left\" or \"Center\" or \"Right\", stupid!");
 	}
 
 }

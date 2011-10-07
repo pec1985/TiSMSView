@@ -76,6 +76,8 @@
 	CGRect a = self.labelsPosition;
 	a.origin.y = frame.origin.y+frame.size.height;
 	self.labelsPosition = a;
+    
+    NSLog(@"%f %f %f %f",frame.size.height,frame.origin.y,self.labelsPosition.size.height,self.labelsPosition.origin.y);
 	
 	[label setIndex_:self.numberOfMessage];
 
@@ -170,6 +172,15 @@
         self.sColor = @"Green";
 	
 	[[self label:text:nil:nil:@"send"] position:@"Right":self.sColor:self.selectedColor];
+	RELEASE_TO_NIL(label);
+}
+
+-(void)addLabel:(NSString *)text;
+{	
+    if(!self.sColor)
+        self.sColor = @"Green";
+	
+	[[self label:text:nil:nil:@"send"] position:@"Center":self.sColor:self.selectedColor];
 	RELEASE_TO_NIL(label);
 }
 
