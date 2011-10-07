@@ -30,6 +30,7 @@
 @property(nonatomic)BOOL autocorrect;
 @property(nonatomic)BOOL beditable;
 @property(nonatomic)BOOL hasCam;
+@property(nonatomic)BOOL shouldAnimate;
 
 -(void)sendImageView:(TiUIView *)view;
 -(void)recieveImageView:(TiUIView *)view;

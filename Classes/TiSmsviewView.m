@@ -24,6 +24,7 @@
 @synthesize hasCam;
 @synthesize folder;
 @synthesize buttonTitle;
+@synthesize shouldAnimate;
 
 -(void)dealloc
 {
@@ -43,6 +44,7 @@
 		self.autocorrect = YES;
 		self.beditable = YES;
 		self.hasCam = NO;
+		self.shouldAnimate = YES;
 	}
 	return self;
 }
@@ -209,8 +211,10 @@
 	ENSURE_UI_THREAD(addLabel,msg);
 	if([msg isEqualToString:@""])
 		return;
+	[[self scrollView] animate:NO];	
 	[[self scrollView] addLabel:msg];
 	[[self scrollView] reloadContentSize];
+	[[self scrollView] animate:self.shouldAnimate];	
 }
 
 -(void)empty
@@ -445,7 +449,8 @@
 
 -(void)setAnimated_:(id)args
 {
-	[[self scrollView] animate:[TiUtils boolValue:args]];	
+	[[self scrollView] animate:[TiUtils boolValue:args]];
+	self.shouldAnimate = [TiUtils boolValue:args];
 }
 
 -(void)setAssets_:(id)args
