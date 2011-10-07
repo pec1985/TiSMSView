@@ -77,8 +77,6 @@
 	a.origin.y = frame.origin.y+frame.size.height;
 	self.labelsPosition = a;
     
-    NSLog(@"%f %f %f %f",frame.size.height,frame.origin.y,self.labelsPosition.size.height,self.labelsPosition.origin.y);
-	
 	[label setIndex_:self.numberOfMessage];
 
 	[self.tempDict setObject:[NSString stringWithFormat:@"%i",self.numberOfMessage] forKey:@"index"];
