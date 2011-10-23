@@ -2,24 +2,30 @@ Most of the magic code taken from: http://www.hanspinckaers.com/multi-line-uitex
 
 Please, for a demo, look at this: http://www.screenr.com/wVCs
 
-INSTALL YOUR MODULE
---------------------
+INSTALL THE MODULE FROM SOURCE
+-------------------------------
 
 1. Run `build.py` which creates your distribution
 2. cd to `/Library/Application Support/Titanium`
 3. copy this zip file into the folder of your Titanium SDK
 
-REGISTER YOUR MODULE
+INSTALLING THE MODULE FROM THE MARKETPLACE
+------------------------------------------
+
+1. Copy the zip file from the marketplace download and place it in the root of your project or the folder of your Titanium SDK
+2. Follow the next step
+
+REGISTER THE MODULE
 ---------------------
 
-Register your module with your application by editing `tiapp.xml` and adding your module.
+Register the module with your application by editing `tiapp.xml` and adding your module.
 Example:
 
 <modules>
 	<module version="1.0">ti.smsview</module>
 </modules>
 
-When you run your project, the compiler will know automatically compile in your module
+When you run your project, the compiler will know automatically compile in the module
 dependencies and copy appropriate image assets into the application.
 
 USING YOUR MODULE IN CODE
