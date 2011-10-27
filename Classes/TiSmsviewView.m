@@ -355,8 +355,10 @@
 		[[[self textArea] textView] setEditable:self.beditable];
 		[[[self textArea] textView] setAutocorrectionType:self.autocorrect ? UITextAutocorrectionTypeYes : UITextAutocorrectionTypeNo];
 		[[[self textArea] textView] setDataDetectorTypes:UIDataDetectorTypeAll];
-		[[self textArea] disableDoneButon:self.sendDisabled];
-		[[self textArea] disableCamButon:self.camDisabled];
+		if(self.sendDisabled)
+			[[self textArea] disableDoneButon:self.sendDisabled];
+		if(self.camDisabled)	
+			[[self textArea] disableCamButon:self.camDisabled];
 
 	}
     else
