@@ -10,4 +10,8 @@
 
 @interface PESMSTextLabel : UILabel
 
+@property(nonatomic)int index_;
+
+-(void)addText:(NSString *)text;
+-(void)resize:(CGRect)frame;
 @end

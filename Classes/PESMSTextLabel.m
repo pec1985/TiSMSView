@@ -9,52 +9,55 @@
 #import "PESMSTextLabel.h"
 
 @implementation PESMSTextLabel
+@synthesize index_;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(void)dealloc
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+//	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
+
+	[super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
+-(id)init
 {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
+	if(self = [super init])
+	{
+	//	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+	//	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resize:) name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
+	}
+	return self;
 }
 
-#pragma mark - View lifecycle
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
+-(void)resize:(CGRect)frame
 {
-}
-*/
+	if (![NSThread isMainThread])
+		[self performSelectorOnMainThread:@selector(resize:) withObject:nil waitUntilDone:NO];
 
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-*/
+	float width = frame.size.width - 40;
+		
+	self.frame = CGRectMake(20, 0, width, 0);
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+	[self sizeToFit];
+	
+	CGRect a = self.frame;
+
+	a.size.width = width;
+	a.origin.x = 20;
+	
+	[self setFrame:a];
+
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+-(void)addText:(NSString *)text
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	if (![NSThread isMainThread])
+		[self performSelectorOnMainThread:@selector(addText:) withObject:text waitUntilDone:NO];
+	self.text = text;
+	self.font = [UIFont boldSystemFontOfSize:14];
+	self.textColor = [UIColor grayColor];
+	self.backgroundColor = [UIColor clearColor];
+	self.textAlignment = UITextAlignmentCenter;
+	self.numberOfLines = 0;
 }
 
 @end
