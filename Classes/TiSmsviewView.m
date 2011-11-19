@@ -111,7 +111,7 @@
 	// animations settings
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:0.3f];
+    [UIView setAnimationDuration:0.25f];
 	
 	// set views with new info
 	[self scrollView].frame = scrollViewFrame;
@@ -137,7 +137,7 @@
 	// animations settings
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:0.3f];
+    [UIView setAnimationDuration:0.25f];
 	
 	// set views with new info
 	[[self scrollView]setFrame: scrollViewFrame];
@@ -323,10 +323,10 @@
 
     CGRect a = self.frame;
     CGFloat h = CGRectGetHeight(self.frame);
-    a.size.height = h - 40;
-    [[self scrollView] setFrame:a];
+	float meh = h - 40;
+    a.size.height = meh;
 	
-	if(self.firstTime)
+	if(self.firstTime == YES)
 	{
 		self.firstTime = NO;
 		[self addSubview: [self scrollView]];
@@ -359,14 +359,12 @@
 			[[self textArea] disableDoneButon:self.sendDisabled];
 		if(self.camDisabled)	
 			[[self textArea] disableCamButon:self.camDisabled];
+			
 
 	}
-    else
-    {
-        [[self scrollView] reloadContentSize];
-        [[self textArea] resize];
-    }
-	
+	[[self scrollView] setFrame:a];
+	[[self scrollView] reloadContentSize];
+	[[self textArea] resize];
 }
 
 #pragma mark Titanium's setters

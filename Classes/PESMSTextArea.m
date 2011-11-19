@@ -33,10 +33,12 @@
 	if(!self.folder)
 		self.folder = @"";
 	source = [self.folder stringByAppendingString:source];
+	
 	if ([source hasPrefix:@"file:/"]) {
 		NSURL* url = [NSURL URLWithString:source];
 		return [url path];
 	}
+	
 	return source;
 }
 
@@ -76,14 +78,8 @@
 		[doneBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 		[doneBtn addTarget:self action:@selector(doneButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 		
-		[doneBtn setBackgroundImage:
-						   [[self resourcesImage:@"smsview.bundle/MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0]
-						   forState:UIControlStateNormal];
-
-		[doneBtn setBackgroundImage:
-						   [[self resourcesImage:@"smsview.bundle/MessageEntrySendButton.png"]stretchableImageWithLeftCapWidth:13 topCapHeight:0]
-						   forState:UIControlStateSelected];
 	}
+	
 	return doneBtn;
 }
 
@@ -96,8 +92,6 @@
 				
 		[camButton addTarget:self action:@selector(camButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 				
-		[camButton setBackgroundImage:[self resourcesImage:@"smsview.bundle/cameraButtonN.png"] forState:UIControlStateNormal];
-		[camButton setBackgroundImage:[self resourcesImage:@"smsview.bundle/cameraButtonP.png"] forState:UIControlStateSelected];
 		camButton.backgroundColor = [UIColor clearColor];
 		[self addSubview:camButton];
 	}
@@ -111,9 +105,6 @@
 	{
 		entryImageView = [[UIImageView alloc] init];
 		entryImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-		[entryImageView setImage:
-			[[self resourcesImage:@"smsview.bundle/MessageEntryInputField.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:22]
-		];
 	}
 	return entryImageView;
 }
@@ -129,31 +120,51 @@
 	{
 		imageView = [[UIImageView alloc] init];
 		imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-		[imageView setImage:
-			[[self resourcesImage:@"smsview.bundle/MessageEntryBackground.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:22]
-		];
-		imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	}
 	return imageView;
 }
 
 -(void)resize
 {
+	imageView		= [self imageView];
+	textView		= [self textView];
+	entryImageView	= [self entryImageView];
+	doneBtn			= [self doneBtn];
+	camButton		= [self camButton];
+
+	if(self.firstTime == NO){
+		self.firstTime = YES;
+		// view hierachy
+		[self addSubview: imageView];
+		[self addSubview: textView];
+		[self addSubview: entryImageView];
+		[self addSubview: doneBtn];
+		[self addSubview: camButton];
+	
+		[imageView		setImage:			[[self resourcesImage:@"smsview.bundle/MessageEntryBackground.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:22]];
+		[entryImageView setImage:			[[self resourcesImage:@"smsview.bundle/MessageEntryInputField.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:22]];
+		[doneBtn		setBackgroundImage:	[[self resourcesImage:@"smsview.bundle/MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0]	forState:UIControlStateNormal];
+		[doneBtn		setBackgroundImage:	[[self resourcesImage:@"smsview.bundle/MessageEntrySendButton.png"]	stretchableImageWithLeftCapWidth:13	topCapHeight:0]	forState:UIControlStateSelected];
+		[camButton		setBackgroundImage:	 [self resourcesImage:@"smsview.bundle/cameraButtonN.png"]																forState:UIControlStateNormal];
+		[camButton		setBackgroundImage:	 [self resourcesImage:@"smsview.bundle/cameraButtonP.png"]																forState:UIControlStateSelected];
+
+	}
+
 	CGFloat w = CGRectGetWidth(self.superview.frame);
 	CGFloat h = CGRectGetHeight(self.superview.frame);
 	CGFloat height = 40;
-	
-	[self					setFrame: CGRectMake(0, h - height, w, height)];
-	[[self imageView]		setFrame: CGRectMake(0, 0, w, height)];
-	[[self textView]		setFrame: CGRectMake(6, 3, w - 80, height)];
-	[[self entryImageView]	setFrame: CGRectMake(5, 0, w-72, height)];
-	[[self doneBtn ]		setFrame: CGRectMake(w - 69, 8, 63, 27)];
+		
+	[self				setFrame: CGRectMake(0, h - height, w, height)];
+	[imageView			setFrame: CGRectMake(0, 0, w, height)];
+	[textView			setFrame: CGRectMake(6, 3, w - 80, height)];
+	[entryImageView		setFrame: CGRectMake(5, 0, w-72, height)];
+	[doneBtn			setFrame: CGRectMake(w - 69, 8, 63, 27)];
 
 	if(self.hasCam)
 	{
-		[[self textView]		setFrame: CGRectMake(41, 3, w - 116, height)];
-		[[self entryImageView]	setFrame: CGRectMake(40, 0, w-107, height)];
-		[[self camButton]		setFrame: CGRectMake(5, 7, 30, 30)];
+		[textView		setFrame: CGRectMake(41, 3, w - 116, height)];
+		[entryImageView	setFrame: CGRectMake(40, 0, w-107, height)];
+		[camButton		setFrame: CGRectMake(5, 7, 30, 30)];
 	}
 	[[self doneBtn].titleLabel setAdjustsFontSizeToFitWidth:YES];
 	
@@ -182,21 +193,15 @@
 		[[self camButton] setEnabled:NO];
 	
 }
-- (void)layoutSubviews
+
+- (id)initWithFrame:(CGRect)frame
 {
-	if(!self.firstTime)
+	if(self = [super initWithFrame:frame])
 	{
 		self.backgroundColor = [UIColor clearColor];
-		self.firstTime = YES;
-		// view hierachy
-		[self addSubview:[self imageView]];
-		[self addSubview:[self textView]];
-		[self addSubview:[self entryImageView]];
-		[self addSubview:[self doneBtn]];
-		[self addSubview:[self camButton]];
-
-		[self resize];
 	}
+	//[self resize];
+	return self;
 }
 
 -(void)doneButtonPressed

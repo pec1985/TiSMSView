@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PESMSLabel.h"
+#import "PESMSTextLabel.h"
 #import "TiUIView.h"
 
 
@@ -15,6 +16,7 @@
 	UILabel *sentLabel;
 	UILabel *recieveLabel;
 	PESMSLabel *label;
+	PESMSTextLabel *textLabel;
 	NSMutableArray *allMessages;
 	NSMutableDictionary *tempDict;
 }

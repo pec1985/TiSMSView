@@ -24,6 +24,7 @@
 -(void)dealloc
 {
 	RELEASE_TO_NIL(allMessages);
+	//[tempDict release];
 	[super dealloc];
 }
 
@@ -39,6 +40,36 @@
 		self.numberOfMessage = 0;
 	}
     return self;
+}
+
+-(PESMSTextLabel *)textLabel:(NSString *)text
+{
+	[self performSelectorOnMainThread:@selector(reloadContentSize) withObject:nil waitUntilDone:YES];
+	
+	textLabel = [[PESMSTextLabel alloc] initWithFrame:self.frame];
+	[textLabel addText:text];
+	
+	[textLabel resize:self.frame];
+	
+	CGRect frame = textLabel.frame;
+	frame.origin.y += labelsPosition.origin.y;	
+	[textLabel setFrame:frame];
+	
+	CGRect a = self.labelsPosition;
+	a.origin.y = frame.origin.y+frame.size.height;
+	self.labelsPosition = a;
+    
+	[textLabel setIndex_:self.numberOfMessage];
+
+	[self.tempDict setObject:[NSString stringWithFormat:@"%i",self.numberOfMessage] forKey:@"index"];
+	
+	self.numberOfMessage++;
+	
+	[self.allMessages addObject:[NSDictionary dictionaryWithDictionary:self.tempDict]];
+	
+	[self addSubview:textLabel];
+
+	return textLabel;
 }
 
 -(PESMSLabel *)label:(NSString *)text:(UIImage *)image:(TiUIView *)view:(NSString *)pos
@@ -175,11 +206,8 @@
 
 -(void)addLabel:(NSString *)text;
 {	
-    if(!self.sColor)
-        self.sColor = @"Green";
-	
-	[[self label:text:nil:nil:@"send"] position:@"Center":self.sColor:self.selectedColor];
-	RELEASE_TO_NIL(label);
+	[self textLabel:text];
+	RELEASE_TO_NIL(textLabel);
 }
 
 -(void)animate:(BOOL)arg

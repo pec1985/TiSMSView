@@ -28,6 +28,8 @@
 		24DE9E1211C5FE74003F90F6 /* TiSmsviewModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiSmsviewModuleAssets.m */; };
 		AA747D9F0F9514B9006C5449 /* TiSmsview_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiSmsview_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		B606756114592C140085E712 /* PESMSTextLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B606755F14592C130085E712 /* PESMSTextLabel.h */; };
+		B606756214592C140085E712 /* PESMSTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B606756014592C140085E712 /* PESMSTextLabel.m */; };
 		B671D17B1405C80400C5F651 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B671D17A1405C80400C5F651 /* CoreText.framework */; };
 		B6A5206213C3701C0016C96A /* TiSmsviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = B6A5205E13C3701A0016C96A /* TiSmsviewView.h */; };
 		B6A5206313C3701C0016C96A /* TiSmsviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A5205F13C3701B0016C96A /* TiSmsviewView.m */; };
@@ -63,6 +65,8 @@
 		24DE9E1011C5FE74003F90F6 /* TiSmsviewModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiSmsviewModuleAssets.m; path = Classes/TiSmsviewModuleAssets.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiSmsview_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiSmsview_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B606755F14592C130085E712 /* PESMSTextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PESMSTextLabel.h; path = Classes/PESMSTextLabel.h; sourceTree = "<group>"; };
+		B606756014592C140085E712 /* PESMSTextLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PESMSTextLabel.m; path = Classes/PESMSTextLabel.m; sourceTree = "<group>"; };
 		B671D17A1405C80400C5F651 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B6A51F9C13C158BA0016C96A /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		B6A5204C13C23C520016C96A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 				B6F6BD2B13F97C8100AD29C4 /* PESMSScrollView.m */,
 				B6F6BD2C13F97C8200AD29C4 /* PESMSTextArea.h */,
 				B6F6BD2D13F97C8200AD29C4 /* PESMSTextArea.m */,
+				B606755F14592C130085E712 /* PESMSTextLabel.h */,
+				B606756014592C140085E712 /* PESMSTextLabel.m */,
 			);
 			name = GrowingTextView;
 			sourceTree = "<group>";
@@ -201,6 +207,7 @@
 				B6F6BD3213F97C8200AD29C4 /* PESMSTextArea.h in Headers */,
 				B6F6BD3813F97F5500AD29C4 /* HPGrowingTextView.h in Headers */,
 				B6F6BD3A13F97F5500AD29C4 /* HPTextViewInternal.h in Headers */,
+				B606756114592C140085E712 /* PESMSTextLabel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +290,7 @@
 				B6F6BD3313F97C8200AD29C4 /* PESMSTextArea.m in Sources */,
 				B6F6BD3913F97F5500AD29C4 /* HPGrowingTextView.m in Sources */,
 				B6F6BD3B13F97F5500AD29C4 /* HPTextViewInternal.m in Sources */,
+				B606756214592C140085E712 /* PESMSTextLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,7 +310,10 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/PecTf.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -322,7 +333,10 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				DSTROOT = /tmp/PecTf.dst;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -338,13 +352,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Debug;
 		};
@@ -352,12 +370,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Release;
 		};
