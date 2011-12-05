@@ -27,6 +27,7 @@
 @synthesize shouldAnimate;
 @synthesize sendDisabled;
 @synthesize camDisabled;
+@synthesize hasTabbar;
 
 -(void)dealloc
 {
@@ -49,6 +50,7 @@
 		self.shouldAnimate = YES;
 		self.sendDisabled = NO;
 		self.camDisabled = NO;
+		self.hasTabbar = NO;
 	}
 	return self;
 }
@@ -89,11 +91,16 @@
 	NSDictionary* info = [val userInfo];
 	NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
 	CGSize keyboardSize = [aValue CGRectValue].size;
+	int tabHeight = 0;
+	if(self.hasTabbar == YES){
+		tabHeight = 49;
+	}
+	
 	if ([[UIApplication sharedApplication]statusBarOrientation] == UIDeviceOrientationPortrait ||
 		[[UIApplication sharedApplication]statusBarOrientation] == UIDeviceOrientationPortraitUpsideDown)
-		return keyboardSize.height;
+		return keyboardSize.height - tabHeight;
 	 else
-		return keyboardSize.width;
+		return keyboardSize.width - tabHeight;
 }
 
 //Code from Brett Schumann
@@ -494,6 +501,11 @@
 	{
 		[[self textArea] disableDoneButon:self.sendDisabled];
 	}
+}
+
+-(void)setHasTab_:(id)args
+{
+	self.hasTabbar = [TiUtils boolValue:args];
 }
 
 -(void)setCamButtonDisabled_:(id)arg

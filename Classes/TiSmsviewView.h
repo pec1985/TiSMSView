@@ -33,6 +33,7 @@
 @property(nonatomic)BOOL shouldAnimate;
 @property(nonatomic)BOOL sendDisabled;
 @property(nonatomic)BOOL camDisabled;
+@property(nonatomic)BOOL hasTabbar;
 
 -(void)sendImageView:(TiUIView *)view;
 -(void)recieveImageView:(TiUIView *)view;

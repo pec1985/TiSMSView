@@ -47,7 +47,8 @@ var textArea = Ti.SMSView.createView({
 	// textAlignment: 'left',	// <--- Defaulst to left
 	// textColor: 'blue',		// <--- Defaults to "black"
 	returnType: Ti.SMSView.RETURNKEY_DONE, // <---- Defaults to Ti.SMSView.RETURNKEY_DEFAULT
-	camButton: true				// <--- Defaults to false
+	camButton: true,				// <--- Defaults to false
+	hasTab:true
 			
 });
 
@@ -123,4 +124,9 @@ textArea.addEventListener('messageClicked', function(e){
 	Ti.API.info('Index: ' + e.index);
 });
 
-win.open({modal:true,animated:false});
+var tabgroup = Ti.UI.createTabGroup();
+var tab = Ti.UI.createTab({
+	window:win
+});
+tabgroup.addTab(tab);
+tabgroup.open();
