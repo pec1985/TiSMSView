@@ -34,6 +34,7 @@
 @property(nonatomic)BOOL sendDisabled;
 @property(nonatomic)BOOL camDisabled;
 @property(nonatomic)BOOL hasTabbar;
+@property(nonatomic)float bottomOfWin;
 
 -(void)sendImageView:(TiUIView *)view;
 -(void)recieveImageView:(TiUIView *)view;
@@ -46,5 +47,4 @@
 -(void)_focus;
 -(void)empty;
 -(NSArray *)getMessages;
-
 @end

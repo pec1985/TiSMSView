@@ -18,8 +18,8 @@ Titanium.SMSView = require('ti.smsview');
 
 var buttonBar = Ti.UI.createButtonBar({
 	labels:['Recieve','Empty','Get All','Disable','Enable'],
-	backgroundColor:'green',
-	height:30
+	height:30,
+	style:Ti.UI.iPhone.SystemButtonStyle.BAR
 });
 
 var headerView = Ti.UI.createView();
@@ -28,14 +28,15 @@ headerView.add(buttonBar);
 
 var win = Ti.UI.createWindow({
 	titleControl:buttonBar,
-	orientationModes:[1,2,3,4]
+	orientationModes:[1,2,3,4],
+	tabBarHidden:true
 });
 
 var textArea = Ti.SMSView.createView({
 	//maxLines:6,				// <--- Defaults to 4
 	//minLines:2,				// <--- Defaults to 1
 	backgroundColor: '#dae1eb',	// <--- Defaults to #dae1eb
-	assets: 'assets',			// <--- Defauls to nothing, smsview.bundle can be places in the Resources dir
+	assets: 'assets',			// <--- Defauls to nothing, smsview.bundle can be placed in the Resources dir
 	// sendColor: 'Green',		// <--- Defaults to "Green"
 	// recieveColor: 'White',	// <--- Defaults to "White"
 	// selectedColor: 'Blue',	// <--- Defaults to "Blue"
@@ -47,8 +48,8 @@ var textArea = Ti.SMSView.createView({
 	// textAlignment: 'left',	// <--- Defaulst to left
 	// textColor: 'blue',		// <--- Defaults to "black"
 	returnType: Ti.SMSView.RETURNKEY_DONE, // <---- Defaults to Ti.SMSView.RETURNKEY_DEFAULT
-	camButton: true,				// <--- Defaults to false
-	hasTab:true
+	camButton: true				// <--- Defaults to false
+	// hasTab:true				// <--- Defaults to false
 			
 });
 
@@ -62,10 +63,10 @@ buttonBar.addEventListener('click', function(e){
 		/*
 		the camera button dissable property:
 			case 3: textArea.camButtonDisabled = true; break;
-			case 4: textArea.setCamButtonDisabled(false); break;
+			case 4: textArea.camButtonDisabled = false; break;
 		*/
 		case 3: textArea.sendButtonDisabled = true; break;
-		case 4: textArea.setSendButtonDisabled(false); break;
+		case 4: textArea.sendButtonDisabled = false; break;
 	}
 });
 
@@ -124,9 +125,10 @@ textArea.addEventListener('messageClicked', function(e){
 	Ti.API.info('Index: ' + e.index);
 });
 
-var tabgroup = Ti.UI.createTabGroup();
+var tabGroup = Ti.UI.createTabGroup();
 var tab = Ti.UI.createTab({
-	window:win
+	window:win,
+	title:'SMSView'
 });
-tabgroup.addTab(tab);
-tabgroup.open();
+tabGroup.addTab(tab);
+tabGroup.open();

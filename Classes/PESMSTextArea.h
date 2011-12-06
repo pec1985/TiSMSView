@@ -42,7 +42,7 @@
 @property(nonatomic)int maxLines;
 @property(nonatomic)int minLines;
 
--(void)resize;
+-(void)resize:(float)bottom;
 -(void)resignTextView;
 -(void)emptyTextView;
 -(void)becomeTextView;

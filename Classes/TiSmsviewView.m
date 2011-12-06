@@ -28,6 +28,7 @@
 @synthesize sendDisabled;
 @synthesize camDisabled;
 @synthesize hasTabbar;
+@synthesize bottomOfWin;
 
 -(void)dealloc
 {
@@ -51,6 +52,7 @@
 		self.sendDisabled = NO;
 		self.camDisabled = NO;
 		self.hasTabbar = NO;
+		self.bottomOfWin = 0.0;
 	}
 	return self;
 }
@@ -98,9 +100,11 @@
 	
 	if ([[UIApplication sharedApplication]statusBarOrientation] == UIDeviceOrientationPortrait ||
 		[[UIApplication sharedApplication]statusBarOrientation] == UIDeviceOrientationPortraitUpsideDown)
-		return keyboardSize.height - tabHeight;
+		self.bottomOfWin = keyboardSize.height - tabHeight;
 	 else
-		return keyboardSize.width - tabHeight;
+		self.bottomOfWin = keyboardSize.width - tabHeight;
+		
+	return self.bottomOfWin;
 }
 
 //Code from Brett Schumann
@@ -152,6 +156,7 @@
 	
 	// commit animations
 	[UIView commitAnimations];
+	self.bottomOfWin = 0.0;
 }
 
 -(void)heightOfTextViewDidChange:(float)height
@@ -371,7 +376,7 @@
 	}
 	[[self scrollView] setFrame:a];
 	[[self scrollView] reloadContentSize];
-	[[self textArea] resize];
+	[[self textArea] resize:self.bottomOfWin];
 }
 
 #pragma mark Titanium's setters
@@ -382,7 +387,7 @@
 	if(!self.firstTime)
 	{
 		[[self textArea] setCamera:self.hasCam];
-		[[self textArea] resize];
+		[[self textArea] resize:self.bottomOfWin];
 	}
 }	
 

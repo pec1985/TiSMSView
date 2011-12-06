@@ -7,6 +7,7 @@
 //
 
 #import "PESMSTextArea.h"
+#import "TiSmsviewView.h"
 #import "TiHost.h"
 
 @implementation PESMSTextArea
@@ -124,7 +125,7 @@
 	return imageView;
 }
 
--(void)resize
+-(void)resize:(float)bottom
 {
 	imageView		= [self imageView];
 	textView		= [self textView];
@@ -151,7 +152,7 @@
 	}
 
 	CGFloat w = CGRectGetWidth(self.superview.frame);
-	CGFloat h = CGRectGetHeight(self.superview.frame);
+	CGFloat h = (float)CGRectGetHeight(self.superview.frame) - bottom;
 	CGFloat height = 40;
 		
 	[self				setFrame: CGRectMake(0, h - height, w, height)];
