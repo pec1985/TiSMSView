@@ -32,6 +32,14 @@ loadMessages(
 	);
 ```
 
+### addLabel( string )
+Inserts a label in the screen
+
+Ex:
+```
+addLabel( 'Jan 25, 2012' );
+```
+
 ### blur()
 
 blurs the text area and brings the keyboard down
@@ -152,6 +160,13 @@ Return button of keyboard
 - Ti.SMSView.RETURNKEY_YAHOO
 - Ti.SMSView.RETURNKEY_DONE
 - Ti.SMSView.RETURNKEY_EMERGENCY_CALL
+
+
+### hasTab
+
+Boolean
+
+Whether the window where the SMSView is has a bottom tab or not
 
 ## Events
 
